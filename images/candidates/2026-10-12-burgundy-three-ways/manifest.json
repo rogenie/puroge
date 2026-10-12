@@ -32,17 +32,6 @@
       ]
     },
     {
-      "file": "images/candidates/2026-10-12-burgundy-three-ways/burgundy-and-ivory.jpg",
-      "kind": "look",
-      "look": "burgundy-and-ivory",
-      "prompt": "Photorealistic full-length fashion photograph. Natural standing pose, hands relaxed, face toward camera. True-to-life fabric texture and color. No text, no logos, no bags, no jewelry beyond small earrings. Vertical 3:4. One woman, full length, head to toe visible: Filipina woman, early 30s, shoulder-length dark hair, petite frame, warm smile, wearing dark burgundy burgundy sweater (100% cotton), ivory white ivory trousers (100% polyester), dark tan camel loafers (100% leather upper). Setting: a warm, softly lit dressmaker's workroom with cream plaster walls, a wooden sewing table along the back wall with a vintage sewing machine and spools of thread, bolts of fabric leaning in a corner, a dressmaker's form to one side, light oak floor, late-afternoon window light from the left. Calm, uncluttered, no logos. The attached photos are the exact products. Reproduce each garment's color, fabric, cut and details faithfully. Ignore any person, mannequin or background in the product photos.",
-      "refs": [
-        "https://m.media-amazon.com/images/I/91TbSw04A1L._AC_SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/61Q+Ga228OL._AC_SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/71sXWlK8uhL._AC_SL1500_.jpg"
-      ]
-    },
-    {
       "file": "images/candidates/2026-10-12-burgundy-three-ways/burgundy-and-red.jpg",
       "kind": "look",
       "look": "burgundy-and-red",
@@ -63,7 +52,19 @@
         "https://m.media-amazon.com/images/I/7120BmgruYL._AC_SL1500_.jpg",
         "https://m.media-amazon.com/images/I/71JORMn9cTL._AC_SL1500_.jpg"
       ]
+    },
+    {
+      "file": "images/candidates/2026-10-12-burgundy-three-ways/burgundy-and-ivory.jpg",
+      "kind": "look",
+      "look": "burgundy-and-ivory",
+      "prompt": "Photorealistic full-length fashion photograph. Natural standing pose, hands relaxed, face toward camera. True-to-life fabric texture and color. No text, letters or numbers anywhere in the image, including on mannequins, sewing machines and fabric. No logos, no bags, no jewelry beyond small earrings. Vertical 3:4. One woman, full length, head to toe visible: Filipina woman, early 30s, shoulder-length dark hair, petite frame, warm smile, wearing dark burgundy burgundy sweater (100% cotton), ivory white ivory trousers (100% polyester), dark tan camel loafers (100% leather upper). Setting: a warm, softly lit dressmaker's workroom with cream plaster walls, a wooden sewing table along the back wall with a vintage sewing machine and spools of thread, bolts of fabric leaning in a corner, a dressmaker's form to one side, light oak floor, late-afternoon window light from the left. Calm, uncluttered, no logos. The attached photos are the exact products. Reproduce each garment's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos.",
+      "refs": [
+        "https://m.media-amazon.com/images/I/91TbSw04A1L._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/61Q+Ga228OL._AC_SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71sXWlK8uhL._AC_SL1500_.jpg"
+      ]
     }
   ],
-  "estimated_cost_usd": 0.2
+  "history_cost_usd": 0.2,
+  "estimated_cost_usd": 0.04
 }

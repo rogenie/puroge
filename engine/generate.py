@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Generate images for one video file with fal.ai (Nano Banana edit, product photos as references).
 
-Usage:  FAL_KEY=... python3 engine/generate.py engine/runs/<date>/<video>.json [--group-only]
+Usage:  FAL_KEY=... python3 engine/generate.py engine/runs/<date>/<video>.json [--group-only] [--only <look slug or "group">]
+  --only   regenerate just one image (after a failed quality check); other candidates are kept
 
 Writes candidates to images/candidates/<video id>/:
   group-<n>.jpg        all models together, 9:16, for the video (2 candidates)
@@ -67,7 +68,14 @@ def main():
     looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]
     order = cast["positions"][str(len(looks))]
     outdir = ROOT / "images" / "candidates" / video["id"]
+    only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+    old = outdir / "manifest.json"
     manifest = {"video": video["id"], "endpoint": ENDPOINT, "tier": tier, "images": []}
+    if only and old.exists():
+        prev = json.loads(old.read_text())
+        keep = (lambda i: i["kind"] != "group") if only == "group" else (lambda i: i.get("look") != only)
+        manifest["images"] = [i for i in prev["images"] if keep(i)]
+        manifest["history_cost_usd"] = prev.get("estimated_cost_usd", 0) + prev.get("history_cost_usd", 0)
 
     # Group image for the video: every model, every reference.
     lines, refs = [], []
@@ -79,15 +87,17 @@ def main():
     refs = list(dict.fromkeys(refs))
     group_prompt = (f"{cast['style']} Vertical 9:16. {len(looks)} women standing side by side, full length, head to toe visible. "
                     + " ".join(lines) + f" Setting: {cast['set']}. {cast['reference_note']}")
-    urls = call(group_prompt, refs, "9:16", 2)
+    urls = call(group_prompt, refs, "9:16", 2) if only in (None, "group") else []
     for i, u in enumerate(urls, 1):
         dest = outdir / f"group-{i}.jpg"
         save_jpeg(u, dest)
         manifest["images"].append({"file": str(dest.relative_to(ROOT)), "kind": "group", "prompt": group_prompt, "refs": refs})
 
     # One image per look for the site.
-    if "--group-only" not in sys.argv:
+    if "--group-only" not in sys.argv and only != "group":
         for model_key, look in zip(order, looks):
+            if only and only != look["slug"]:
+                continue
             ps = pieces_for(look, tier)
             look_refs = [p["ref"] for p in ps if p["ref"]]
             prompt = (f"{cast['style']} Vertical 3:4. One woman, full length, head to toe visible: {cast['models'][model_key]}, "
@@ -99,7 +109,8 @@ def main():
                                            "prompt": prompt, "refs": look_refs})
 
     outdir.mkdir(parents=True, exist_ok=True)
-    manifest["estimated_cost_usd"] = round(len(manifest["images"]) * PRICE_PER_IMAGE, 2)
+    new = len(urls) + sum(1 for i in manifest["images"] if i["kind"] == "look" and (not only or i.get("look") == only))
+    manifest["estimated_cost_usd"] = round(new * PRICE_PER_IMAGE, 2)
     (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"{len(manifest['images'])} images in {outdir.relative_to(ROOT)}, about ${manifest['estimated_cost_usd']}")
 

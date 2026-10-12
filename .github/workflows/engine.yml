@@ -13,6 +13,11 @@ on:
         description: "Video file, e.g. engine/runs/2026-10-12/burgundy-three-ways.json"
         required: true
         type: string
+      only:
+        description: "Optional: regenerate just one image (a look slug, or 'group')"
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -38,7 +43,12 @@ jobs:
         if: inputs.step == 'generate'
         env:
           FAL_KEY: ${{ secrets.FAL_KEY }}
-        run: python3 engine/generate.py "${{ inputs.video }}"
+        run: |
+          if [ -n "${{ inputs.only }}" ]; then
+            python3 engine/generate.py "${{ inputs.video }}" --only "${{ inputs.only }}"
+          else
+            python3 engine/generate.py "${{ inputs.video }}"
+          fi
 
       - name: Save candidates to the repository
         if: inputs.step == 'generate'

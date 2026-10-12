@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Puroge site from data/looks.json.
+"""Build the Purogé site from data/looks.json.
 
 Usage:  python3 build.py            published looks only (what goes live)
         python3 build.py --drafts   also build looks marked "draft": true (local preview)
@@ -20,6 +20,7 @@ import json
 import shutil
 import sys
 from pathlib import Path
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
@@ -97,14 +98,14 @@ def page(title, body, site, desc="", path="/", image=""):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta property="og:site_name" content="Puroge"><meta property="og:type" content="website">
+<meta property="og:site_name" content="Purogé"><meta property="og:type" content="website">
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}">{img}<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f6f1e8">
 {FONTS}<link rel="stylesheet" href="/style.css"></head><body><div class="wrap">
-<header><a class="brand" href="/">PUROGE</a><nav><a href="/#looks">Looks</a><a href="/story/">Our story</a></nav></header>
+<header><a class="brand" href="/">PUROGÉ</a><nav><a href="/#looks">Looks</a><a href="/story/">Our story</a></nav></header>
 {body}
-<footer>{socials and f"<p>{socials}</p>"}<p>{e(site['dedication'])}</p><p>{e(site['disclosure'])}</p></footer>
+<footer>{socials and f"<p>{socials}</p>"}<p>{e(site['dedication'])}</p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
 </div></body></html>"""
 
 
@@ -147,7 +148,7 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{{
  document.querySelectorAll('.panel').forEach(p=>p.hidden=p.dataset.p!==b.dataset.t);
 }});
 </script>"""
-    return page(f"Look {lid}: {look['title']} | Puroge", body, site, look.get("lesson"),
+    return page(f"Look {lid}: {look['title']} | Purogé", body, site, look.get("lesson"),
                 f"/look/{lid}/", look.get("image", ""))
 
 
@@ -160,7 +161,7 @@ def home_page(looks, site):
                   'Every piece checked for fabric and fit before it goes up.</div>')
     body = f"""<h1>Elegant, never boring.<br>Every piece found for you.</h1>
 <p class="lead">You see an outfit you love, and then the hunting starts. We do the hunting.
-Each Puroge look is a complete outfit, numbered piece by piece, with a link to every item.</p>
+Each Purogé look is a complete outfit, numbered piece by piece, with a link to every item.</p>
 <a class="btn" href="#looks">See the looks</a>
 <h2>How it works</h2>
 <ol class="how">
@@ -172,7 +173,7 @@ Each Puroge look is a complete outfit, numbered piece by piece, with a link to e
 judges clothes from the inside out.</p>
 <h2 id="looks">The looks</h2>
 {looks_html}"""
-    return page("Puroge | Elegant, never boring", body, site,
+    return page("Purogé | Elegant, never boring", body, site,
                 "Complete elegant outfits, every piece found and linked for you, in two price versions.")
 
 
@@ -181,15 +182,31 @@ def story_page(site):
 <h1 style="margin-top:8px">Named for two women who sewed.</h1>
 <p class="lead">My grandmothers, Lola Purisima and Lola Roberta, sewed and sold clothes for a living.</p>
 <p class="names"><span>Pu</span>risima · <span>Ro</span>berta · Ro<span>ge</span>nie</p>
-<p>Puroge carries all three of us: the first sound of each Lola's name, and mine.</p>
+<p>Purogé carries all three of us: the first sound of each Lola's name, and mine.</p>
 <p>The brand works the way a good shopkeeper does. Instead of leaving you to hunt down an outfit you saw
 online, we find every piece for you, check what it is made of, and put it all on one page.
 Two versions of each look, so it works for more than one budget.</p>
 <p>Lola is Tagalog for grandmother.</p>
 <p style="margin-top:28px"><a class="btn" href="/#looks">See the looks</a></p>"""
-    return page("Our story | Puroge", body, site,
-                "Puroge is named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
+    return page("Our story | Purogé", body, site,
+                "Purogé is named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
                 "/story/")
+
+
+def with_affiliate(url, site):
+    """Add the Amazon store ID to Amazon links, replacing any other tag already on them."""
+    tag = site.get("amazon_tag")
+    if not url or not tag:
+        return url
+    parts = urlsplit(url)
+    host = parts.netloc.lower()
+    if not (host == "amazon.com" or host.endswith(".amazon.com") or host in ("amzn.to", "a.co")):
+        return url
+    if host in ("amzn.to", "a.co"):
+        return url  # short links already carry the tag they were created with
+    query = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if k != "tag"]
+    query.append(("tag", tag))
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment))
 
 
 def go_page(url, back):
@@ -226,11 +243,11 @@ def main():
         for p in look["pieces"]:
             for key, code, *_ in TIERS:
                 v = p.get(key) or {}
-                url = None if v.get("sold_out") else v.get("url")
+                url = None if v.get("sold_out") else with_affiliate(v.get("url"), site)
                 write(OUT / "go" / f"{lid}-{p['n']}-{code}" / "index.html", go_page(url, f"/look/{lid}/"))
     write(OUT / "index.html", home_page(looks, site))
     write(OUT / "story" / "index.html", story_page(site))
-    write(OUT / "404.html", page("Not found | Puroge",
+    write(OUT / "404.html", page("Not found | Purogé",
           '<h1>This page wandered off.</h1><p class="lead">The look may have moved. '
           'Everything we have scouted is on the home page.</p><a class="btn" href="/#looks">See the looks</a>',
           site, "Page not found", "/404.html"))

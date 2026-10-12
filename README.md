@@ -1,4 +1,4 @@
-# Puroge site
+# Purogé site
 
 1. Add or edit looks in `data/looks.json` (copy the sample look, give it the next id like `002`).
 2. Looks marked `"draft": true` stay hidden. Remove that line to publish a look.

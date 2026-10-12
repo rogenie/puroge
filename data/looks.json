@@ -1,10 +1,12 @@
 {
   "site": {
-    "name": "Puroge",
+    "name": "Purogé",
     "domain": "puroge.com",
     "tagline": "We found it for you.",
     "dedication": "Named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
-    "disclosure": "Some links earn Puroge a commission, at no extra cost to you. We only list pieces we would wear.",
+    "disclosure": "Some links earn Purogé a commission, at no extra cost to you. We only list pieces we would wear.",
+    "amazon_tag": "rogeniecord0c-20",
+    "amazon_disclosure": "As an Amazon Associate, Purogé earns from qualifying purchases.",
     "socials": []
   },
   "looks": [

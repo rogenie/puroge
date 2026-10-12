@@ -1,8 +1,10 @@
 # Puroge site
 
 1. Add or edit looks in `data/looks.json` (copy the sample look, give it the next id like `002`).
-2. Run `python3 build.py`. The finished site appears in `site/`.
-3. Upload `site/` to GitHub Pages (or any static host) and point puroge.com at it. `site/CNAME` is already set.
+2. Looks marked `"draft": true` stay hidden. Remove that line to publish a look.
+3. Push to `main`. GitHub Actions builds the site and publishes it to puroge.com in about a minute.
+
+Preview locally with `python3 build.py --drafts`, then open `site/index.html`.
 
 Links to use in posts and DMs:
 - Whole outfit: `puroge.com/look/001`

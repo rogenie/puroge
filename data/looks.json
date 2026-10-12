@@ -12,7 +12,6 @@
   "looks": [
     {
       "id": "001",
-      "draft": true,
       "title": "The Camel Coat, Not the Beige Outfit",
       "occasion": "Autumn weekday",
       "palette": [
@@ -108,7 +107,6 @@
     },
     {
       "id": "002",
-      "draft": true,
       "title": "Navy and Brown, Together",
       "occasion": "Office",
       "palette": [
@@ -203,7 +201,6 @@
     },
     {
       "id": "003",
-      "draft": true,
       "title": "The Dinner Dress",
       "occasion": "Evening",
       "palette": [

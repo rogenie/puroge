@@ -1,0 +1,27 @@
+{
+  "id": "2026-10-12-twin-test",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "status": "test",
+  "short_link": "puroge.com/burgundy-and-ivory",
+  "looks": [
+    "burgundy-and-ivory"
+  ],
+  "cast": [
+    {
+      "model": "T",
+      "tier": "heirloom"
+    },
+    {
+      "model": "R",
+      "tier": "everyday"
+    }
+  ],
+  "labels": [
+    "5'9\" · Heirloom",
+    "4'6\" · Everyday"
+  ],
+  "notes": [
+    "First test of Rogenie's twin in the Del Mar set: one image, about $0.04."
+  ]
+}

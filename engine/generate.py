@@ -68,12 +68,15 @@ def call(prompt, refs, aspect, n):
 def person_refs(model):
     """Reference photos of a real person: URLs as given, local files uploaded to fal storage."""
     import fal_client
+    base = Path(os.environ.get("PEOPLE_DIR", ROOT))
     out = []
     for r in model.get("refs", []):
         if r.startswith("http"):
             out.append(r)
-        elif (ROOT / r).exists():
-            out.append(fal_client.upload_file(str(ROOT / r)))
+        elif (base / r).exists():
+            out.append(fal_client.upload_file(str(base / r)))
+        else:
+            print(f"::warning title=generate.py::reference photo not found: {r}")
     return out
 
 
@@ -109,12 +112,12 @@ def main_pairs(video, cast, outdir, only):
             dest = outdir / f"{look['slug']}.jpg"
             save_jpeg(u, dest)
             made += 1
-            manifest["images"].append({"file": str(dest.relative_to(ROOT)), "kind": "look", "look": look["slug"],
-                                       "prompt": prompt, "refs": refs, "person_refs": len(persons)})
+            manifest["images"].append({"file": dest.name, "kind": "look", "look": look["slug"],
+                                       "prompt": prompt, "person_refs": len(persons)})
     outdir.mkdir(parents=True, exist_ok=True)
     manifest["estimated_cost_usd"] = round(made * PRICE_PER_IMAGE, 2)
     (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    print(f"{made} images in {outdir.relative_to(ROOT)}, about ${manifest['estimated_cost_usd']}")
+    print(f"{made} images in {outdir}, about ${manifest['estimated_cost_usd']}")
 
 
 def main():
@@ -127,7 +130,7 @@ def main():
     tier = video.get("tier_shown", "everyday")
     looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]
     order = cast["positions"][str(len(looks))]
-    outdir = ROOT / "images" / "candidates" / video["id"]
+    outdir = Path(os.environ.get("CANDIDATES_DIR", ROOT / "images" / "candidates")) / video["id"]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
     if video.get("mode") == "pairs":
         return main_pairs(video, cast, outdir, only)

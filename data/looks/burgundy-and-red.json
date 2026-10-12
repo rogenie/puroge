@@ -55,17 +55,18 @@
     },
     {
       "n": 2,
-      "item": "Red midi skirt",
+      "item": "Red skirt",
       "types": [
         "midi-skirt"
       ],
       "heirloom": {
-        "name": "100% Washable Silk Skirt, Paprika Red",
+        "name": "100% Washable Silk Maxi Skirt, Clay Red",
         "store": "Quince",
         "material": "100% mulberry silk",
-        "price": "$70",
-        "url": "https://www.quince.com/women/silk/silk-skirt",
-        "last_checked": "2026-10-12"
+        "price": "$80",
+        "url": "https://www.quince.com/women/100-washable-silk-maxi-skirt",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://images.quince.com/4IMzArh9YEmYMEC2IBNs5u/85eb5a6124c09a67686daf35673db14b/W-SKT-9-CLARED-2078_EDITED.jpg"
       },
       "everyday": {
         "name": "High Waist A-Line Satin Midi Skirt, Red",

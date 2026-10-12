@@ -2,8 +2,15 @@
   "formats": {
     "three-partners": {
       "name": "One color, three partners",
-      "models": ["A", "B", "C"],
-      "length_seconds": [12, 20],
+      "models": [
+        "A",
+        "B",
+        "C"
+      ],
+      "length_seconds": [
+        12,
+        20
+      ],
       "structure": [
         "Hook (0-2s): the hero color and a promise, e.g. 'Burgundy, three ways.'",
         "Partner 1 (left model): 'With ivory, it's elegant.' plus one-line reason",
@@ -20,28 +27,44 @@
     },
     "color-swap": {
       "name": "The color swap",
-      "models": ["A", "C"],
-      "length_seconds": [10, 15],
+      "models": [
+        "A",
+        "C"
+      ],
+      "length_seconds": [
+        10,
+        15
+      ],
       "structure": [
         "Hook: 'Same outfit. Flip the colors.'",
         "Model A in color X top / color Y bottom; Model C reversed",
         "One-line reason the pairing works",
         "Close: numbered pieces and the short link"
       ],
-      "rules": ["High-contrast pairings perform best (rust and navy, red and black, pink and grey)"],
+      "rules": [
+        "High-contrast pairings perform best (rust and navy, red and black, pink and grey)"
+      ],
       "link": "series"
     },
     "two-tiers": {
       "name": "Heirloom vs Everyday",
-      "models": ["A", "C"],
-      "length_seconds": [10, 15],
+      "models": [
+        "A",
+        "C"
+      ],
+      "length_seconds": [
+        10,
+        15
+      ],
       "structure": [
         "Hook: 'Same look. Two budgets.'",
         "Model A wears the Heirloom tier, Model C the Everyday tier",
         "One line on what you gain with each",
         "Close: numbered pieces and the short link"
       ],
-      "rules": ["Both tiers must match closely in color and silhouette"],
+      "rules": [
+        "Both tiers must match closely in color and silhouette"
+      ],
       "link": "look"
     }
   },
@@ -57,6 +80,14 @@
     "hashtags": "5 to 8, mixing broad and search terms",
     "image_prompts": "one per model, built from brand.md's template",
     "notes": "scouting compromises and anything the reviewer should know",
-    "qa": "filled in by the quality check: pass/fail per image"
+    "qa": "filled in by the quality check: pass/fail per image",
+    "mode": "\"pairs\" for the two-person format",
+    "cast": "[{model, tier}, {model, tier}] left to right",
+    "labels": "two strings shown above the people, left then right"
+  },
+  "cast": {
+    "people": "Two in every image: T (tall AI model, 5'9\") on the left and R (Rogenie, 4'6\") on the right, each wearing one tier of the same look.",
+    "tiers": "Alternate by video: odd videos T=heirloom/R=everyday, even videos T=everyday/R=heirloom, so viewers see both tiers on both heights.",
+    "labels": "Show height and tier above each person, e.g. \"5'9\\\" · Heirloom\" and \"4'6\\\" · Everyday\"."
   }
 }

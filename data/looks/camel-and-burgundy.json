@@ -1,7 +1,7 @@
 {
   "slug": "camel-and-burgundy",
   "title": "Camel and Burgundy",
-  "kind": "color",
+  "kind": "pairing",
   "published": "2026-10-12",
   "old_urls": [
     "/look/001/"
@@ -15,11 +15,12 @@
       "autumn",
       "winter"
     ],
-    "colors": [
-      "camel",
-      "ivory",
-      "charcoal",
-      "burgundy"
+    "pairing": [
+      "camel-and-burgundy",
+      "charcoal-and-camel"
+    ],
+    "mood": [
+      "quiet"
     ]
   },
   "lesson": "Camel over ivory is the classic. Dark trousers ground it, and the burgundy shoe is the one swap that keeps it from going beige.",
@@ -34,6 +35,9 @@
     {
       "n": 1,
       "item": "Camel coat",
+      "types": [
+        "camel-coat"
+      ],
       "heirloom": {
         "name": "Camel Hair Single-Breasted Midi Coat, Vicuna",
         "store": "Quince",
@@ -54,6 +58,9 @@
     {
       "n": 2,
       "item": "Ivory knit",
+      "types": [
+        "crewneck-sweater"
+      ],
       "heirloom": {
         "name": "Mongolian Cashmere Crewneck Sweater, Ivory",
         "store": "Quince",
@@ -74,6 +81,10 @@
     {
       "n": 3,
       "item": "Dark trousers",
+      "types": [
+        "tailored-trousers",
+        "corduroy-pants"
+      ],
       "heirloom": {
         "name": "Theory Double Pleat Pants, New Charcoal Melange",
         "store": "Amazon",
@@ -94,6 +105,10 @@
     {
       "n": 4,
       "item": "Burgundy shoes",
+      "types": [
+        "ballet-flats",
+        "loafers"
+      ],
       "heirloom": {
         "name": "Italian Leather Handwoven Square Toe Ballet Flat, Merlot",
         "store": "Quince",

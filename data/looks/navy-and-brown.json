@@ -1,7 +1,7 @@
 {
   "slug": "navy-and-brown",
   "title": "Navy and Brown",
-  "kind": "color",
+  "kind": "pairing",
   "published": "2026-10-12",
   "old_urls": [
     "/look/002/"
@@ -15,10 +15,12 @@
       "winter",
       "spring"
     ],
-    "colors": [
-      "navy",
-      "ivory",
-      "brown"
+    "pairing": [
+      "navy-and-brown",
+      "navy-and-ivory"
+    ],
+    "mood": [
+      "sharp"
     ]
   },
   "lesson": "The old rule said never wear navy with brown. Ignore it. Navy head to toe with brown shoes looks deliberate and warm, not dull.",
@@ -32,6 +34,10 @@
     {
       "n": 1,
       "item": "Navy knit",
+      "types": [
+        "crewneck-sweater",
+        "cardigan"
+      ],
       "heirloom": {
         "name": "NAADAM The Original Cashmere Crewneck, Navy",
         "store": "Amazon",
@@ -52,6 +58,10 @@
     {
       "n": 2,
       "item": "Ivory shirt",
+      "types": [
+        "silk-blouse",
+        "white-shirt"
+      ],
       "heirloom": {
         "name": "Washable Stretch Silk Notch Collar Blouse, Ivory",
         "store": "Quince",
@@ -72,6 +82,10 @@
     {
       "n": 3,
       "item": "Navy trousers",
+      "types": [
+        "wide-leg-trousers",
+        "chinos"
+      ],
       "heirloom": {
         "name": "100% European Linen Pleated Trouser, Deep Navy",
         "store": "Quince",
@@ -92,6 +106,9 @@
     {
       "n": 4,
       "item": "Brown shoes",
+      "types": [
+        "loafers"
+      ],
       "heirloom": {
         "name": "Italian Leather Venetian Loafer, Coffee Bean",
         "store": "Quince",

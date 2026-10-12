@@ -6,12 +6,16 @@ Usage:  python3 build.py            published looks only (what goes live)
 Output: site/  (GitHub Actions builds and publishes this automatically on every push)
 
 Generates:
-  /                           home: latest looks, browse by occasion and color
+  /                           home: latest-video button, the three ways in, latest looks, values
   /latest/                    the bio link: newest looks first, same order as the feed
-  /looks/                     every look, with filters
+  /looks/                     every look, filterable by occasion, colors, mood and season
   /look/<slug>/               one page per look, Heirloom and Everyday tabs
   /<slug>/                    short link to a look (say it or show it in the video)
-  /occasion/<x>/, /colors/<x>/, /season/<x>/   collection pages
+  /occasion/, /style/, /colors/            the three ways in (hub pages)
+  /occasion/<x>/              "Where are you going?"   from tags.occasion
+  /style/<piece>/             "Style a piece you own"  from each piece's "types"
+  /colors/<pair>/             "Colors that work"       from tags.pairing
+  /season/<x>/                season pages; mood is a filter only
   /go/<slug>-<n>-h|e/         redirect to piece n, Heirloom or Everyday
 Tags must come from the taxonomy in data/site.json, so hundreds of looks stay consistent.
 """
@@ -91,6 +95,15 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .feed .card .hero{aspect-ratio:4/5;height:auto}
 .feed .card div.t{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;line-height:1.2}
 .feed{grid-template-columns:1fr}
+.doors{display:grid;gap:12px;margin:20px 0}
+.door{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px}
+.door b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:26px;line-height:1.15}
+.door span{color:var(--muted);font-size:14px}
+.door .chips{margin:10px 0 0}
+.door .chips i{font-style:normal;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--ink)}
+.hub{list-style:none;padding:0;margin:20px 0;display:grid;gap:8px}
+.hub a{display:flex;justify-content:space-between;text-decoration:none;border-bottom:1px solid var(--line);padding:12px 0;font-size:17px}
+.hub a span{color:var(--muted);font-size:14px}
 footer{border-top:1px solid var(--line);margin-top:56px;padding:20px 0 40px;color:var(--muted);font-size:13px}
 footer a{margin-right:14px}
 """
@@ -131,14 +144,52 @@ def hero(look):
     return '<div class="hero">Look image</div>'
 
 
+GROUPS = {
+    # group: (url base, way-in title, way-in question, how a single page is headed)
+    "occasion": ("occasion", "Where are you going?", "Complete outfits for the place you're headed.", lambda n: f"Outfits for {n.lower()}"),
+    "style": ("style", "Style a piece you own", "Start from what's in your closet. Shop only what's missing.", None),
+    "pairing": ("colors", "Colors that work", "Pairings that look elegant and never boring.", lambda n: n),
+    "season": ("season", "By season", "", lambda n: f"{n} looks"),
+}
+
+
 def label(site, group, key):
-    return site["taxonomy"][group].get(key, key)
+    v = site["taxonomy"][group].get(key, key)
+    return v["label"] if isinstance(v, dict) else v
+
+
+def heading(site, group, key):
+    v = site["taxonomy"][group].get(key, key)
+    if isinstance(v, dict):
+        return v.get("title", v["label"])
+    return GROUPS[group][3](v)
+
+
+def look_types(look):
+    out = []
+    for p in look["pieces"]:
+        for t in p.get("types", []):
+            if t not in out:
+                out.append(t)
+    return out
+
+
+def members_of(looks, group, key):
+    if group == "style":
+        return [l for l in looks if key in look_types(l)]
+    return [l for l in looks if key in l["tags"].get(group, [])]
+
+
+def used_keys(site, looks, group):
+    order = list(site["taxonomy"][group])
+    found = {k for l in looks for k in (look_types(l) if group == "style" else l["tags"].get(group, []))}
+    return [k for k in order if k in found]
 
 
 def card(look, site):
     t = look["tags"]
-    data = " ".join(f'data-{g}="{e(" ".join(t.get(g, [])))}"' for g in ("occasion", "colors", "season"))
-    return (f'<a class="card" href="/look/{look["slug"]}/" {data} data-kind="{e(look["kind"])}">{hero(look)}'
+    data = " ".join(f'data-{g}="{e(" ".join(t.get(g, [])))}"' for g in ("occasion", "pairing", "mood", "season"))
+    return (f'<a class="card" href="/look/{look["slug"]}/" {data}>{hero(look)}'
             f'<div class="t"><div class="meta">{e(label(site, "kind", look["kind"]))}</div>{e(look["title"])}</div></a>')
 
 
@@ -156,27 +207,31 @@ def look_page(look, site):
                 btn = '<span class="btn off">Sold out</span>'
             else:
                 btn = f'<a class="btn" rel="sponsored nofollow" href="/go/{slug}-{p["n"]}-{code}/">Shop</a>'
+            fit = f'<div class="sub">Fit: {e(v["fit"])}</div>' if v.get("fit") else ""
             rows.append(f"""<div class="piece"><div class="num">{p['n']}</div><div>
 <div class="name">{e(p['item'])}</div><div class="sub">{e(v.get('name'))} · {e(v.get('store'))} · {e(v.get('price'))}</div>
-<span class="mat">{e(v.get('material'))}</span></div>{btn}</div>""")
+{fit}<span class="mat">{e(v.get('material'))}</span></div>{btn}</div>""")
         panels.append(f'<div class="panel" data-p="{key}"{"" if i == 0 else " hidden"}>{"".join(rows)}</div>')
     checked = max((v.get("last_checked", "") for p in look["pieces"] for k, *_ in TIERS
                    for v in [p.get(k) or {}]), default="")
     t = look["tags"]
-    taglinks = " · ".join(
-        [f'<a href="/occasion/{o}/">{e(label(site, "occasion", o))}</a>' for o in t.get("occasion", [])] +
-        [f'<a href="/season/{x}/">{e(label(site, "season", x))}</a>' for x in t.get("season", [])])
-    colorlinks = "".join(f'<a class="chip" href="/colors/{c}/">{e(label(site, "colors", c))}</a>' for c in t.get("colors", []))
-    body = f"""<p class="meta" style="margin-top:24px">{e(label(site, "kind", look["kind"]))}</p>
+    def links(group, keys):
+        base = GROUPS[group][0]
+        return "".join(f'<a class="chip" href="/{base}/{k}/">{e(label(site, group, k))}</a>' for k in keys)
+    more = f"""<h2>Find more like this</h2>
+<p class="lbl meta">Occasion</p><div class="chips">{links("occasion", t.get("occasion", []))}</div>
+<p class="lbl meta">Colors</p><div class="chips">{links("pairing", t.get("pairing", []))}</div>
+<p class="lbl meta">Style a piece</p><div class="chips">{links("style", look_types(look))}</div>"""
+    mood = " · ".join(label(site, "mood", m) for m in t.get("mood", []))
+    body = f"""<p class="meta" style="margin-top:24px">{e(label(site, "kind", look["kind"]))}{" · " + e(mood) if mood else ""}</p>
 <h1 style="margin-top:8px">{e(look['title'])}</h1>
 {hero(look)}<p class="ai">Image is AI-generated. Every piece listed below is real and was in stock when checked.</p>
 <div class="swatches">{sw}</div>
 <p class="lesson">{e(look.get('lesson'))}</p>
 <div class="tabs" role="tablist">{"".join(tabs)}</div>{"".join(panels)}
 <p class="note">Numbers match the video. Prices and stock change; last checked {e(checked)}.</p>
-<p class="tags meta">{taglinks}</p>
-<div class="chips">{colorlinks}</div>
-<p style="margin-top:20px"><a class="btn off" href="/looks/">Browse all looks</a></p>
+{more}
+<p style="margin-top:24px"><a class="btn off" href="/looks/">Browse all looks</a></p>
 <script>
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{{
  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
@@ -187,31 +242,30 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{{
                 f"/look/{slug}/", look.get("image", ""))
 
 
-def browse_chips(site, looks, group, base):
-    used = sorted({x for l in looks for x in l["tags"].get(group, [])},
-                  key=lambda k: list(site["taxonomy"][group]).index(k))
-    return "".join(f'<a class="chip" href="/{base}/{k}/">{e(label(site, group, k))}</a>' for k in used)
+def door(site, looks, group):
+    base, title, question, _ = GROUPS[group]
+    keys = used_keys(site, looks, group)[:5]
+    chips = "".join(f"<i>{e(label(site, group, k))}</i>" for k in keys)
+    return (f'<a class="door" href="/{base}/"><b>{e(title)}</b><span>{e(question)}</span>'
+            f'<div class="chips">{chips}</div></a>')
 
 
 def home_page(looks, site):
-    latest = looks[:6]
-    cards = "".join(card(l, site) for l in latest)
+    cards = "".join(card(l, site) for l in looks[:6])
     looks_html = (f'<div class="grid">{cards}</div><a class="btn off" href="/looks/">See all {len(looks)} looks</a>'
                   if looks else
                   '<div class="empty"><b>The first looks are being scouted.</b>'
                   'Every piece checked for fabric and fit before it goes up.</div>')
-    browse = ""
-    if looks:
-        browse = f"""<h2>Browse</h2>
-<p class="filters lbl meta">By occasion</p><div class="chips">{browse_chips(site, looks, "occasion", "occasion")}</div>
-<p class="filters lbl meta">By color</p><div class="chips">{browse_chips(site, looks, "colors", "colors")}</div>"""
+    doors = (f'<div class="doors">{door(site, looks, "occasion")}{door(site, looks, "style")}{door(site, looks, "pairing")}</div>'
+             if looks else "")
     body = f"""<h1>Elegant, never boring.<br>Every piece found for you.</h1>
 <p class="lead">You see an outfit you love, and then the hunting starts. We do the hunting.
-Each Purogé look is a complete outfit, numbered piece by piece, with a link to every item.</p>
+Every look is a complete outfit, numbered piece by piece, in two price versions.</p>
 <a class="btn" href="/latest/">Find the look from our latest video</a>
+<h2>Start here</h2>
+{doors}
 <h2 id="looks">Latest looks</h2>
 {looks_html}
-{browse}
 <h2>How it works</h2>
 <ol class="how">
 <li><div><b>Find a look you love</b> in our videos. Every piece in it is numbered.</div></li>
@@ -242,9 +296,9 @@ def latest_page(looks, site):
 
 def all_looks_page(looks, site):
     groups = []
-    for g, title in (("occasion", "Occasion"), ("colors", "Color"), ("season", "Season")):
-        used = sorted({x for l in looks for x in l["tags"].get(g, [])}, key=lambda k: list(site["taxonomy"][g]).index(k))
-        chips = "".join(f'<button class="chip" aria-pressed="false" data-g="{g}" data-v="{k}">{e(label(site, g, k))}</button>' for k in used)
+    for g, title in (("occasion", "Occasion"), ("pairing", "Colors"), ("mood", "Mood"), ("season", "Season")):
+        chips = "".join(f'<button class="chip" aria-pressed="false" data-g="{g}" data-v="{k}">{e(label(site, g, k))}</button>'
+                        for k in used_keys(site, looks, g))
         groups.append(f'<p class="lbl meta">{title}</p><div class="chips">{chips}</div>')
     cards = "".join(card(l, site) for l in looks)
     body = f"""<p class="meta" style="margin-top:24px">Every look</p>
@@ -253,25 +307,36 @@ def all_looks_page(looks, site):
 <p class="count" id="count">{len(looks)} looks</p>
 <div class="grid" id="grid">{cards}</div>
 <script>
-const sel={{occasion:new Set(),colors:new Set(),season:new Set()}};
+const sel={{occasion:new Set(),pairing:new Set(),mood:new Set(),season:new Set()}};
 const cards=[...document.querySelectorAll('#grid .card')], count=document.getElementById('count');
 function apply(){{let n=0;cards.forEach(c=>{{const ok=Object.entries(sel).every(([g,s])=>!s.size||(c.dataset[g]||'').split(' ').some(v=>s.has(v)));c.hidden=!ok;if(ok)n++;}});count.textContent=n+(n===1?' look':' looks');}}
 document.querySelectorAll('.filters .chip').forEach(b=>b.onclick=()=>{{const s=sel[b.dataset.g],on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);on?s.add(b.dataset.v):s.delete(b.dataset.v);apply();}});
 </script>"""
-    return page("All looks | Purogé", body, site, "Every Purogé look, filterable by occasion, color and season.", "/looks/")
+    return page("All looks | Purogé", body, site, "Every Purogé look, filterable by occasion, colors, mood and season.", "/looks/")
 
 
-def collection_page(looks, site, group, key, base):
-    name = label(site, group, key)
-    heading = {"occasion": f"Outfits for {name.lower()}", "colors": f"Looks with {name.lower()}",
-               "season": f"{name} looks"}[group]
-    cards = "".join(card(l, site) for l in looks)
-    body = f"""<p class="meta" style="margin-top:24px">{e({"occasion": "Occasion", "colors": "Color", "season": "Season"}[group])}</p>
-<h1 style="margin-top:8px">{e(heading)}</h1>
-<p class="count">{len(looks)} look{"s" if len(looks) != 1 else ""}</p>
-<div class="grid">{cards}</div>
+def hub_page(looks, site, group):
+    base, title, question, _ = GROUPS[group]
+    rows = "".join(f'<li><a href="/{base}/{k}/">{e(label(site, group, k))}<span>{len(members_of(looks, group, k))}</span></a></li>'
+                   for k in used_keys(site, looks, group))
+    body = f"""<p class="meta" style="margin-top:24px">Start here</p>
+<h1 style="margin-top:8px">{e(title)}</h1>
+<p class="lead">{e(question)}</p>
+<ul class="hub">{rows}</ul>
 <a class="btn off" href="/looks/">Browse every look</a>"""
-    return page(f"{heading} | Purogé", body, site, f"Complete Purogé outfits: {heading.lower()}.", f"/{base}/{key}/")
+    return page(f"{title} | Purogé", body, site, question, f"/{base}/")
+
+
+def collection_page(members, site, group, key):
+    base, title, _, _ = GROUPS[group]
+    head = heading(site, group, key)
+    cards = "".join(card(l, site) for l in members)
+    body = f"""<p class="meta" style="margin-top:24px"><a href="/{base}/">{e(title)}</a></p>
+<h1 style="margin-top:8px">{e(head)}</h1>
+<p class="count">{len(members)} look{"s" if len(members) != 1 else ""}</p>
+<div class="grid">{cards}</div>
+<a class="btn off" href="/{base}/">{e(title)}</a>"""
+    return page(f"{head} | Purogé", body, site, f"Complete Purogé outfits: {head}.", f"/{base}/{key}/")
 
 
 def redirect_page(to):
@@ -359,26 +424,30 @@ def write(path, text):
     path.write_text(text, encoding="utf-8")
 
 
-RESERVED = {"look", "looks", "latest", "go", "occasion", "colors", "season", "story", "values",
+RESERVED = {"look", "looks", "latest", "go", "occasion", "style", "colors", "season", "story", "values",
             "favicon.svg", "style.css", "404.html", "robots.txt", "sitemap.txt", "CNAME"}
 
 
 def load(show_drafts):
     site = json.loads((ROOT / "data" / "site.json").read_text(encoding="utf-8"))
+    tax = site["taxonomy"]
     looks, errors, seen = [], [], set()
     for f in sorted((ROOT / "data" / "looks").glob("*.json")):
         l = json.loads(f.read_text(encoding="utf-8"))
-        slug = l.get("slug", "")
-        where = f.name
+        slug, where = l.get("slug", ""), f.name
         if slug != f.stem: errors.append(f"{where}: slug must match the file name")
         if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug): errors.append(f"{where}: slug must be lowercase words joined by dashes")
         if slug in RESERVED: errors.append(f"{where}: '{slug}' is a reserved address")
         if slug in seen: errors.append(f"{where}: duplicate slug")
         seen.add(slug)
-        if l.get("kind") not in site["taxonomy"]["kind"]: errors.append(f"{where}: unknown kind '{l.get('kind')}'")
-        for g in ("occasion", "colors", "season"):
+        if l.get("kind") not in tax["kind"]: errors.append(f"{where}: unknown kind '{l.get('kind')}'")
+        for g in ("occasion", "pairing", "mood", "season"):
             for v in l.get("tags", {}).get(g, []):
-                if v not in site["taxonomy"][g]: errors.append(f"{where}: unknown {g} tag '{v}' (add it to site.json first)")
+                if v not in tax[g]: errors.append(f"{where}: unknown {g} '{v}' (add it to site.json first)")
+        for p in l.get("pieces", []):
+            if not p.get("types"): errors.append(f"{where}: piece {p.get('n')} needs at least one type")
+            for v in p.get("types", []):
+                if v not in tax["style"]: errors.append(f"{where}: unknown piece type '{v}' (add it to site.json first)")
         if show_drafts or not l.get("draft"):
             looks.append(l)
     if errors:
@@ -397,7 +466,7 @@ def main():
     write(OUT / "favicon.svg", FAVICON)
     write(OUT / "CNAME", d)
     write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\nSitemap: https://{d}/sitemap.txt\n")
-    urls = [f"https://{d}{p}" for p in ("/", "/latest/", "/looks/", "/values/", "/story/")]
+    urls = [f"https://{d}{p}" for p in ("/", "/latest/", "/looks/", "/occasion/", "/style/", "/colors/", "/values/", "/story/")]
     for look in looks:
         slug = look["slug"]
         write(OUT / "look" / slug / "index.html", look_page(look, site))
@@ -410,12 +479,16 @@ def main():
                 v = p.get(key) or {}
                 url = None if v.get("sold_out") else with_affiliate(v.get("url"), site)
                 write(OUT / "go" / f"{slug}-{p['n']}-{code}" / "index.html", go_page(url, f"/look/{slug}/"))
-    for group, base in (("occasion", "occasion"), ("colors", "colors"), ("season", "season")):
-        for key in site["taxonomy"][group]:
-            members = [l for l in looks if key in l["tags"].get(group, [])]
-            if members:
-                write(OUT / base / key / "index.html", collection_page(members, site, group, key, base))
-                urls.append(f"https://{d}/{base}/{key}/")
+    for group in ("occasion", "style", "pairing", "season"):
+        base = GROUPS[group][0]
+        if group != "season":
+            write(OUT / base / "index.html", hub_page(looks, site, group))
+        for key in used_keys(site, looks, group):
+            write(OUT / base / key / "index.html", collection_page(members_of(looks, group, key), site, group, key))
+            urls.append(f"https://{d}/{base}/{key}/")
+    for old, to in site.get("legacy_redirects", {}).items():
+        if not (OUT / old.strip("/") / "index.html").exists():
+            write(OUT / old.strip("/") / "index.html", redirect_page(to))
     write(OUT / "index.html", home_page(looks, site))
     write(OUT / "latest" / "index.html", latest_page(looks, site))
     write(OUT / "looks" / "index.html", all_looks_page(looks, site))

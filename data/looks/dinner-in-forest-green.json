@@ -15,10 +15,11 @@
       "autumn",
       "winter"
     ],
-    "colors": [
-      "green",
-      "cream",
-      "burgundy"
+    "pairing": [
+      "green-and-burgundy"
+    ],
+    "mood": [
+      "romantic"
     ]
   },
   "lesson": "Forest green with burgundy shoes: two deep colors, one soft layer between them. Same shoes as Look 001, because fewer pieces should mean more outfits.",
@@ -32,6 +33,10 @@
     {
       "n": 1,
       "item": "Green dress",
+      "types": [
+        "slip-dress",
+        "midi-dress"
+      ],
       "heirloom": {
         "name": "100% Washable Silk Maxi Slip Dress, Forest Green",
         "store": "Quince",
@@ -52,6 +57,9 @@
     {
       "n": 2,
       "item": "Cream cardigan",
+      "types": [
+        "cardigan"
+      ],
       "heirloom": {
         "name": "JENNIE LIU 100% Cashmere Button Cardigan, Cream",
         "store": "Amazon",
@@ -72,6 +80,10 @@
     {
       "n": 3,
       "item": "Burgundy shoes",
+      "types": [
+        "ballet-flats",
+        "loafers"
+      ],
       "heirloom": {
         "name": "Italian Leather Handwoven Square Toe Ballet Flat, Merlot",
         "store": "Quince",

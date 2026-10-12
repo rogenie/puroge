@@ -9,9 +9,9 @@
   "socials": [],
   "taxonomy": {
     "kind": {
-      "color": "Color pairing",
+      "pairing": "Color pairing",
       "occasion": "Occasion",
-      "piece": "One piece, many ways",
+      "piece": "Style a piece",
       "rule": "Style rule"
     },
     "occasion": {
@@ -30,23 +30,114 @@
       "autumn": "Autumn",
       "winter": "Winter"
     },
-    "colors": {
-      "camel": "Camel",
-      "ivory": "Ivory",
-      "burgundy": "Burgundy",
-      "navy": "Navy",
-      "brown": "Brown",
-      "charcoal": "Charcoal",
-      "green": "Green",
-      "black": "Black",
-      "white": "White",
-      "grey": "Grey",
-      "red": "Red",
-      "blue": "Blue",
-      "pink": "Pink",
-      "olive": "Olive",
-      "cream": "Cream",
-      "tan": "Tan"
+    "pairing": {
+      "camel-and-burgundy": "Camel and burgundy",
+      "navy-and-brown": "Navy and brown",
+      "green-and-burgundy": "Green and burgundy",
+      "black-and-camel": "Black and camel",
+      "navy-and-ivory": "Navy and ivory",
+      "grey-and-pink": "Grey and pink",
+      "brown-and-blue": "Brown and blue",
+      "olive-and-cream": "Olive and cream",
+      "black-and-white": "Black and white",
+      "red-and-pink": "Red and pink",
+      "tan-and-white": "Tan and white",
+      "charcoal-and-camel": "Charcoal and camel"
+    },
+    "style": {
+      "camel-coat": {
+        "label": "Camel coat",
+        "title": "How to wear a camel coat"
+      },
+      "trench-coat": {
+        "label": "Trench coat",
+        "title": "How to wear a trench coat"
+      },
+      "blazer": {
+        "label": "Blazer",
+        "title": "How to wear a blazer"
+      },
+      "crewneck-sweater": {
+        "label": "Crewneck sweater",
+        "title": "How to wear a crewneck sweater"
+      },
+      "cardigan": {
+        "label": "Cardigan",
+        "title": "How to wear a cardigan"
+      },
+      "white-shirt": {
+        "label": "White shirt",
+        "title": "How to wear a white shirt"
+      },
+      "silk-blouse": {
+        "label": "Silk blouse",
+        "title": "How to wear a silk blouse"
+      },
+      "tailored-trousers": {
+        "label": "Tailored trousers",
+        "title": "How to wear tailored trousers"
+      },
+      "wide-leg-trousers": {
+        "label": "Wide-leg trousers",
+        "title": "How to wear wide-leg trousers"
+      },
+      "corduroy-pants": {
+        "label": "Corduroy pants",
+        "title": "How to wear corduroy pants"
+      },
+      "chinos": {
+        "label": "Chinos",
+        "title": "How to wear chinos"
+      },
+      "jeans": {
+        "label": "Jeans",
+        "title": "How to wear jeans and still look elegant"
+      },
+      "midi-skirt": {
+        "label": "Midi skirt",
+        "title": "How to wear a midi skirt"
+      },
+      "slip-dress": {
+        "label": "Slip dress",
+        "title": "How to wear a slip dress"
+      },
+      "midi-dress": {
+        "label": "Midi dress",
+        "title": "How to wear a midi dress"
+      },
+      "loafers": {
+        "label": "Loafers",
+        "title": "What to wear with loafers"
+      },
+      "ballet-flats": {
+        "label": "Ballet flats",
+        "title": "What to wear with ballet flats"
+      },
+      "ankle-boots": {
+        "label": "Ankle boots",
+        "title": "What to wear with ankle boots"
+      },
+      "heels": {
+        "label": "Heels",
+        "title": "What to wear with heels"
+      }
+    },
+    "mood": {
+      "quiet": "Quiet",
+      "sharp": "Sharp",
+      "soft": "Soft",
+      "bold": "Bold",
+      "romantic": "Romantic"
     }
+  },
+  "legacy_redirects": {
+    "/colors/camel/": "/colors/",
+    "/colors/ivory/": "/colors/",
+    "/colors/burgundy/": "/colors/",
+    "/colors/navy/": "/colors/",
+    "/colors/brown/": "/colors/",
+    "/colors/charcoal/": "/colors/",
+    "/colors/green/": "/colors/",
+    "/colors/cream/": "/colors/"
   }
 }

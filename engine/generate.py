@@ -105,4 +105,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit as ex:
+        if ex.code not in (0, None):
+            print(f"::error title=generate.py::{ex.code}")
+        raise
+    except Exception as ex:
+        import traceback
+        detail = "".join(traceback.format_exception_only(type(ex), ex)).strip().replace("\n", " | ")
+        print(f"::error title=generate.py::{detail[:900]}")
+        raise

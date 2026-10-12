@@ -1,7 +1,7 @@
 {
   "id": "2026-10-12-burgundy-three-ways",
   "format": "three-partners",
-  "status": "awaiting images",
+  "status": "images approved; video rendered",
   "short_link": "puroge.com/burgundy-three-ways",
   "looks": [
     "burgundy-and-ivory",
@@ -97,5 +97,13 @@
     "Everyday ivory trousers and red skirt are polyester; materials are listed on the site.",
     "Video shows the Everyday tier, since most pieces earn through the Amazon store ID; the site offers both tiers."
   ],
-  "qa": null
+  "qa": {
+    "group-1": "pass. All pieces match product colors and cuts. Chosen.",
+    "group-2": "fail. Garbled lettering on the sewing machine reads like 'SHAME'.",
+    "burgundy-and-ivory (first)": "fail. Loafers looked dark brown vs 'Dark Tan'; regenerated.",
+    "burgundy-and-ivory (second)": "pass. Checked the product photo: Eastland's 'Dark Tan' is itself dark brown, so the image is faithful.",
+    "burgundy-and-red": "pass.",
+    "burgundy-and-navy": "pass. Model C reads slimmer than the brief; faces vary between images until model reference sheets exist.",
+    "cost_usd": 0.24
+  }
 }

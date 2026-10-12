@@ -104,12 +104,32 @@ def main():
                              "-preset", "medium", "-crf", "20", "-movflags", "+faststart", str(out)],
                             stdin=subprocess.PIPE)
 
+    from PIL import ImageFilter
+    backdrops = {}
+
+    def backdrop(src):
+        key = id(src)
+        if key not in backdrops:
+            wall = src.crop((0, 0, src.width, max(8, round(src.height * 0.08))))   # top strip: just wall
+            backdrops[key] = wall.resize((W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(40))
+        return backdrops[key]
+
     def render(idx, t):
         (a_, b_), src, (x, y, w, h) = shots[idx]
-        z = 1 - 0.06 * ease(min(max((t - a_) / max(b_ - a_, 0.01), 0), 1))   # slow push-in
-        cw, ch = w * z, h * z
-        cx, cy = x + (w - cw) / 2, y + (h - ch) * 0.35
-        return src.crop((round(cx), round(cy), round(cx + cw), round(cy + ch))).resize((W, H), Image.LANCZOS)
+        p = ease(min(max((t - a_) / max(b_ - a_, 0.01), 0), 1))
+        if src.width / src.height <= 9 / 16 + 0.01:          # tall image (the group shot): fill the frame
+            z = 1 - 0.06 * p
+            cw, ch = w * z, h * z
+            cx, cy = x + (w - cw) / 2, y + (h - ch) * 0.35
+            return src.crop((round(cx), round(cy), round(cx + cw), round(cy + ch))).resize((W, H), Image.LANCZOS)
+        # wider image (a look close-up): show it whole, anchored to the bottom, text band above on a blurred backdrop
+        frame = backdrop(src).copy()
+        z = 1 + 0.05 * p
+        fw = round(W * z)
+        fh = round(src.height * fw / src.width)
+        fg = src.resize((fw, fh), Image.LANCZOS)
+        frame.paste(fg, ((W - fw) // 2, H - fh))
+        return frame
 
     FADE = 0.35
     for f in range(int(total * FPS)):

@@ -42,7 +42,10 @@
       "black-and-white": "Black and white",
       "red-and-pink": "Red and pink",
       "tan-and-white": "Tan and white",
-      "charcoal-and-camel": "Charcoal and camel"
+      "charcoal-and-camel": "Charcoal and camel",
+      "burgundy-and-ivory": "Burgundy and ivory",
+      "burgundy-and-red": "Burgundy and red",
+      "burgundy-and-navy": "Burgundy and navy"
     },
     "style": {
       "camel-coat": {
@@ -120,6 +123,10 @@
       "heels": {
         "label": "Heels",
         "title": "What to wear with heels"
+      },
+      "knee-high-boots": {
+        "label": "Knee-high boots",
+        "title": "What to wear with knee-high boots"
       }
     },
     "mood": {

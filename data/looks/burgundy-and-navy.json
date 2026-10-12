@@ -1,0 +1,103 @@
+{
+  "slug": "burgundy-and-navy",
+  "title": "Burgundy and Navy",
+  "kind": "pairing",
+  "published": "2026-10-12T15:00",
+  "series": "burgundy-three-ways",
+  "tags": {
+    "occasion": [
+      "work",
+      "weekend"
+    ],
+    "season": [
+      "autumn",
+      "winter",
+      "spring"
+    ],
+    "pairing": [
+      "burgundy-and-navy"
+    ],
+    "mood": [
+      "quiet"
+    ]
+  },
+  "lesson": "With navy, burgundy turns quiet. Both are deep and close in weight, so nothing shouts, and brown loafers keep it soft.",
+  "palette": [
+    "#5a2a27",
+    "#1f2a44",
+    "#4a3426"
+  ],
+  "image": "",
+  "pieces": [
+    {
+      "n": 1,
+      "item": "Burgundy sweater",
+      "types": [
+        "crewneck-sweater"
+      ],
+      "heirloom": {
+        "name": "NAADAM The Original Cashmere Crewneck, Merlot",
+        "store": "Amazon",
+        "material": "100% cashmere",
+        "price": "$78",
+        "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Dark Burgundy",
+        "store": "Amazon",
+        "material": "100% cotton",
+        "price": "$20",
+        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 2,
+      "item": "Navy trousers",
+      "types": [
+        "wide-leg-trousers",
+        "chinos"
+      ],
+      "heirloom": {
+        "name": "100% European Linen Pleated Trouser, Deep Navy",
+        "store": "Quince",
+        "material": "100% European linen",
+        "price": "$52",
+        "url": "https://www.quince.com/women/100-european-linen-pleated-trouser",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Amazon Essentials Straight Leg Stretch Twill Chino, Navy",
+        "store": "Amazon",
+        "material": "97% cotton, 3% elastane",
+        "price": "$21",
+        "url": "https://www.amazon.com/dp/B08JDMQPPD",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 3,
+      "item": "Brown loafers",
+      "types": [
+        "loafers"
+      ],
+      "heirloom": {
+        "name": "Italian Leather Venetian Loafer, Coffee Bean",
+        "store": "Quince",
+        "material": "Italian suede upper, leather lining and sole",
+        "price": "$110",
+        "url": "https://www.quince.com/women/italian-leather-venetian-loafer?color=coffee-bean",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Eastland Classic II Penny Loafer, Brown",
+        "store": "Amazon",
+        "material": "100% leather upper",
+        "price": "$54",
+        "url": "https://www.amazon.com/dp/B0007NNJ4O",
+        "last_checked": "2026-10-12"
+      }
+    }
+  ]
+}

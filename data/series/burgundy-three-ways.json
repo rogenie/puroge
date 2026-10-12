@@ -1,0 +1,24 @@
+{
+  "slug": "burgundy-three-ways",
+  "title": "Burgundy, Three Ways",
+  "format": "three-partners",
+  "published": "2026-10-12T15:00",
+  "intro": "One burgundy sweater, three partners. With ivory it's elegant, with red it's striking, with navy it's quiet.",
+  "looks": [
+    {
+      "slug": "burgundy-and-ivory",
+      "label": "With ivory",
+      "mood": "Elegant"
+    },
+    {
+      "slug": "burgundy-and-red",
+      "label": "With red",
+      "mood": "Striking"
+    },
+    {
+      "slug": "burgundy-and-navy",
+      "label": "With navy",
+      "mood": "Quiet"
+    }
+  ]
+}

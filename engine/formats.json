@@ -1,0 +1,62 @@
+{
+  "formats": {
+    "three-partners": {
+      "name": "One color, three partners",
+      "models": ["A", "B", "C"],
+      "length_seconds": [12, 20],
+      "structure": [
+        "Hook (0-2s): the hero color and a promise, e.g. 'Burgundy, three ways.'",
+        "Partner 1 (left model): 'With ivory, it's elegant.' plus one-line reason",
+        "Partner 2 (center model): 'With red, it's striking.' plus one-line reason",
+        "Partner 3 (right model): 'With navy, it's quiet.' plus one-line reason",
+        "Close: 'Same sweater. Every piece is linked.' then the short link"
+      ],
+      "rules": [
+        "The hero piece is the same real product in all three looks",
+        "Each partner is its own look on the site; the video links to a series page holding all three",
+        "Partners must differ in mood (e.g. soft, bold, quiet)"
+      ],
+      "link": "series"
+    },
+    "color-swap": {
+      "name": "The color swap",
+      "models": ["A", "C"],
+      "length_seconds": [10, 15],
+      "structure": [
+        "Hook: 'Same outfit. Flip the colors.'",
+        "Model A in color X top / color Y bottom; Model C reversed",
+        "One-line reason the pairing works",
+        "Close: numbered pieces and the short link"
+      ],
+      "rules": ["High-contrast pairings perform best (rust and navy, red and black, pink and grey)"],
+      "link": "series"
+    },
+    "two-tiers": {
+      "name": "Heirloom vs Everyday",
+      "models": ["A", "C"],
+      "length_seconds": [10, 15],
+      "structure": [
+        "Hook: 'Same look. Two budgets.'",
+        "Model A wears the Heirloom tier, Model C the Everyday tier",
+        "One line on what you gain with each",
+        "Close: numbered pieces and the short link"
+      ],
+      "rules": ["Both tiers must match closely in color and silhouette"],
+      "link": "look"
+    }
+  },
+  "video_file_fields": {
+    "id": "date plus slug, e.g. 2026-10-12-burgundy-three-ways",
+    "format": "one of the keys above",
+    "short_link": "puroge.com/<series or look slug>",
+    "looks": "look slugs shown, in left-to-right order",
+    "hook": "on-screen text for the first 2 seconds",
+    "script": "voiceover lines with timing",
+    "on_screen": "text overlays with timing",
+    "caption": "post caption, ending with the label line and short link",
+    "hashtags": "5 to 8, mixing broad and search terms",
+    "image_prompts": "one per model, built from brand.md's template",
+    "notes": "scouting compromises and anything the reviewer should know",
+    "qa": "filled in by the quality check: pass/fail per image"
+  }
+}

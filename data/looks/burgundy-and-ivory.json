@@ -1,0 +1,101 @@
+{
+  "slug": "burgundy-and-ivory",
+  "title": "Burgundy and Ivory",
+  "kind": "pairing",
+  "published": "2026-10-12T15:00",
+  "series": "burgundy-three-ways",
+  "tags": {
+    "occasion": [
+      "work",
+      "dinner"
+    ],
+    "season": [
+      "autumn",
+      "winter"
+    ],
+    "pairing": [
+      "burgundy-and-ivory"
+    ],
+    "mood": [
+      "soft"
+    ]
+  },
+  "lesson": "With ivory, burgundy turns elegant. The pale trousers give the deep color room to breathe, and camel shoes keep it warm instead of stark.",
+  "palette": [
+    "#5a2a27",
+    "#efe6d6",
+    "#b08a5b"
+  ],
+  "image": "",
+  "pieces": [
+    {
+      "n": 1,
+      "item": "Burgundy sweater",
+      "types": [
+        "crewneck-sweater"
+      ],
+      "heirloom": {
+        "name": "NAADAM The Original Cashmere Crewneck, Merlot",
+        "store": "Amazon",
+        "material": "100% cashmere",
+        "price": "$78",
+        "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Dark Burgundy",
+        "store": "Amazon",
+        "material": "100% cotton",
+        "price": "$20",
+        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 2,
+      "item": "Ivory trousers",
+      "types": [
+        "wide-leg-trousers"
+      ],
+      "heirloom": {
+        "name": "100% European Linen Pleated Trouser, White",
+        "store": "Quince",
+        "material": "100% European linen",
+        "price": "$52",
+        "url": "https://www.quince.com/women/100-european-linen-pleated-trouser",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Tronjori High Waist Wide Leg Palazzo Pants, Ivory White",
+        "store": "Amazon",
+        "material": "100% polyester",
+        "price": "$38",
+        "url": "https://www.amazon.com/dp/B0B8CWJMKP",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 3,
+      "item": "Camel loafers",
+      "types": [
+        "loafers"
+      ],
+      "heirloom": {
+        "name": "Italian Leather Tassel Loafer, Camel",
+        "store": "Quince",
+        "material": "Italian suede upper, leather lining and sole",
+        "price": "$110",
+        "url": "https://www.quince.com/women/italian-leather-tassel-loafer?color=camel",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Eastland Classic II Penny Loafer, Dark Tan",
+        "store": "Amazon",
+        "material": "100% leather upper",
+        "price": "$54",
+        "url": "https://www.amazon.com/dp/B0007NNJ4O",
+        "last_checked": "2026-10-12"
+      }
+    }
+  ]
+}

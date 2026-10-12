@@ -1,0 +1,33 @@
+# Scouting rules
+
+## For every piece, both tiers
+
+- **Heirloom:** the best-made option that fits the look. Prefer natural fibers and brands known for quality.
+- **Everyday:** the same look at a gentler price. Prefer Amazon (earns commission through the store ID automatically).
+- Both tiers should match in color and silhouette closely enough that the video makes sense for either.
+
+## Check on the product page itself, never from search results alone
+
+- Exact product name and the color name you are linking
+- Material composition as listed (record it word for word; fabric no longer blocks a piece, but it is always shown)
+- Price (if it varies by size, record "from $X")
+- In stock in the chosen color
+- Rating and review count: avoid under 3.8 stars, and prefer 100+ reviews for Everyday
+- For Amazon, the ASIN; link as `https://www.amazon.com/dp/<ASIN>` (the build adds the store ID)
+
+## When the ideal piece doesn't exist
+
+Take the closest real match and say so in the run notes, e.g. "Quince's silk skirt comes in Paprika Red, not true red."
+Never invent or substitute a product that wasn't opened and checked.
+
+## Reuse on purpose
+
+Reusing a piece across looks is good: it shows fewer pieces making more outfits. The `three-partners` format depends on it.
+
+## How to read Amazon
+
+Amazon blocks automated page reads. Use the browser pane on Rogenie's computer (amazon.com is approved there) and read search results and product pages with the page's own fetch. If the computer is offline, scout non-Amazon stores only and flag the gap.
+
+## Record
+
+Each look is a file `data/looks/<slug>.json`. Each piece needs `types` from the taxonomy in `data/site.json`; add a new type there first if needed. Set `"draft": true` until the human review approves it.

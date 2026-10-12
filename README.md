@@ -21,3 +21,9 @@ Links to use in posts and DMs:
 When a piece sells out, set `"sold_out": true` or paste a replacement `url`, update `last_checked`, rebuild. Every video and DM link keeps working.
 
 Put affiliate links (Amazon, Walmart, Target, ShopMy) in the `url` fields. Add the AI image path in `image`.
+
+Series (one video, several looks): `data/series/<slug>.json` lists the looks in video order.
+It gets a page at `/series/<slug>/` and a short link at `puroge.com/<slug>`, and appears on `/latest`.
+
+The content engine's playbook lives in `engine/` (formats, brand voice and set, models, scouting rules),
+and each weekly run's video files go in `engine/runs/<date>/`.

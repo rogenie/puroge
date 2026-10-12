@@ -1,0 +1,101 @@
+{
+  "slug": "burgundy-and-red",
+  "title": "Burgundy and Red",
+  "kind": "pairing",
+  "published": "2026-10-12T15:00",
+  "series": "burgundy-three-ways",
+  "tags": {
+    "occasion": [
+      "dinner",
+      "holiday"
+    ],
+    "season": [
+      "autumn",
+      "winter"
+    ],
+    "pairing": [
+      "burgundy-and-red"
+    ],
+    "mood": [
+      "bold"
+    ]
+  },
+  "lesson": "With red, burgundy turns striking. Two reds of different depth create a tension the eye enjoys, and boots in the darker shade tie it together.",
+  "palette": [
+    "#5a2a27",
+    "#b5361f",
+    "#4a1e1c"
+  ],
+  "image": "",
+  "pieces": [
+    {
+      "n": 1,
+      "item": "Burgundy sweater",
+      "types": [
+        "crewneck-sweater"
+      ],
+      "heirloom": {
+        "name": "NAADAM The Original Cashmere Crewneck, Merlot",
+        "store": "Amazon",
+        "material": "100% cashmere",
+        "price": "$78",
+        "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Dark Burgundy",
+        "store": "Amazon",
+        "material": "100% cotton",
+        "price": "$20",
+        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 2,
+      "item": "Red midi skirt",
+      "types": [
+        "midi-skirt"
+      ],
+      "heirloom": {
+        "name": "100% Washable Silk Skirt, Paprika Red",
+        "store": "Quince",
+        "material": "100% mulberry silk",
+        "price": "$70",
+        "url": "https://www.quince.com/women/silk/silk-skirt",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "High Waist A-Line Satin Midi Skirt, Red",
+        "store": "Amazon",
+        "material": "97% polyester, 3% spandex",
+        "price": "$32",
+        "url": "https://www.amazon.com/dp/B0B2Z7DJT5",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 3,
+      "item": "Burgundy boots",
+      "types": [
+        "knee-high-boots"
+      ],
+      "heirloom": {
+        "name": "Vince Camuto Sangeti Knee High Boot, Dark Mahogany",
+        "store": "Amazon",
+        "material": "100% leather",
+        "price": "$229",
+        "url": "https://www.amazon.com/dp/B0C35VVTYP",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Easyfox Knee High Boots, Burgundy",
+        "store": "Amazon",
+        "material": "Faux leather upper",
+        "price": "$65",
+        "url": "https://www.amazon.com/dp/B0D6R1MLCH",
+        "last_checked": "2026-10-12"
+      }
+    }
+  ]
+}

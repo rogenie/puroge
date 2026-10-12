@@ -16,6 +16,8 @@ Generates:
   /style/<piece>/             "Style a piece you own"  from each piece's "types"
   /colors/<pair>/             "Colors that work"       from tags.pairing
   /season/<x>/                season pages; mood is a filter only
+  /series/<slug>/             a video that shows several looks (e.g. one color, three partners)
+  /<series-slug>/             short link to a series
   /go/<slug>-<n>-h|e/         redirect to piece n, Heirloom or Everyday
 Tags must come from the taxonomy in data/site.json, so hundreds of looks stay consistent.
 """
@@ -284,8 +286,34 @@ Every look is a complete outfit, numbered piece by piece, in two price versions.
                 "Complete elegant outfits, every piece found and linked for you, in two price versions.")
 
 
-def latest_page(looks, site):
-    items = "".join(card(l, site) for l in looks[:30])
+def series_card(series, by_slug, site):
+    first = by_slug[series["looks"][0]["slug"]]
+    return (f'<a class="card" href="/series/{series["slug"]}/">{hero(first)}'
+            f'<div class="t"><div class="meta">{len(series["looks"])} looks</div>{e(series["title"])}</div></a>')
+
+
+def series_page(series, by_slug, site):
+    items = []
+    for i, ref in enumerate(series["looks"], 1):
+        l = by_slug[ref["slug"]]
+        items.append(f'''<a class="card" href="/look/{l["slug"]}/">{hero(l)}
+<div class="t"><div class="meta">{i} · {e(ref.get("label", ""))}{" · " + e(ref["mood"]) if ref.get("mood") else ""}</div>{e(l["title"])}</div></a>''')
+    body = f"""<p class="meta" style="margin-top:24px">From our videos</p>
+<h1 style="margin-top:8px">{e(series["title"])}</h1>
+<p class="lead">{e(series.get("intro", ""))}</p>
+<p class="note">Tap a look to see every piece, numbered as in the video, in Heirloom and Everyday versions.</p>
+<div class="grid">{"".join(items)}</div>
+<a class="btn off" href="/latest/">More from our videos</a>"""
+    return page(f"{series['title']} | Purogé", body, site, series.get("intro", ""), f"/series/{series['slug']}/")
+
+
+def latest_page(looks, site, series_list=()):
+    by_slug = {l["slug"]: l for l in looks}
+    in_series = {r["slug"] for sr in series_list for r in sr["looks"]}
+    feed = [(sr.get("published", ""), series_card(sr, by_slug, site)) for sr in series_list]
+    feed += [(l.get("published", ""), card(l, site)) for l in looks if l["slug"] not in in_series]
+    feed.sort(key=lambda x: x[0], reverse=True)
+    items = "".join(c for _, c in feed[:30])
     body = f"""<p class="meta" style="margin-top:24px">From our videos</p>
 <h1 style="margin-top:8px">The latest looks</h1>
 <p class="lead">Newest first, in the same order as our videos. Tap the one you just watched.</p>
@@ -424,7 +452,7 @@ def write(path, text):
     path.write_text(text, encoding="utf-8")
 
 
-RESERVED = {"look", "looks", "latest", "go", "occasion", "style", "colors", "season", "story", "values",
+RESERVED = {"series", "look", "looks", "latest", "go", "occasion", "style", "colors", "season", "story", "values",
             "favicon.svg", "style.css", "404.html", "robots.txt", "sitemap.txt", "CNAME"}
 
 
@@ -453,12 +481,25 @@ def load(show_drafts):
     if errors:
         sys.exit("Fix these before building:\n  " + "\n  ".join(errors))
     looks.sort(key=lambda l: (l.get("published", ""), l["slug"]), reverse=True)
-    return site, looks
+    visible = {l["slug"] for l in looks}
+    series_list = []
+    for f in sorted((ROOT / "data" / "series").glob("*.json")) if (ROOT / "data" / "series").exists() else []:
+        sr = json.loads(f.read_text(encoding="utf-8"))
+        if sr.get("slug") != f.stem: errors.append(f"{f.name}: slug must match the file name")
+        if sr.get("slug") in RESERVED or sr.get("slug") in seen: errors.append(f"{f.name}: address already used")
+        missing = [r["slug"] for r in sr.get("looks", []) if r["slug"] not in seen]
+        if missing: errors.append(f"{f.name}: unknown looks {missing}")
+        if not missing and all(r["slug"] in visible for r in sr["looks"]) and (show_drafts or not sr.get("draft")):
+            series_list.append(sr)
+    if errors:
+        sys.exit("Fix these before building:\n  " + "\n  ".join(errors))
+    series_list.sort(key=lambda x: x.get("published", ""), reverse=True)
+    return site, looks, series_list
 
 
 def main():
     show_drafts = "--drafts" in sys.argv
-    site, looks = load(show_drafts)
+    site, looks, series_list = load(show_drafts)
     if OUT.exists():
         shutil.rmtree(OUT)
     d = site["domain"]
@@ -490,7 +531,12 @@ def main():
         if not (OUT / old.strip("/") / "index.html").exists():
             write(OUT / old.strip("/") / "index.html", redirect_page(to))
     write(OUT / "index.html", home_page(looks, site))
-    write(OUT / "latest" / "index.html", latest_page(looks, site))
+    by_slug = {l["slug"]: l for l in looks}
+    for sr in series_list:
+        write(OUT / "series" / sr["slug"] / "index.html", series_page(sr, by_slug, site))
+        write(OUT / sr["slug"] / "index.html", redirect_page(f"/series/{sr['slug']}/"))
+        urls.append(f"https://{d}/series/{sr['slug']}/")
+    write(OUT / "latest" / "index.html", latest_page(looks, site, series_list))
     write(OUT / "looks" / "index.html", all_looks_page(looks, site))
     write(OUT / "story" / "index.html", story_page(site))
     write(OUT / "values" / "index.html", values_page(site))

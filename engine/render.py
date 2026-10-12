@@ -36,6 +36,11 @@ def nine16(img_w, img_h, focus_y=0.45):
 
 
 def shot_source(shot, video, group, order, cand_dir):
+    lk = re.search(r"look:([a-z0-9-]+)", shot)
+    if lk:
+        for p in (ROOT / "images" / "looks" / f"{lk.group(1)}.jpg", cand_dir / f"{lk.group(1)}.jpg"):
+            if p.exists():
+                return Image.open(p).convert("RGB")
     m = re.search(r"Model ([ABC])", shot)
     if not m or m.group(1) not in order:
         return group
@@ -131,6 +136,18 @@ def main():
         frame.paste(fg, ((W - fw) // 2, H - fh))
         return frame
 
+    labels = video.get("labels")          # e.g. ["5'9\" · Heirloom", "4'6\" · Everyday"], left then right
+    label_layer = None
+    if labels:
+        label_layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        dl = ImageDraw.Draw(label_layer)
+        lf = ImageFont.truetype(FONT, 40)
+        for text, cx in zip(labels, (W * 0.27, W * 0.73)):
+            tw = dl.textlength(text, font=lf)
+            y = int(H * 0.185)
+            dl.rounded_rectangle((cx - tw / 2 - 18, y - 6, cx + tw / 2 + 18, y + 52), radius=26, fill=(246, 241, 232, 225))
+            dl.text((cx - tw / 2, y), text, font=lf, fill=(42, 36, 32, 255))
+
     FADE = 0.35
     for f in range(int(total * FPS)):
         t = f / FPS
@@ -140,6 +157,9 @@ def main():
         if idx and t - a_ < FADE:
             frame = Image.blend(render(idx - 1, t), frame, ease((t - a_) / FADE))
         frame = frame.convert("RGBA")
+        src_now = shots[idx][1]
+        if label_layer is not None and src_now.width / src_now.height > 9 / 16 + 0.01:
+            frame.alpha_composite(label_layer)
         layer = next((lay for (ta, tb), lay in texts if ta <= t < tb), None)
         if layer is not None:
             frame.alpha_composite(layer)

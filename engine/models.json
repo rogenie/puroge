@@ -1,21 +1,29 @@
 {
-  "set": "a warm, softly lit dressmaker's workroom with cream plaster walls, a wooden sewing table along the back wall with a vintage sewing machine and spools of thread, bolts of fabric leaning in a corner, a dressmaker's form to one side, light oak floor, late-afternoon window light from the left. Calm, uncluttered, no logos",
+  "set": "a sunlit beachfront living room in Del Mar, California: floor-to-ceiling glass walls opening onto the Pacific Ocean and palm trees, cream marble floors with soft gold veining, a deep cream sectional sofa with linen pillows, a square marble block coffee table with white hydrangeas in a glass vase and white coral, an olive tree in a large stone planter, slatted light oak columns, a natural jute rug, bright late-afternoon sun. Natural materials only, no television, calm and uncluttered, no logos",
   "models": {
-    "A": "Filipina woman, early 30s, shoulder-length dark hair, petite frame, warm smile",
-    "B": "Black woman, late 20s, natural hair pulled back, tall and slim",
-    "C": "white woman, late 30s, wavy light brown hair, curvy, size 14"
+    "T": {
+      "label": "5'9\"",
+      "description": "tall woman, 5 feet 9 inches, slim build, early 30s, light olive skin, shoulder-length brown hair, calm warm expression",
+      "refs": []
+    },
+    "R": {
+      "label": "4'6\"",
+      "description": "Rogenie: petite Filipina woman, 4 feet 6 inches tall, long dark wavy hair, warm brown eyes, full lips; her face and body must match the reference photos exactly",
+      "refs": []
+    }
   },
   "positions": {
-    "3": [
-      "A",
-      "B",
-      "C"
-    ],
     "2": [
-      "A",
-      "C"
+      "T",
+      "R"
+    ],
+    "3": [
+      "T",
+      "R",
+      "T"
     ]
   },
   "style": "Photorealistic full-length fashion photograph. Natural standing pose, hands relaxed, face toward camera. True-to-life fabric texture and color. No text, letters or numbers anywhere in the image, including on mannequins, sewing machines and fabric. No logos, no bags, no jewelry beyond small earrings.",
-  "reference_note": "The attached photos are the exact products. Reproduce each garment's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos."
+  "reference_note": "The attached photos are the exact products. Reproduce each garment's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos. When reference photos of a person are attached, that person's face, hair and proportions must match them.",
+  "scale_note": "Show true relative heights: the 4'6\" woman's head reaches about the tall woman's shoulder."
 }

@@ -8,6 +8,9 @@ Writes candidates to images/candidates/<video id>/:
   group-<n>.jpg        all models together, 9:16, for the video (2 candidates)
   <look slug>.jpg      one model per look, 3:4, for the look page and the video close-ups
   manifest.json        prompts, references and costs, for the quality check
+Pairs mode (video file has "mode": "pairs"): one 3:4 image per look with two people side by side,
+each wearing one tier ("cast": [{"model": "T", "tier": "heirloom"}, {"model": "R", "tier": "everyday"}]).
+People with reference photos ("refs" in engine/models.json) are matched to those photos.
 Nothing goes live until a candidate is approved with engine/approve.py.
 Cost at fal's listed price (about $0.04 per image): about $0.20 per three-look video.
 """
@@ -36,7 +39,12 @@ def pieces_for(look, tier):
 
 
 def describe(pieces):
-    return ", ".join(f'{p["name"].split(",")[-1].strip().lower()} {p["item"].lower()} ({p["material"]})' for p in pieces)
+    out = []
+    for p in pieces:
+        color, item = p["name"].split(",")[-1].strip().lower(), p["item"].lower()
+        words = [w for w in color.split() if w not in item.split()]
+        out.append(f'{" ".join(words + [item]).strip()} ({p["material"]})')
+    return ", ".join(out)
 
 
 def save_jpeg(url, dest, max_w=1080):
@@ -57,6 +65,58 @@ def call(prompt, refs, aspect, n):
     return [img["url"] for img in res["images"]]
 
 
+def person_refs(model):
+    """Reference photos of a real person: URLs as given, local files uploaded to fal storage."""
+    import fal_client
+    out = []
+    for r in model.get("refs", []):
+        if r.startswith("http"):
+            out.append(r)
+        elif (ROOT / r).exists():
+            out.append(fal_client.upload_file(str(ROOT / r)))
+    return out
+
+
+def model_desc(cast, key):
+    m = cast["models"][key]
+    return m["description"] if isinstance(m, dict) else m
+
+
+def main_pairs(video, cast, outdir, only):
+    looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]
+    sides = ["On the left", "On the right"]
+    people = video["cast"]
+    face_refs = {p["model"]: person_refs(cast["models"][p["model"]]) for p in people}
+    manifest = {"video": video["id"], "endpoint": ENDPOINT, "mode": "pairs", "images": []}
+    old = outdir / "manifest.json"
+    if only and old.exists():
+        manifest["images"] = [i for i in json.loads(old.read_text())["images"] if i.get("look") != only]
+    made = 0
+    for look in looks:
+        if only and only != look["slug"]:
+            continue
+        lines, refs = [], []
+        for side, p in zip(sides, people):
+            ps = pieces_for(look, p["tier"])
+            lines.append(f"{side}: {model_desc(cast, p['model'])}, wearing {describe(ps)}.")
+            refs += [x["ref"] for x in ps if x["ref"]]
+        persons = [u for p in people for u in face_refs[p["model"]]]
+        refs = list(dict.fromkeys(persons + refs))
+        prompt = (f"{cast['style']} Vertical 3:4. Two women standing side by side, both full length, head to toe visible, "
+                  f"same outfit idea in two versions. " + " ".join(lines) + f" {cast.get('scale_note', '')} "
+                  f"Setting: {cast['set']}. {cast['reference_note']}")
+        for u in call(prompt, refs, "3:4", 1):
+            dest = outdir / f"{look['slug']}.jpg"
+            save_jpeg(u, dest)
+            made += 1
+            manifest["images"].append({"file": str(dest.relative_to(ROOT)), "kind": "look", "look": look["slug"],
+                                       "prompt": prompt, "refs": refs, "person_refs": len(persons)})
+    outdir.mkdir(parents=True, exist_ok=True)
+    manifest["estimated_cost_usd"] = round(made * PRICE_PER_IMAGE, 2)
+    (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    print(f"{made} images in {outdir.relative_to(ROOT)}, about ${manifest['estimated_cost_usd']}")
+
+
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
@@ -69,6 +129,8 @@ def main():
     order = cast["positions"][str(len(looks))]
     outdir = ROOT / "images" / "candidates" / video["id"]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+    if video.get("mode") == "pairs":
+        return main_pairs(video, cast, outdir, only)
     old = outdir / "manifest.json"
     manifest = {"video": video["id"], "endpoint": ENDPOINT, "tier": tier, "images": []}
     if only and old.exists():
@@ -82,7 +144,7 @@ def main():
     for pos, (model_key, look) in enumerate(zip(order, looks)):
         side = ["On the left", "In the center", "On the right"][pos if len(looks) == 3 else (0 if pos == 0 else 2)]
         ps = pieces_for(look, tier)
-        lines.append(f"{side}: {cast['models'][model_key]}, wearing {describe(ps)}.")
+        lines.append(f"{side}: {model_desc(cast, model_key)}, wearing {describe(ps)}.")
         refs += [p["ref"] for p in ps if p["ref"]]
     refs = list(dict.fromkeys(refs))
     group_prompt = (f"{cast['style']} Vertical 9:16. {len(looks)} women standing side by side, full length, head to toe visible. "
@@ -100,7 +162,7 @@ def main():
                 continue
             ps = pieces_for(look, tier)
             look_refs = [p["ref"] for p in ps if p["ref"]]
-            prompt = (f"{cast['style']} Vertical 3:4. One woman, full length, head to toe visible: {cast['models'][model_key]}, "
+            prompt = (f"{cast['style']} Vertical 3:4. One woman, full length, head to toe visible: {model_desc(cast, model_key)}, "
                       f"wearing {describe(ps)}. Setting: {cast['set']}. {cast['reference_note']}")
             for u in call(prompt, look_refs, "3:4", 1):
                 dest = outdir / f"{look['slug']}.jpg"

@@ -10,23 +10,23 @@ Warm, exacting, a little dry. Someone raised around a sewing machine who can't h
 - Never shame what people already own. Never say "look rich" or "classy vs. trashy."
 - "Lola" may appear naturally. Nothing should need a translation to follow.
 
-## The set: the atelier
+## The set: Rogenie's future home in Del Mar
 
-Every image uses the same set so the feed is recognizable before anyone reads a word.
+Every image uses the same room so the feed is recognizable before anyone reads a word. The exact wording lives in `models.json` ("set"):
 
-> A warm, softly lit dressmaker's workroom. Cream plaster walls, a wooden sewing table along the back wall with a vintage sewing machine and spools of thread, bolts of fabric leaning in a corner, a dressmaker's form to one side. Light oak floor, late-afternoon window light from the left. Calm, uncluttered, no logos.
+> A sunlit beachfront living room in Del Mar: floor-to-ceiling glass onto the Pacific and palms, cream marble floors with soft gold veining, a deep cream sectional with linen pillows, a marble block coffee table with white hydrangeas and coral, an olive tree in a stone planter, slatted oak columns, a jute rug. Natural materials only, no television.
 
 ## The models
 
-Until the AI twin is ready, three recurring models appear in every video, always in the same positions. Generate a reference sheet for each once, then pass those images as references every time so faces stay consistent.
+Two people in every image, side by side, each wearing one tier of the same look:
 
-| Position | Name (internal) | Description |
-|---|---|---|
-| Left | Model A | Filipina woman, early 30s, shoulder-length dark hair, petite frame, warm smile |
-| Center | Model B | Black woman, late 20s, natural hair pulled back, tall and slim |
-| Right | Model C | White woman, late 30s, wavy light brown hair, curvy, size 14 |
+| Side | Who | Height label | Default tier |
+|---|---|---|---|
+| Left | A recurring AI model (T) | 5'9" | Heirloom |
+| Right | Rogenie (R), from her reference photos | 4'6" | Everyday |
 
-Two-model formats use A and C. The AI twin, once ready, replaces Model A and becomes the host.
+Heights are shown on screen. True relative height matters: it shows each look working on a tall and a petite frame.
+Rogenie's reference photos stay private (never in the public repository). The tall model gets a reference sheet so her face stays the same every week.
 
 ## Image prompt template
 

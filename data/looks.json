@@ -15,33 +15,264 @@
       "draft": true,
       "title": "The Camel Coat, Not the Beige Outfit",
       "occasion": "Autumn weekday",
-      "palette": ["#b08a5b", "#efe6d6", "#5a2a27", "#2b2b2b"],
-      "lesson": "Camel over cream is the classic. The oxblood loafer is the one swap that keeps it from going beige.",
+      "palette": [
+        "#b08a5b",
+        "#efe6d6",
+        "#3b322c",
+        "#5a2a27"
+      ],
+      "lesson": "Camel over ivory is the classic. Dark trousers ground it, and the burgundy shoe is the one swap that keeps it from going beige.",
       "image": "",
       "pieces": [
         {
           "n": 1,
-          "item": "Coat",
-          "heirloom": {"name": "[Sample] Double-faced wool coat", "store": "Sample store", "material": "100% wool", "price": "$$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
-          "everyday": {"name": "[Sample] Wool-blend wrap coat", "store": "Sample store", "material": "70% wool, 30% polyamide", "price": "$", "url": "https://example.com/", "last_checked": "2026-10-12"}
+          "item": "Camel coat",
+          "heirloom": {
+            "name": "Camel Hair Single-Breasted Midi Coat, Vicuna",
+            "store": "Quince",
+            "material": "100% camel hair shell",
+            "price": "$300",
+            "url": "https://www.quince.com/women/camel-hair-single-breasted-midi-coat",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Calvin Klein Classic Wool Blend Coat, Classic Camel",
+            "store": "Amazon",
+            "material": "60% wool, 33% polyester, 5% cashmere",
+            "price": "from $114",
+            "url": "https://www.amazon.com/dp/B07BNJB3VC",
+            "last_checked": "2026-10-12"
+          }
         },
         {
           "n": 2,
-          "item": "Knit",
-          "heirloom": {"name": "[Sample] Cashmere crewneck", "store": "Sample store", "material": "100% cashmere", "price": "$$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
-          "everyday": {"name": "[Sample] Merino crewneck", "store": "Sample store", "material": "100% merino wool", "price": "$", "url": "https://example.com/", "last_checked": "2026-10-12"}
+          "item": "Ivory knit",
+          "heirloom": {
+            "name": "Mongolian Cashmere Crewneck Sweater, Ivory",
+            "store": "Quince",
+            "material": "100% cashmere",
+            "price": "$50",
+            "url": "https://www.quince.com/women/cashmere/cashmere-crewneck-sweater",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Cream",
+            "store": "Amazon",
+            "material": "100% cotton",
+            "price": "$20",
+            "url": "https://www.amazon.com/dp/B07QC4GD5Q",
+            "last_checked": "2026-10-12"
+          }
         },
         {
           "n": 3,
-          "item": "Trousers",
-          "heirloom": {"name": "[Sample] Pleated wool trousers", "store": "Sample store", "material": "100% wool", "price": "$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
-          "everyday": {"name": "[Sample] Wide-leg cotton trousers", "store": "Sample store", "material": "98% cotton, 2% elastane", "price": "$", "url": "https://example.com/", "last_checked": "2026-10-12"}
+          "item": "Dark trousers",
+          "heirloom": {
+            "name": "Theory Double Pleat Pants, New Charcoal Melange",
+            "store": "Amazon",
+            "material": "100% virgin wool",
+            "price": "$307",
+            "url": "https://www.amazon.com/dp/B0BXFQZ28N",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Rasutina Wide Leg Corduroy Pants, Dark Brown",
+            "store": "Amazon",
+            "material": "71% cotton, 25% rayon, 4% spandex",
+            "price": "$40",
+            "url": "https://www.amazon.com/dp/B0HCTGBG68",
+            "last_checked": "2026-10-12"
+          }
         },
         {
           "n": 4,
-          "item": "Loafers",
-          "heirloom": {"name": "[Sample] Oxblood leather loafers", "store": "Sample store", "material": "Calf leather, leather sole", "price": "$$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
-          "everyday": {"name": "[Sample] Burgundy penny loafers", "store": "Sample store", "material": "Leather upper", "price": "$", "url": "", "sold_out": true, "last_checked": "2026-10-12"}
+          "item": "Burgundy shoes",
+          "heirloom": {
+            "name": "Italian Leather Handwoven Square Toe Ballet Flat, Merlot",
+            "store": "Quince",
+            "material": "Handwoven Italian cow leather, leather sole",
+            "price": "$84",
+            "url": "https://www.quince.com/women/italian-leather-handwoven-square-toe-ballet-flat?color=merlot",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Eastland Classic II Penny Loafer, Burgundy",
+            "store": "Amazon",
+            "material": "100% leather upper",
+            "price": "$54",
+            "url": "https://www.amazon.com/dp/B0007NNJ4O",
+            "last_checked": "2026-10-12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "002",
+      "draft": true,
+      "title": "Navy and Brown, Together",
+      "occasion": "Office",
+      "palette": [
+        "#1f2a44",
+        "#efe6d6",
+        "#4a3426"
+      ],
+      "lesson": "The old rule said never wear navy with brown. Ignore it. Navy head to toe with brown shoes looks deliberate and warm, not dull.",
+      "image": "",
+      "pieces": [
+        {
+          "n": 1,
+          "item": "Navy knit",
+          "heirloom": {
+            "name": "NAADAM The Original Cashmere Crewneck, Navy",
+            "store": "Amazon",
+            "material": "100% cashmere",
+            "price": "$78",
+            "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Amazon Essentials 100% Cotton V-Neck Cardigan, Navy",
+            "store": "Amazon",
+            "material": "50% organic cotton, 50% cotton",
+            "price": "$24",
+            "url": "https://www.amazon.com/dp/B0CP4XZ22D",
+            "last_checked": "2026-10-12"
+          }
+        },
+        {
+          "n": 2,
+          "item": "Ivory shirt",
+          "heirloom": {
+            "name": "Washable Stretch Silk Notch Collar Blouse, Ivory",
+            "store": "Quince",
+            "material": "90% mulberry silk, 10% spandex",
+            "price": "$80",
+            "url": "https://www.quince.com/women/silk/silk-notch-collar-blouse",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Cotton Oxford Button Down Shirt, White",
+            "store": "Amazon",
+            "material": "100% cotton",
+            "price": "$22",
+            "url": "https://www.amazon.com/dp/B0D7LVYRM2",
+            "last_checked": "2026-10-12"
+          }
+        },
+        {
+          "n": 3,
+          "item": "Navy trousers",
+          "heirloom": {
+            "name": "100% European Linen Pleated Trouser, Deep Navy",
+            "store": "Quince",
+            "material": "100% European linen",
+            "price": "$52",
+            "url": "https://www.quince.com/women/100-european-linen-pleated-trouser",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Amazon Essentials Straight Leg Stretch Twill Chino, Navy",
+            "store": "Amazon",
+            "material": "97% cotton, 3% elastane",
+            "price": "$21",
+            "url": "https://www.amazon.com/dp/B08JDMQPPD",
+            "last_checked": "2026-10-12"
+          }
+        },
+        {
+          "n": 4,
+          "item": "Brown shoes",
+          "heirloom": {
+            "name": "Italian Leather Venetian Loafer, Coffee Bean",
+            "store": "Quince",
+            "material": "Italian suede upper, leather lining and sole",
+            "price": "$110",
+            "url": "https://www.quince.com/women/italian-leather-venetian-loafer?color=coffee-bean",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Eastland Classic II Penny Loafer, Brown",
+            "store": "Amazon",
+            "material": "100% leather upper",
+            "price": "$54",
+            "url": "https://www.amazon.com/dp/B0007NNJ4O",
+            "last_checked": "2026-10-12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "003",
+      "draft": true,
+      "title": "The Dinner Dress",
+      "occasion": "Evening",
+      "palette": [
+        "#2f4a3a",
+        "#efe6d6",
+        "#5a2a27"
+      ],
+      "lesson": "Forest green with burgundy shoes: two deep colors, one soft layer between them. Same shoes as Look 001, because fewer pieces should mean more outfits.",
+      "image": "",
+      "pieces": [
+        {
+          "n": 1,
+          "item": "Green dress",
+          "heirloom": {
+            "name": "100% Washable Silk Maxi Slip Dress, Forest Green",
+            "store": "Quince",
+            "material": "100% mulberry silk",
+            "price": "$110",
+            "url": "https://www.quince.com/women/womens-100-washable-silk-maxi-slip-dress",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "ZESICA Long Sleeve Midi Dress, Green",
+            "store": "Amazon",
+            "material": "92% cotton, 8% elastane",
+            "price": "$60",
+            "url": "https://www.amazon.com/dp/B0FCC17JFD",
+            "last_checked": "2026-10-12"
+          }
+        },
+        {
+          "n": 2,
+          "item": "Cream cardigan",
+          "heirloom": {
+            "name": "JENNIE LIU 100% Cashmere Button Cardigan, Cream",
+            "store": "Amazon",
+            "material": "100% cashmere",
+            "price": "$159",
+            "url": "https://www.amazon.com/dp/B00Q5FV800",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Organic Merino Crew Neck Cardigan, Cream White",
+            "store": "Amazon",
+            "material": "100% organic merino wool (GOTS)",
+            "price": "$51",
+            "url": "https://www.amazon.com/dp/B0FW3QW5ZP",
+            "last_checked": "2026-10-12"
+          }
+        },
+        {
+          "n": 3,
+          "item": "Burgundy shoes",
+          "heirloom": {
+            "name": "Italian Leather Handwoven Square Toe Ballet Flat, Merlot",
+            "store": "Quince",
+            "material": "Handwoven Italian cow leather, leather sole",
+            "price": "$84",
+            "url": "https://www.quince.com/women/italian-leather-handwoven-square-toe-ballet-flat?color=merlot",
+            "last_checked": "2026-10-12"
+          },
+          "everyday": {
+            "name": "Eastland Classic II Penny Loafer, Burgundy",
+            "store": "Amazon",
+            "material": "100% leather upper",
+            "price": "$54",
+            "url": "https://www.amazon.com/dp/B0007NNJ4O",
+            "last_checked": "2026-10-12"
+          }
         }
       ]
     }

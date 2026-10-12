@@ -3,31 +3,91 @@
   "format": "three-partners",
   "status": "awaiting images",
   "short_link": "puroge.com/burgundy-three-ways",
-  "looks": ["burgundy-and-ivory", "burgundy-and-red", "burgundy-and-navy"],
+  "looks": [
+    "burgundy-and-ivory",
+    "burgundy-and-red",
+    "burgundy-and-navy"
+  ],
   "tier_shown": "everyday",
   "hook": "Burgundy, three ways",
   "script": [
-    {"t": "0-2s", "shot": "All three models, wide", "vo": "One burgundy sweater. Three partners."},
-    {"t": "2-6s", "shot": "Push in on Model A (left)", "vo": "With ivory, it's elegant. Pale trousers give burgundy room to breathe."},
-    {"t": "6-10s", "shot": "Push in on Model B (center)", "vo": "With red, it's striking. Two reds of different depth, and the eye loves the tension."},
-    {"t": "10-14s", "shot": "Push in on Model C (right)", "vo": "With navy, it's quiet. Both colors are deep, so nothing shouts."},
-    {"t": "14-18s", "shot": "All three models, wide", "vo": "Same sweater, three moods. Every piece is real and linked. Link in bio."}
+    {
+      "t": "0-2s",
+      "shot": "All three models, wide",
+      "vo": "One burgundy sweater. Three partners."
+    },
+    {
+      "t": "2-6s",
+      "shot": "Push in on Model A (left)",
+      "vo": "With ivory, it's elegant. Pale trousers give burgundy room to breathe."
+    },
+    {
+      "t": "6-10s",
+      "shot": "Push in on Model B (center)",
+      "vo": "With red, it's striking. Two reds of different depth, and the eye loves the tension."
+    },
+    {
+      "t": "10-14s",
+      "shot": "Push in on Model C (right)",
+      "vo": "With navy, it's quiet. Both colors are deep, so nothing shouts."
+    },
+    {
+      "t": "14-18s",
+      "shot": "All three models, wide",
+      "vo": "Same sweater, three moods. Every piece is real and linked. Link in bio."
+    }
   ],
   "on_screen": [
-    {"t": "0-2s", "text": "Burgundy, three ways"},
-    {"t": "2-6s", "text": "With ivory: elegant"},
-    {"t": "6-10s", "text": "With red: striking"},
-    {"t": "10-14s", "text": "With navy: quiet"},
-    {"t": "14-18s", "text": "1 Sweater · 2 Trousers or skirt · 3 Shoes\npuroge.com/burgundy-three-ways"}
+    {
+      "t": "0-2s",
+      "text": "Burgundy, three ways"
+    },
+    {
+      "t": "2-6s",
+      "text": "With ivory: elegant"
+    },
+    {
+      "t": "6-10s",
+      "text": "With red: striking"
+    },
+    {
+      "t": "10-14s",
+      "text": "With navy: quiet"
+    },
+    {
+      "t": "14-18s",
+      "text": "1 Sweater · 2 Bottoms · 3 Shoes\nEvery piece is linked:\npuroge.com/burgundy-three-ways"
+    }
   ],
   "caption": "Burgundy, three ways. With ivory it's elegant, with red it's striking, with navy it's quiet. Same sweater in all three.\n\nEvery piece is real and linked, in an Heirloom and an Everyday version: puroge.com/burgundy-three-ways (link in bio)\n\nModels are AI. Every piece is real and linked.",
-  "hashtags": ["#burgundyoutfit", "#colorcombos", "#outfitideas", "#fallfashion", "#howtostyle", "#elegantstyle", "#capsulewardrobe", "#whattowear"],
+  "hashtags": [
+    "#burgundyoutfit",
+    "#colorcombos",
+    "#outfitideas",
+    "#fallfashion",
+    "#howtostyle",
+    "#elegantstyle",
+    "#capsulewardrobe",
+    "#whattowear"
+  ],
   "image_prompts": {
     "group": "Full-length fashion photo, vertical 9:16, three women standing side by side. Left: Filipina woman, early 30s, shoulder-length dark hair, petite frame, warm smile, wearing a dark burgundy cotton cable-knit crewneck sweater, ivory high-waisted wide-leg palazzo trousers, dark tan leather penny loafers. Center: Black woman, late 20s, natural hair pulled back, tall and slim, wearing the same dark burgundy cotton cable-knit crewneck sweater tucked into a red satin A-line midi skirt, burgundy knee-high boots with a low block heel. Right: white woman, late 30s, wavy light brown hair, curvy, size 14, wearing the same dark burgundy cotton cable-knit crewneck sweater, navy straight-leg twill chinos, brown leather penny loafers. Setting: a warm, softly lit dressmaker's workroom with cream plaster walls, a wooden sewing table with a vintage sewing machine and spools of thread, bolts of fabric leaning in a corner, a dressmaker's form to one side, light oak floor, late-afternoon window light from the left. Natural standing poses, hands relaxed, faces toward camera. Photorealistic, true-to-life fabric texture, no text, no logos, no bags or jewelry.",
     "try_on_references": {
-      "Model A": ["https://www.amazon.com/dp/B07QC4GD5Q (Dark Burgundy)", "https://www.amazon.com/dp/B0B8CWJMKP (Ivory White)", "https://www.amazon.com/dp/B0007NNJ4O (Dark Tan)"],
-      "Model B": ["https://www.amazon.com/dp/B07QC4GD5Q (Dark Burgundy)", "https://www.amazon.com/dp/B0B2Z7DJT5 (Red)", "https://www.amazon.com/dp/B0D6R1MLCH (Burgundy)"],
-      "Model C": ["https://www.amazon.com/dp/B07QC4GD5Q (Dark Burgundy)", "https://www.amazon.com/dp/B08JDMQPPD (Navy)", "https://www.amazon.com/dp/B0007NNJ4O (Brown)"]
+      "Model A": [
+        "https://www.amazon.com/dp/B07QC4GD5Q (Dark Burgundy)",
+        "https://www.amazon.com/dp/B0B8CWJMKP (Ivory White)",
+        "https://www.amazon.com/dp/B0007NNJ4O (Dark Tan)"
+      ],
+      "Model B": [
+        "https://www.amazon.com/dp/B07QC4GD5Q (Dark Burgundy)",
+        "https://www.amazon.com/dp/B0B2Z7DJT5 (Red)",
+        "https://www.amazon.com/dp/B0D6R1MLCH (Burgundy)"
+      ],
+      "Model C": [
+        "https://www.amazon.com/dp/B07QC4GD5Q (Dark Burgundy)",
+        "https://www.amazon.com/dp/B08JDMQPPD (Navy)",
+        "https://www.amazon.com/dp/B0007NNJ4O (Brown)"
+      ]
     }
   },
   "notes": [

@@ -13,7 +13,8 @@
 - Price (if it varies by size, record "from $X")
 - In stock in the chosen color
 - Rating and review count: avoid under 3.8 stars, and prefer 100+ reviews for Everyday
-- For Amazon, the ASIN; link as `https://www.amazon.com/dp/<ASIN>` (the build adds the store ID)
+- For Amazon, the ASIN **of the exact color variant**; link as `https://www.amazon.com/dp/<ASIN>` (the build adds the store ID). Parent ASINs open on Amazon's default color, which may not be the one in the look.
+- The main product photo URL as `ref_image` (from the product page's main image, highest resolution). The image model dresses the models from these, so they must show the right color.
 
 ## When the ideal piece doesn't exist
 

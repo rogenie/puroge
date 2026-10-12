@@ -39,16 +39,18 @@
         "store": "Amazon",
         "material": "100% cashmere",
         "price": "$78",
-        "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0CWPG88TR",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61QKXkMNcPL._AC_SL1500_.jpg"
       },
       "everyday": {
         "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Dark Burgundy",
         "store": "Amazon",
         "material": "100% cotton",
         "price": "$20",
-        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B07QC4FTDF",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/91TbSw04A1L._AC_SL1500_.jpg"
       }
     },
     {
@@ -70,8 +72,9 @@
         "store": "Amazon",
         "material": "100% polyester",
         "price": "$38",
-        "url": "https://www.amazon.com/dp/B0B8CWJMKP",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B07LBFRD5M",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61Q+Ga228OL._AC_SL1500_.jpg"
       }
     },
     {
@@ -93,8 +96,9 @@
         "store": "Amazon",
         "material": "100% leather upper",
         "price": "$54",
-        "url": "https://www.amazon.com/dp/B0007NNJ4O",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B08T19TJQH",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/71sXWlK8uhL._AC_SL1500_.jpg"
       }
     }
   ]

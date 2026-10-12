@@ -50,8 +50,9 @@
         "store": "Amazon",
         "material": "92% cotton, 8% elastane",
         "price": "$60",
-        "url": "https://www.amazon.com/dp/B0FCC17JFD",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0FRMXDQLM",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/51ObgDdcVjL._AC_SL1424_.jpg"
       }
     },
     {
@@ -65,16 +66,18 @@
         "store": "Amazon",
         "material": "100% cashmere",
         "price": "$159",
-        "url": "https://www.amazon.com/dp/B00Q5FV800",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B00Q5FV882",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61yDoRa4STL._AC_SL1500_.jpg"
       },
       "everyday": {
         "name": "Organic Merino Crew Neck Cardigan, Cream White",
         "store": "Amazon",
         "material": "100% organic merino wool (GOTS)",
         "price": "$51",
-        "url": "https://www.amazon.com/dp/B0FW3QW5ZP",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0FW3GV8JY",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/81BIfTUE2wL._AC_SL1500_.jpg"
       }
     },
     {
@@ -97,8 +100,9 @@
         "store": "Amazon",
         "material": "100% leather upper",
         "price": "$54",
-        "url": "https://www.amazon.com/dp/B0007NNJ4O",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0007NNJ8U",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/51haD8KR4mL._AC_SL1500_.jpg"
       }
     }
   ]

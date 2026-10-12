@@ -39,16 +39,18 @@
         "store": "Amazon",
         "material": "100% cashmere",
         "price": "$78",
-        "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0CWPG88TR",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61QKXkMNcPL._AC_SL1500_.jpg"
       },
       "everyday": {
         "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Dark Burgundy",
         "store": "Amazon",
         "material": "100% cotton",
         "price": "$20",
-        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B07QC4FTDF",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/91TbSw04A1L._AC_SL1500_.jpg"
       }
     },
     {
@@ -70,8 +72,9 @@
         "store": "Amazon",
         "material": "97% polyester, 3% spandex",
         "price": "$32",
-        "url": "https://www.amazon.com/dp/B0B2Z7DJT5",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0B2ZJN6CG",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/41+leo9wjKL._AC_SL1200_.jpg"
       }
     },
     {
@@ -85,16 +88,18 @@
         "store": "Amazon",
         "material": "100% leather",
         "price": "$229",
-        "url": "https://www.amazon.com/dp/B0C35VVTYP",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0C35L112P",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61CI4l-6JdL._AC_SL1500_.jpg"
       },
       "everyday": {
         "name": "Easyfox Knee High Boots, Burgundy",
         "store": "Amazon",
         "material": "Faux leather upper",
         "price": "$65",
-        "url": "https://www.amazon.com/dp/B0D6R1MLCH",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0D6R39WD4",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61blh4bBX7L._AC_SL1500_.jpg"
       }
     }
   ]

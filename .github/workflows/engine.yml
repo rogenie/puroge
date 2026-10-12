@@ -1,0 +1,61 @@
+name: Content engine
+
+on:
+  workflow_dispatch:
+    inputs:
+      step:
+        description: "generate (make image candidates) or render (make the video from approved images)"
+        required: true
+        default: generate
+        type: choice
+        options: [generate, render]
+      video:
+        description: "Video file, e.g. engine/runs/2026-10-12/burgundy-three-ways.json"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: engine
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install tools
+        run: |
+          pip install fal-client pillow
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Generate image candidates
+        if: inputs.step == 'generate'
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+        run: python3 engine/generate.py "${{ inputs.video }}"
+
+      - name: Save candidates to the repository
+        if: inputs.step == 'generate'
+        run: |
+          git config user.name "Purogé engine"
+          git config user.email "engine@puroge.com"
+          git add images/candidates
+          git commit -m "Image candidates for ${{ inputs.video }}" || echo "Nothing new"
+          git push
+
+      - name: Render video
+        if: inputs.step == 'render'
+        run: python3 engine/render.py "${{ inputs.video }}"
+
+      - name: Attach the video to this run
+        if: inputs.step == 'render'
+        uses: actions/upload-artifact@v4
+        with:
+          name: video
+          path: videos/*.mp4

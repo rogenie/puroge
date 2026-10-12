@@ -43,16 +43,18 @@
         "store": "Amazon",
         "material": "100% cashmere",
         "price": "$78",
-        "url": "https://www.amazon.com/dp/B0CWPP5YYQ",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0CWPPG323",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61P5O4y3aqL._AC_SL1500_.jpg"
       },
       "everyday": {
         "name": "Amazon Essentials 100% Cotton V-Neck Cardigan, Navy",
         "store": "Amazon",
         "material": "50% organic cotton, 50% cotton",
         "price": "$24",
-        "url": "https://www.amazon.com/dp/B0CP4XZ22D",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0BG7NJ6N4",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/91SHkslsaBL._AC_SL1500_.jpg"
       }
     },
     {
@@ -75,8 +77,9 @@
         "store": "Amazon",
         "material": "100% cotton",
         "price": "$22",
-        "url": "https://www.amazon.com/dp/B0D7LVYRM2",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0DQD92B3J",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/61lLkS802EL._AC_SL1500_.jpg"
       }
     },
     {
@@ -99,8 +102,9 @@
         "store": "Amazon",
         "material": "97% cotton, 3% elastane",
         "price": "$21",
-        "url": "https://www.amazon.com/dp/B08JDMQPPD",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B08JDLQM8R",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/7120BmgruYL._AC_SL1500_.jpg"
       }
     },
     {
@@ -122,8 +126,9 @@
         "store": "Amazon",
         "material": "100% leather upper",
         "price": "$54",
-        "url": "https://www.amazon.com/dp/B0007NNJ4O",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B08L27656N",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/71JORMn9cTL._AC_SL1500_.jpg"
       }
     }
   ]

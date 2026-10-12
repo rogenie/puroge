@@ -51,8 +51,9 @@
         "store": "Amazon",
         "material": "60% wool, 33% polyester, 5% cashmere",
         "price": "from $114",
-        "url": "https://www.amazon.com/dp/B07BNJB3VC",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B07CCNQQHD",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/612ISJ-wQwL._AC_SL1500_.jpg"
       }
     },
     {
@@ -74,8 +75,9 @@
         "store": "Amazon",
         "material": "100% cotton",
         "price": "$20",
-        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B07QC4H63J",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/81UKQMlUqGL._AC_SL1500_.jpg"
       }
     },
     {
@@ -90,16 +92,18 @@
         "store": "Amazon",
         "material": "100% virgin wool",
         "price": "$307",
-        "url": "https://www.amazon.com/dp/B0BXFQZ28N",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0BXFPY5GS",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/7120FsvsxVL._AC_SL1500_.jpg"
       },
       "everyday": {
         "name": "Rasutina Wide Leg Corduroy Pants, Dark Brown",
         "store": "Amazon",
         "material": "71% cotton, 25% rayon, 4% spandex",
         "price": "$40",
-        "url": "https://www.amazon.com/dp/B0HCTGBG68",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0HCTHQTLX",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/610hJLZePpL._AC_SL1500_.jpg"
       }
     },
     {
@@ -122,8 +126,9 @@
         "store": "Amazon",
         "material": "100% leather upper",
         "price": "$54",
-        "url": "https://www.amazon.com/dp/B0007NNJ4O",
-        "last_checked": "2026-10-12"
+        "url": "https://www.amazon.com/dp/B0007NNJ8U",
+        "last_checked": "2026-10-12",
+        "ref_image": "https://m.media-amazon.com/images/I/51haD8KR4mL._AC_SL1500_.jpg"
       }
     }
   ]

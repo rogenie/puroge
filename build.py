@@ -52,7 +52,7 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clam
 h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px;margin:48px 0 8px}
 .meta{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em}
 .lesson,.lead{font-size:18px;margin:16px 0 20px}
-.hero{aspect-ratio:4/5;background:var(--line);border-radius:6px;overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:14px}
+.hero{aspect-ratio:3/4;background:var(--line);border-radius:6px;overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:14px}
 .hero img{width:100%;height:100%;object-fit:cover}
 .ai{font-size:12px;color:var(--muted);margin-top:6px}
 .swatches{display:flex;gap:6px;margin:16px 0}
@@ -94,7 +94,7 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .count{color:var(--muted);font-size:14px}
 .tags a{color:var(--muted)}
 .feed .card{display:grid;grid-template-columns:96px 1fr;align-items:center}
-.feed .card .hero{aspect-ratio:4/5;height:auto}
+.feed .card .hero{aspect-ratio:3/4;height:auto}
 .feed .card div.t{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;line-height:1.2}
 .feed{grid-template-columns:1fr}
 .doors{display:grid;gap:12px;margin:20px 0}
@@ -504,6 +504,8 @@ def main():
         shutil.rmtree(OUT)
     d = site["domain"]
     write(OUT / "style.css", CSS)
+    if (ROOT / "images" / "looks").exists():
+        shutil.copytree(ROOT / "images" / "looks", OUT / "images" / "looks")
     write(OUT / "favicon.svg", FAVICON)
     write(OUT / "CNAME", d)
     write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\nSitemap: https://{d}/sitemap.txt\n")

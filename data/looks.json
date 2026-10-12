@@ -1,0 +1,47 @@
+{
+  "site": {
+    "name": "Puroge",
+    "domain": "puroge.com",
+    "tagline": "We found it for you.",
+    "dedication": "Named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
+    "disclosure": "Some links earn Puroge a commission, at no extra cost to you. We only list pieces we would wear.",
+    "socials": []
+  },
+  "looks": [
+    {
+      "id": "001",
+      "draft": true,
+      "title": "The Camel Coat, Not the Beige Outfit",
+      "occasion": "Autumn weekday",
+      "palette": ["#b08a5b", "#efe6d6", "#5a2a27", "#2b2b2b"],
+      "lesson": "Camel over cream is the classic. The oxblood loafer is the one swap that keeps it from going beige.",
+      "image": "",
+      "pieces": [
+        {
+          "n": 1,
+          "item": "Coat",
+          "heirloom": {"name": "[Sample] Double-faced wool coat", "store": "Sample store", "material": "100% wool", "price": "$$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
+          "everyday": {"name": "[Sample] Wool-blend wrap coat", "store": "Sample store", "material": "70% wool, 30% polyamide", "price": "$", "url": "https://example.com/", "last_checked": "2026-10-12"}
+        },
+        {
+          "n": 2,
+          "item": "Knit",
+          "heirloom": {"name": "[Sample] Cashmere crewneck", "store": "Sample store", "material": "100% cashmere", "price": "$$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
+          "everyday": {"name": "[Sample] Merino crewneck", "store": "Sample store", "material": "100% merino wool", "price": "$", "url": "https://example.com/", "last_checked": "2026-10-12"}
+        },
+        {
+          "n": 3,
+          "item": "Trousers",
+          "heirloom": {"name": "[Sample] Pleated wool trousers", "store": "Sample store", "material": "100% wool", "price": "$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
+          "everyday": {"name": "[Sample] Wide-leg cotton trousers", "store": "Sample store", "material": "98% cotton, 2% elastane", "price": "$", "url": "https://example.com/", "last_checked": "2026-10-12"}
+        },
+        {
+          "n": 4,
+          "item": "Loafers",
+          "heirloom": {"name": "[Sample] Oxblood leather loafers", "store": "Sample store", "material": "Calf leather, leather sole", "price": "$$$", "url": "https://example.com/", "last_checked": "2026-10-12"},
+          "everyday": {"name": "[Sample] Burgundy penny loafers", "store": "Sample store", "material": "Leather upper", "price": "$", "url": "", "sold_out": true, "last_checked": "2026-10-12"}
+        }
+      ]
+    }
+  ]
+}

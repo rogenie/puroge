@@ -71,6 +71,9 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .how{display:grid;gap:12px;margin:20px 0;padding:0;list-style:none;counter-reset:s}
 .how li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:baseline}
 .how li::before{content:counter(s);font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;color:var(--accent)}
+.vals{list-style:none;padding:0;margin:16px 0 24px;display:grid;gap:14px}
+.vals li{border-left:2px solid var(--accent);padding-left:14px}
+.vals b{font-weight:600}
 .empty{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:28px 20px;text-align:center;color:var(--muted)}
 .empty b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:26px;line-height:1.2;margin-bottom:8px;color:var(--ink)}
 .names{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;line-height:1.3;margin:28px 0}
@@ -103,7 +106,7 @@ def page(title, body, site, desc="", path="/", image=""):
 <meta property="og:url" content="{url}">{img}<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f6f1e8">
 {FONTS}<link rel="stylesheet" href="/style.css"></head><body><div class="wrap">
-<header><a class="brand" href="/">PUROGÉ</a><nav><a href="/#looks">Looks</a><a href="/story/">Our story</a></nav></header>
+<header><a class="brand" href="/">PUROGÉ</a><nav><a href="/#looks">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a></nav></header>
 {body}
 <footer>{socials and f"<p>{socials}</p>"}<p>{e(site['dedication'])}</p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
 </div></body></html>"""
@@ -171,10 +174,51 @@ Each Purogé look is a complete outfit, numbered piece by piece, with a link to 
 </ol>
 <p>Every piece lists its fabric. We favor wool, linen, cotton, silk and leather, because a seamstress
 judges clothes from the inside out.</p>
+<h2>What we stand for</h2>
+<ul class="vals">
+<li><b>Fabric first.</b> Every piece names what it is made of. We favor natural fibers because they wear better, last longer and age well.</li>
+<li><b>Elegant, never boring.</b> Classic foundations with one deliberate detail that makes the outfit yours.</li>
+<li><b>Real, and honest about it.</b> Our images are AI-generated and labeled. The clothes in them are real, checked and linked.</li>
+<li><b>Made to be kept.</b> Fewer, better pieces, worn for years and handed down.</li>
+</ul>
+<a class="btn off" href="/values/">Our values and where we're going</a>
 <h2 id="looks">The looks</h2>
 {looks_html}"""
     return page("Purogé | Elegant, never boring", body, site,
                 "Complete elegant outfits, every piece found and linked for you, in two price versions.")
+
+
+def values_page(site):
+    body = """<p class="meta" style="margin-top:24px">Values and vision</p>
+<h1 style="margin-top:8px">Dress well. Buy less. Keep it longer.</h1>
+<p class="lead">Purogé helps you dress with elegance that never feels boring, using clothes made to last.
+Here is what guides every look we publish, and where we are going.</p>
+
+<h2>Our values</h2>
+<ul class="vals">
+<li><b>Fabric first.</b> A seamstress judges clothes from the inside out. Every piece we list names its fiber,
+and we favor wool, linen, cotton, silk, cashmere and leather because they wear better, breathe better and age well.
+When a piece is a blend, we say so.</li>
+<li><b>Sustainability you can check.</b> We don't use vague words like "eco-friendly." We tell you what a garment
+is made of and let the materials speak. Buying fewer, longer-lasting pieces is the most sustainable choice there is.</li>
+<li><b>Elegant, never boring.</b> Timeless foundations, then one deliberate detail: a color, a texture, an unexpected shoe.
+Elegance is edited, not erased.</li>
+<li><b>We do the hunting.</b> You see an outfit you love, and we find every piece in it. Two versions of each look,
+Heirloom and Everyday, so good style works for more than one budget.</li>
+<li><b>Honest about everything.</b> Our model images are AI-generated, and we label them. The clothes are real and checked.
+Some links earn us a commission, and we disclose it.</li>
+<li><b>Made to be kept.</b> Our name carries two grandmothers who sewed and sold clothes for a living.
+We honor that by choosing clothes worth keeping, mending and handing down.</li>
+</ul>
+
+<h2>Our vision</h2>
+<p>Today, Purogé curates: complete outfits from brands that meet our standards, found and linked for you.</p>
+<p>Tomorrow, the Purogé label: premium dresses of our own, cut from natural fibers and sewn to be kept for a lifetime.
+Everything we learn from curating, which pieces you love and which ones are impossible to find, shapes what we make.</p>
+<p style="margin-top:28px"><a class="btn" href="/#looks">See the looks</a></p>"""
+    return page("Values and vision | Purogé", body, site,
+                "Fabric first, elegant never boring, made to be kept. What Purogé stands for and where it is going.",
+                "/values/")
 
 
 def story_page(site):
@@ -235,7 +279,7 @@ def main():
     write(OUT / "favicon.svg", FAVICON)
     write(OUT / "CNAME", site["domain"])
     write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\nSitemap: https://{site['domain']}/sitemap.txt\n")
-    urls = [f"https://{site['domain']}/", f"https://{site['domain']}/story/"]
+    urls = [f"https://{site['domain']}/", f"https://{site['domain']}/values/", f"https://{site['domain']}/story/"]
     for look in looks:
         lid = look["id"]
         write(OUT / "look" / lid / "index.html", look_page(look, site))
@@ -247,6 +291,7 @@ def main():
                 write(OUT / "go" / f"{lid}-{p['n']}-{code}" / "index.html", go_page(url, f"/look/{lid}/"))
     write(OUT / "index.html", home_page(looks, site))
     write(OUT / "story" / "index.html", story_page(site))
+    write(OUT / "values" / "index.html", values_page(site))
     write(OUT / "404.html", page("Not found | Purogé",
           '<h1>This page wandered off.</h1><p class="lead">The look may have moved. '
           'Everything we have scouted is on the home page.</p><a class="btn" href="/#looks">See the looks</a>',

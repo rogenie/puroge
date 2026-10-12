@@ -8,8 +8,9 @@
 Preview locally with `python3 build.py --drafts`, then open `site/index.html`.
 
 Links to use in posts and DMs:
-- Whole outfit: `puroge.com/look/001`
-- One piece: `puroge.com/go/001-3-h` (piece 3, Heirloom) or `puroge.com/go/001-3-e` (piece 3, Everyday)
+- Whole outfit: `puroge.com/navy-and-brown` (short link, say it or show it in the video)
+- Bio link: `puroge.com/latest` (newest looks first)
+- One piece: `puroge.com/go/navy-and-brown-3-h` (piece 3, Heirloom) or `...-3-e` (Everyday)
 
 When a piece sells out, set `"sold_out": true` or paste a replacement `url`, update `last_checked`, rebuild. Every video and DM link keeps working.
 

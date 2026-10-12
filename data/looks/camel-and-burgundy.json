@@ -1,0 +1,115 @@
+{
+  "slug": "camel-and-burgundy",
+  "title": "Camel and Burgundy",
+  "kind": "color",
+  "published": "2026-10-12",
+  "old_urls": [
+    "/look/001/"
+  ],
+  "tags": {
+    "occasion": [
+      "weekend",
+      "work"
+    ],
+    "season": [
+      "autumn",
+      "winter"
+    ],
+    "colors": [
+      "camel",
+      "ivory",
+      "charcoal",
+      "burgundy"
+    ]
+  },
+  "lesson": "Camel over ivory is the classic. Dark trousers ground it, and the burgundy shoe is the one swap that keeps it from going beige.",
+  "palette": [
+    "#b08a5b",
+    "#efe6d6",
+    "#3b322c",
+    "#5a2a27"
+  ],
+  "image": "",
+  "pieces": [
+    {
+      "n": 1,
+      "item": "Camel coat",
+      "heirloom": {
+        "name": "Camel Hair Single-Breasted Midi Coat, Vicuna",
+        "store": "Quince",
+        "material": "100% camel hair shell",
+        "price": "$300",
+        "url": "https://www.quince.com/women/camel-hair-single-breasted-midi-coat",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Calvin Klein Classic Wool Blend Coat, Classic Camel",
+        "store": "Amazon",
+        "material": "60% wool, 33% polyester, 5% cashmere",
+        "price": "from $114",
+        "url": "https://www.amazon.com/dp/B07BNJB3VC",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 2,
+      "item": "Ivory knit",
+      "heirloom": {
+        "name": "Mongolian Cashmere Crewneck Sweater, Ivory",
+        "store": "Quince",
+        "material": "100% cashmere",
+        "price": "$50",
+        "url": "https://www.quince.com/women/cashmere/cashmere-crewneck-sweater",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Amazon Essentials Soft Cotton Cable Knit Crewneck, Cream",
+        "store": "Amazon",
+        "material": "100% cotton",
+        "price": "$20",
+        "url": "https://www.amazon.com/dp/B07QC4GD5Q",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 3,
+      "item": "Dark trousers",
+      "heirloom": {
+        "name": "Theory Double Pleat Pants, New Charcoal Melange",
+        "store": "Amazon",
+        "material": "100% virgin wool",
+        "price": "$307",
+        "url": "https://www.amazon.com/dp/B0BXFQZ28N",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Rasutina Wide Leg Corduroy Pants, Dark Brown",
+        "store": "Amazon",
+        "material": "71% cotton, 25% rayon, 4% spandex",
+        "price": "$40",
+        "url": "https://www.amazon.com/dp/B0HCTGBG68",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 4,
+      "item": "Burgundy shoes",
+      "heirloom": {
+        "name": "Italian Leather Handwoven Square Toe Ballet Flat, Merlot",
+        "store": "Quince",
+        "material": "Handwoven Italian cow leather, leather sole",
+        "price": "$84",
+        "url": "https://www.quince.com/women/italian-leather-handwoven-square-toe-ballet-flat?color=merlot",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Eastland Classic II Penny Loafer, Burgundy",
+        "store": "Amazon",
+        "material": "100% leather upper",
+        "price": "$54",
+        "url": "https://www.amazon.com/dp/B0007NNJ4O",
+        "last_checked": "2026-10-12"
+      }
+    }
+  ]
+}

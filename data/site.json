@@ -1,0 +1,52 @@
+{
+  "name": "Purogé",
+  "domain": "puroge.com",
+  "tagline": "We found it for you.",
+  "dedication": "Named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
+  "disclosure": "Some links earn Purogé a commission, at no extra cost to you. We only list pieces we would wear.",
+  "amazon_tag": "rogeniecord0c-20",
+  "amazon_disclosure": "As an Amazon Associate, Purogé earns from qualifying purchases.",
+  "socials": [],
+  "taxonomy": {
+    "kind": {
+      "color": "Color pairing",
+      "occasion": "Occasion",
+      "piece": "One piece, many ways",
+      "rule": "Style rule"
+    },
+    "occasion": {
+      "work": "Work",
+      "dinner": "Dinner",
+      "weekend": "Weekend",
+      "date-night": "Date night",
+      "wedding-guest": "Wedding guest",
+      "travel": "Travel",
+      "brunch": "Brunch",
+      "holiday": "Holiday party"
+    },
+    "season": {
+      "spring": "Spring",
+      "summer": "Summer",
+      "autumn": "Autumn",
+      "winter": "Winter"
+    },
+    "colors": {
+      "camel": "Camel",
+      "ivory": "Ivory",
+      "burgundy": "Burgundy",
+      "navy": "Navy",
+      "brown": "Brown",
+      "charcoal": "Charcoal",
+      "green": "Green",
+      "black": "Black",
+      "white": "White",
+      "grey": "Grey",
+      "red": "Red",
+      "blue": "Blue",
+      "pink": "Pink",
+      "olive": "Olive",
+      "cream": "Cream",
+      "tan": "Tan"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 # Purogé site
 
-1. Add or edit looks in `data/looks.json` (copy the sample look, give it the next id like `002`).
+1. Each look is one file in `data/looks/`, named after its address (`navy-and-brown.json` lives at puroge.com/navy-and-brown). Copy an existing look to start a new one.
+   Tags (occasion, colors, season) must come from the lists in `data/site.json`; the build stops and says why if one does not.
 2. Looks marked `"draft": true` stay hidden. Remove that line to publish a look.
 3. Push to `main`. GitHub Actions builds the site and publishes it to puroge.com in about a minute.
 

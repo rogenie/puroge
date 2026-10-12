@@ -1,0 +1,93 @@
+{
+  "slug": "dinner-in-forest-green",
+  "title": "Dinner in Forest Green",
+  "kind": "occasion",
+  "published": "2026-10-12",
+  "old_urls": [
+    "/look/003/"
+  ],
+  "tags": {
+    "occasion": [
+      "dinner",
+      "date-night"
+    ],
+    "season": [
+      "autumn",
+      "winter"
+    ],
+    "colors": [
+      "green",
+      "cream",
+      "burgundy"
+    ]
+  },
+  "lesson": "Forest green with burgundy shoes: two deep colors, one soft layer between them. Same shoes as Look 001, because fewer pieces should mean more outfits.",
+  "palette": [
+    "#2f4a3a",
+    "#efe6d6",
+    "#5a2a27"
+  ],
+  "image": "",
+  "pieces": [
+    {
+      "n": 1,
+      "item": "Green dress",
+      "heirloom": {
+        "name": "100% Washable Silk Maxi Slip Dress, Forest Green",
+        "store": "Quince",
+        "material": "100% mulberry silk",
+        "price": "$110",
+        "url": "https://www.quince.com/women/womens-100-washable-silk-maxi-slip-dress",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "ZESICA Long Sleeve Midi Dress, Green",
+        "store": "Amazon",
+        "material": "92% cotton, 8% elastane",
+        "price": "$60",
+        "url": "https://www.amazon.com/dp/B0FCC17JFD",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 2,
+      "item": "Cream cardigan",
+      "heirloom": {
+        "name": "JENNIE LIU 100% Cashmere Button Cardigan, Cream",
+        "store": "Amazon",
+        "material": "100% cashmere",
+        "price": "$159",
+        "url": "https://www.amazon.com/dp/B00Q5FV800",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Organic Merino Crew Neck Cardigan, Cream White",
+        "store": "Amazon",
+        "material": "100% organic merino wool (GOTS)",
+        "price": "$51",
+        "url": "https://www.amazon.com/dp/B0FW3QW5ZP",
+        "last_checked": "2026-10-12"
+      }
+    },
+    {
+      "n": 3,
+      "item": "Burgundy shoes",
+      "heirloom": {
+        "name": "Italian Leather Handwoven Square Toe Ballet Flat, Merlot",
+        "store": "Quince",
+        "material": "Handwoven Italian cow leather, leather sole",
+        "price": "$84",
+        "url": "https://www.quince.com/women/italian-leather-handwoven-square-toe-ballet-flat?color=merlot",
+        "last_checked": "2026-10-12"
+      },
+      "everyday": {
+        "name": "Eastland Classic II Penny Loafer, Burgundy",
+        "store": "Amazon",
+        "material": "100% leather upper",
+        "price": "$54",
+        "url": "https://www.amazon.com/dp/B0007NNJ4O",
+        "last_checked": "2026-10-12"
+      }
+    }
+  ]
+}

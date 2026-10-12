@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
-"""Build the Purogé site from data/looks.json.
+"""Build the Purogé site from data/site.json and data/looks/*.json (one file per look).
 
 Usage:  python3 build.py            published looks only (what goes live)
         python3 build.py --drafts   also build looks marked "draft": true (local preview)
 Output: site/  (GitHub Actions builds and publishes this automatically on every push)
 
 Generates:
-  site/index.html             home: story + all published looks, newest first
-  site/story/index.html       the story behind the name
-  site/look/<id>/index.html   one page per look, Heirloom and Everyday tabs
-  site/go/<id>-<n>-h/         redirect to the Heirloom piece n
-  site/go/<id>-<n>-e/         redirect to the Everyday piece n
-  site/404.html, favicon.svg, style.css, CNAME, robots.txt
-Videos and DMs link to /look/<id> or /go/... so a dead product link is fixed
-by editing looks.json and pushing, never by re-editing posts.
+  /                           home: latest looks, browse by occasion and color
+  /latest/                    the bio link: newest looks first, same order as the feed
+  /looks/                     every look, with filters
+  /look/<slug>/               one page per look, Heirloom and Everyday tabs
+  /<slug>/                    short link to a look (say it or show it in the video)
+  /occasion/<x>/, /colors/<x>/, /season/<x>/   collection pages
+  /go/<slug>-<n>-h|e/         redirect to piece n, Heirloom or Everyday
+Tags must come from the taxonomy in data/site.json, so hundreds of looks stay consistent.
 """
 import html
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -64,7 +65,7 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .btn{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 18px;border-radius:99px;font-size:14px;white-space:nowrap}
 .btn.off{background:none;color:var(--muted);border:1px solid var(--line)}
 .note{color:var(--muted);font-size:13px;margin:24px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:24px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:24px 0}
 .card{text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .card .hero{border-radius:0}
 .card div.t{padding:12px}
@@ -78,6 +79,18 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .empty b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:26px;line-height:1.2;margin-bottom:8px;color:var(--ink)}
 .names{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;line-height:1.3;margin:28px 0}
 .names span{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 14px;font:inherit;font-size:14px;text-decoration:none;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters{margin:8px 0 4px}
+.filters .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:12px}
+.card[hidden]{display:none}
+.count{color:var(--muted);font-size:14px}
+.tags a{color:var(--muted)}
+.feed .card{display:grid;grid-template-columns:96px 1fr;align-items:center}
+.feed .card .hero{aspect-ratio:4/5;height:auto}
+.feed .card div.t{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;line-height:1.2}
+.feed{grid-template-columns:1fr}
 footer{border-top:1px solid var(--line);margin-top:56px;padding:20px 0 40px;color:var(--muted);font-size:13px}
 footer a{margin-right:14px}
 """
@@ -106,7 +119,7 @@ def page(title, body, site, desc="", path="/", image=""):
 <meta property="og:url" content="{url}">{img}<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f6f1e8">
 {FONTS}<link rel="stylesheet" href="/style.css"></head><body><div class="wrap">
-<header><a class="brand" href="/">PUROGÉ</a><nav><a href="/#looks">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a></nav></header>
+<header><a class="brand" href="/">PUROGÉ</a><nav><a href="/looks/">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a></nav></header>
 {body}
 <footer>{socials and f"<p>{socials}</p>"}<p>{e(site['dedication'])}</p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
 </div></body></html>"""
@@ -118,62 +131,93 @@ def hero(look):
     return '<div class="hero">Look image</div>'
 
 
+def label(site, group, key):
+    return site["taxonomy"][group].get(key, key)
+
+
+def card(look, site):
+    t = look["tags"]
+    data = " ".join(f'data-{g}="{e(" ".join(t.get(g, [])))}"' for g in ("occasion", "colors", "season"))
+    return (f'<a class="card" href="/look/{look["slug"]}/" {data} data-kind="{e(look["kind"])}">{hero(look)}'
+            f'<div class="t"><div class="meta">{e(label(site, "kind", look["kind"]))}</div>{e(look["title"])}</div></a>')
+
+
 def look_page(look, site):
-    lid = look["id"]
+    slug = look["slug"]
     sw = "".join(f'<span style="background:{e(c)}"></span>' for c in look.get("palette", []))
     tabs, panels = [], []
-    for i, (key, code, label, sub) in enumerate(TIERS):
+    for i, (key, code, lab, sub) in enumerate(TIERS):
         tabs.append(f'<button role="tab" aria-selected="{str(i == 0).lower()}" data-t="{key}">'
-                    f'<b>{label}</b><small>{sub}</small></button>')
+                    f'<b>{lab}</b><small>{sub}</small></button>')
         rows = []
         for p in look["pieces"]:
             v = p.get(key) or {}
             if v.get("sold_out") or not v.get("url"):
                 btn = '<span class="btn off">Sold out</span>'
             else:
-                btn = f'<a class="btn" rel="sponsored nofollow" href="/go/{lid}-{p["n"]}-{code}/">Shop</a>'
+                btn = f'<a class="btn" rel="sponsored nofollow" href="/go/{slug}-{p["n"]}-{code}/">Shop</a>'
             rows.append(f"""<div class="piece"><div class="num">{p['n']}</div><div>
 <div class="name">{e(p['item'])}</div><div class="sub">{e(v.get('name'))} · {e(v.get('store'))} · {e(v.get('price'))}</div>
 <span class="mat">{e(v.get('material'))}</span></div>{btn}</div>""")
         panels.append(f'<div class="panel" data-p="{key}"{"" if i == 0 else " hidden"}>{"".join(rows)}</div>')
     checked = max((v.get("last_checked", "") for p in look["pieces"] for k, *_ in TIERS
                    for v in [p.get(k) or {}]), default="")
-    body = f"""<p class="meta" style="margin-top:24px">Look {e(lid)} · {e(look.get('occasion'))}</p>
+    t = look["tags"]
+    taglinks = " · ".join(
+        [f'<a href="/occasion/{o}/">{e(label(site, "occasion", o))}</a>' for o in t.get("occasion", [])] +
+        [f'<a href="/season/{x}/">{e(label(site, "season", x))}</a>' for x in t.get("season", [])])
+    colorlinks = "".join(f'<a class="chip" href="/colors/{c}/">{e(label(site, "colors", c))}</a>' for c in t.get("colors", []))
+    body = f"""<p class="meta" style="margin-top:24px">{e(label(site, "kind", look["kind"]))}</p>
 <h1 style="margin-top:8px">{e(look['title'])}</h1>
 {hero(look)}<p class="ai">Image is AI-generated. Every piece listed below is real and was in stock when checked.</p>
 <div class="swatches">{sw}</div>
 <p class="lesson">{e(look.get('lesson'))}</p>
 <div class="tabs" role="tablist">{"".join(tabs)}</div>{"".join(panels)}
 <p class="note">Numbers match the video. Prices and stock change; last checked {e(checked)}.</p>
+<p class="tags meta">{taglinks}</p>
+<div class="chips">{colorlinks}</div>
+<p style="margin-top:20px"><a class="btn off" href="/looks/">Browse all looks</a></p>
 <script>
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{{
  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
  document.querySelectorAll('.panel').forEach(p=>p.hidden=p.dataset.p!==b.dataset.t);
 }});
 </script>"""
-    return page(f"Look {lid}: {look['title']} | Purogé", body, site, look.get("lesson"),
-                f"/look/{lid}/", look.get("image", ""))
+    return page(f"{look['title']} | Purogé", body, site, look.get("lesson"),
+                f"/look/{slug}/", look.get("image", ""))
+
+
+def browse_chips(site, looks, group, base):
+    used = sorted({x for l in looks for x in l["tags"].get(group, [])},
+                  key=lambda k: list(site["taxonomy"][group]).index(k))
+    return "".join(f'<a class="chip" href="/{base}/{k}/">{e(label(site, group, k))}</a>' for k in used)
 
 
 def home_page(looks, site):
-    cards = "".join(f'<a class="card" href="/look/{l["id"]}/">{hero(l)}'
-                    f'<div class="t"><div class="meta">Look {e(l["id"])}</div>{e(l["title"])}</div></a>'
-                    for l in looks)
-    looks_html = (f'<div class="grid">{cards}</div>' if looks else
+    latest = looks[:6]
+    cards = "".join(card(l, site) for l in latest)
+    looks_html = (f'<div class="grid">{cards}</div><a class="btn off" href="/looks/">See all {len(looks)} looks</a>'
+                  if looks else
                   '<div class="empty"><b>The first looks are being scouted.</b>'
                   'Every piece checked for fabric and fit before it goes up.</div>')
+    browse = ""
+    if looks:
+        browse = f"""<h2>Browse</h2>
+<p class="filters lbl meta">By occasion</p><div class="chips">{browse_chips(site, looks, "occasion", "occasion")}</div>
+<p class="filters lbl meta">By color</p><div class="chips">{browse_chips(site, looks, "colors", "colors")}</div>"""
     body = f"""<h1>Elegant, never boring.<br>Every piece found for you.</h1>
 <p class="lead">You see an outfit you love, and then the hunting starts. We do the hunting.
 Each Purogé look is a complete outfit, numbered piece by piece, with a link to every item.</p>
-<a class="btn" href="#looks">See the looks</a>
+<a class="btn" href="/latest/">Find the look from our latest video</a>
+<h2 id="looks">Latest looks</h2>
+{looks_html}
+{browse}
 <h2>How it works</h2>
 <ol class="how">
 <li><div><b>Find a look you love</b> in our videos. Every piece in it is numbered.</div></li>
-<li><div><b>Open the look here.</b> The numbers match, so you know exactly what is what.</div></li>
+<li><div><b>Open the look here.</b> The name in the video is the address: the look "Navy and Brown" lives at puroge.com/navy-and-brown.</div></li>
 <li><div><b>Pick your version.</b> Heirloom is made to last a lifetime. Everyday is the same look at a gentler price.</div></li>
 </ol>
-<p>Every piece lists its fabric. We favor wool, linen, cotton, silk and leather, because a seamstress
-judges clothes from the inside out.</p>
 <h2>What we stand for</h2>
 <ul class="vals">
 <li><b>Fabric first.</b> Every piece names what it is made of. We favor natural fibers because they wear better, last longer and age well.</li>
@@ -181,11 +225,59 @@ judges clothes from the inside out.</p>
 <li><b>Real, and honest about it.</b> Our images are AI-generated and labeled. The clothes in them are real, checked and linked.</li>
 <li><b>Made to be kept.</b> Fewer, better pieces, worn for years and handed down.</li>
 </ul>
-<a class="btn off" href="/values/">Our values and where we're going</a>
-<h2 id="looks">The looks</h2>
-{looks_html}"""
+<a class="btn off" href="/values/">Our values and where we're going</a>"""
     return page("Purogé | Elegant, never boring", body, site,
                 "Complete elegant outfits, every piece found and linked for you, in two price versions.")
+
+
+def latest_page(looks, site):
+    items = "".join(card(l, site) for l in looks[:30])
+    body = f"""<p class="meta" style="margin-top:24px">From our videos</p>
+<h1 style="margin-top:8px">The latest looks</h1>
+<p class="lead">Newest first, in the same order as our videos. Tap the one you just watched.</p>
+<div class="grid feed">{items}</div>
+<a class="btn off" href="/looks/">Browse every look</a>"""
+    return page("Latest looks | Purogé", body, site, "The looks from our newest videos, newest first.", "/latest/")
+
+
+def all_looks_page(looks, site):
+    groups = []
+    for g, title in (("occasion", "Occasion"), ("colors", "Color"), ("season", "Season")):
+        used = sorted({x for l in looks for x in l["tags"].get(g, [])}, key=lambda k: list(site["taxonomy"][g]).index(k))
+        chips = "".join(f'<button class="chip" aria-pressed="false" data-g="{g}" data-v="{k}">{e(label(site, g, k))}</button>' for k in used)
+        groups.append(f'<p class="lbl meta">{title}</p><div class="chips">{chips}</div>')
+    cards = "".join(card(l, site) for l in looks)
+    body = f"""<p class="meta" style="margin-top:24px">Every look</p>
+<h1 style="margin-top:8px">All looks</h1>
+<div class="filters">{"".join(groups)}</div>
+<p class="count" id="count">{len(looks)} looks</p>
+<div class="grid" id="grid">{cards}</div>
+<script>
+const sel={{occasion:new Set(),colors:new Set(),season:new Set()}};
+const cards=[...document.querySelectorAll('#grid .card')], count=document.getElementById('count');
+function apply(){{let n=0;cards.forEach(c=>{{const ok=Object.entries(sel).every(([g,s])=>!s.size||(c.dataset[g]||'').split(' ').some(v=>s.has(v)));c.hidden=!ok;if(ok)n++;}});count.textContent=n+(n===1?' look':' looks');}}
+document.querySelectorAll('.filters .chip').forEach(b=>b.onclick=()=>{{const s=sel[b.dataset.g],on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);on?s.add(b.dataset.v):s.delete(b.dataset.v);apply();}});
+</script>"""
+    return page("All looks | Purogé", body, site, "Every Purogé look, filterable by occasion, color and season.", "/looks/")
+
+
+def collection_page(looks, site, group, key, base):
+    name = label(site, group, key)
+    heading = {"occasion": f"Outfits for {name.lower()}", "colors": f"Looks with {name.lower()}",
+               "season": f"{name} looks"}[group]
+    cards = "".join(card(l, site) for l in looks)
+    body = f"""<p class="meta" style="margin-top:24px">{e({"occasion": "Occasion", "colors": "Color", "season": "Season"}[group])}</p>
+<h1 style="margin-top:8px">{e(heading)}</h1>
+<p class="count">{len(looks)} look{"s" if len(looks) != 1 else ""}</p>
+<div class="grid">{cards}</div>
+<a class="btn off" href="/looks/">Browse every look</a>"""
+    return page(f"{heading} | Purogé", body, site, f"Complete Purogé outfits: {heading.lower()}.", f"/{base}/{key}/")
+
+
+def redirect_page(to):
+    return (f'<!doctype html><meta charset="utf-8"><title>Purogé</title><link rel="canonical" href="{e(to)}">'
+            f'<meta http-equiv="refresh" content="0;url={e(to)}"><script>location.replace({json.dumps(to)})</script>'
+            f'<a href="{e(to)}">Continue</a>')
 
 
 def values_page(site):
@@ -215,7 +307,7 @@ We honor that by choosing clothes worth keeping, mending and handing down.</li>
 <p>Today, Purogé curates: complete outfits from brands that meet our standards, found and linked for you.</p>
 <p>Tomorrow, the Purogé label: premium dresses of our own, cut from natural fibers and sewn to be kept for a lifetime.
 Everything we learn from curating, which pieces you love and which ones are impossible to find, shapes what we make.</p>
-<p style="margin-top:28px"><a class="btn" href="/#looks">See the looks</a></p>"""
+<p style="margin-top:28px"><a class="btn" href="/looks/">See the looks</a></p>"""
     return page("Values and vision | Purogé", body, site,
                 "Fabric first, elegant never boring, made to be kept. What Purogé stands for and where it is going.",
                 "/values/")
@@ -231,7 +323,7 @@ def story_page(site):
 online, we find every piece for you, check what it is made of, and put it all on one page.
 Two versions of each look, so it works for more than one budget.</p>
 <p>Lola is Tagalog for grandmother.</p>
-<p style="margin-top:28px"><a class="btn" href="/#looks">See the looks</a></p>"""
+<p style="margin-top:28px"><a class="btn" href="/looks/">See the looks</a></p>"""
     return page("Our story | Purogé", body, site,
                 "Purogé is named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
                 "/story/")
@@ -267,38 +359,74 @@ def write(path, text):
     path.write_text(text, encoding="utf-8")
 
 
+RESERVED = {"look", "looks", "latest", "go", "occasion", "colors", "season", "story", "values",
+            "favicon.svg", "style.css", "404.html", "robots.txt", "sitemap.txt", "CNAME"}
+
+
+def load(show_drafts):
+    site = json.loads((ROOT / "data" / "site.json").read_text(encoding="utf-8"))
+    looks, errors, seen = [], [], set()
+    for f in sorted((ROOT / "data" / "looks").glob("*.json")):
+        l = json.loads(f.read_text(encoding="utf-8"))
+        slug = l.get("slug", "")
+        where = f.name
+        if slug != f.stem: errors.append(f"{where}: slug must match the file name")
+        if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug): errors.append(f"{where}: slug must be lowercase words joined by dashes")
+        if slug in RESERVED: errors.append(f"{where}: '{slug}' is a reserved address")
+        if slug in seen: errors.append(f"{where}: duplicate slug")
+        seen.add(slug)
+        if l.get("kind") not in site["taxonomy"]["kind"]: errors.append(f"{where}: unknown kind '{l.get('kind')}'")
+        for g in ("occasion", "colors", "season"):
+            for v in l.get("tags", {}).get(g, []):
+                if v not in site["taxonomy"][g]: errors.append(f"{where}: unknown {g} tag '{v}' (add it to site.json first)")
+        if show_drafts or not l.get("draft"):
+            looks.append(l)
+    if errors:
+        sys.exit("Fix these before building:\n  " + "\n  ".join(errors))
+    looks.sort(key=lambda l: (l.get("published", ""), l["slug"]), reverse=True)
+    return site, looks
+
+
 def main():
     show_drafts = "--drafts" in sys.argv
-    data = json.loads((ROOT / "data" / "looks.json").read_text(encoding="utf-8"))
-    site = data["site"]
-    looks = [l for l in data["looks"] if show_drafts or not l.get("draft")]
-    looks.sort(key=lambda l: l["id"], reverse=True)
+    site, looks = load(show_drafts)
     if OUT.exists():
         shutil.rmtree(OUT)
+    d = site["domain"]
     write(OUT / "style.css", CSS)
     write(OUT / "favicon.svg", FAVICON)
-    write(OUT / "CNAME", site["domain"])
-    write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\nSitemap: https://{site['domain']}/sitemap.txt\n")
-    urls = [f"https://{site['domain']}/", f"https://{site['domain']}/values/", f"https://{site['domain']}/story/"]
+    write(OUT / "CNAME", d)
+    write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\nSitemap: https://{d}/sitemap.txt\n")
+    urls = [f"https://{d}{p}" for p in ("/", "/latest/", "/looks/", "/values/", "/story/")]
     for look in looks:
-        lid = look["id"]
-        write(OUT / "look" / lid / "index.html", look_page(look, site))
-        urls.append(f"https://{site['domain']}/look/{lid}/")
+        slug = look["slug"]
+        write(OUT / "look" / slug / "index.html", look_page(look, site))
+        write(OUT / slug / "index.html", redirect_page(f"/look/{slug}/"))
+        for old in look.get("old_urls", []):
+            write(OUT / old.strip("/") / "index.html", redirect_page(f"/look/{slug}/"))
+        urls.append(f"https://{d}/look/{slug}/")
         for p in look["pieces"]:
             for key, code, *_ in TIERS:
                 v = p.get(key) or {}
                 url = None if v.get("sold_out") else with_affiliate(v.get("url"), site)
-                write(OUT / "go" / f"{lid}-{p['n']}-{code}" / "index.html", go_page(url, f"/look/{lid}/"))
+                write(OUT / "go" / f"{slug}-{p['n']}-{code}" / "index.html", go_page(url, f"/look/{slug}/"))
+    for group, base in (("occasion", "occasion"), ("colors", "colors"), ("season", "season")):
+        for key in site["taxonomy"][group]:
+            members = [l for l in looks if key in l["tags"].get(group, [])]
+            if members:
+                write(OUT / base / key / "index.html", collection_page(members, site, group, key, base))
+                urls.append(f"https://{d}/{base}/{key}/")
     write(OUT / "index.html", home_page(looks, site))
+    write(OUT / "latest" / "index.html", latest_page(looks, site))
+    write(OUT / "looks" / "index.html", all_looks_page(looks, site))
     write(OUT / "story" / "index.html", story_page(site))
     write(OUT / "values" / "index.html", values_page(site))
     write(OUT / "404.html", page("Not found | Purogé",
           '<h1>This page wandered off.</h1><p class="lead">The look may have moved. '
-          'Everything we have scouted is on the home page.</p><a class="btn" href="/#looks">See the looks</a>',
+          'Every look we have scouted is on the looks page.</p><a class="btn" href="/looks/">See all looks</a>',
           site, "Page not found", "/404.html"))
     write(OUT / "sitemap.txt", "\n".join(urls) + "\n")
-    drafts = len(data["looks"]) - len([l for l in data["looks"] if not l.get("draft")])
-    print(f"Built {len(looks)} look(s) into {OUT}" + (f" ({drafts} draft(s) hidden)" if drafts and not show_drafts else ""))
+    print(f"Built {len(looks)} look(s) into {OUT}")
 
 
 if __name__ == "__main__":

@@ -123,6 +123,7 @@ def main_pairs(video, cast, outdir, only):
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
+    os.environ["FAL_KEY"] = os.environ.get("FAL_KEY", "").strip().strip('"').strip("'").strip()
     if not os.environ.get("FAL_KEY"):
         sys.exit("FAL_KEY is not set. Add it as a repository secret named FAL_KEY.")
     video = load_json(sys.argv[1])

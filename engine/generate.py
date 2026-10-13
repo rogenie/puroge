@@ -89,40 +89,37 @@ def model_desc(cast, key):
 
 
 def main_pairs(video, cast, outdir, only):
+    """One full-length image per person per look ("<look>-<model>.jpg"); render.py places them side by side.
+    People are never generated together: a tall and a petite woman in one frame gets drawn as parent and child."""
     looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]
-    sides = ["On the left", "On the right"]
     people = video["cast"]
-    # Product photos per look come first; people share whatever room is left under the 10-image limit.
-    max_products = max(len({x["ref"] for p in people for x in pieces_for(lk, p["tier"]) if x["ref"]}) for lk in looks)
-    with_refs = [p["model"] for p in people if cast["models"][p["model"]].get("refs")]
-    room = max(MAX_REFS - max_products, 0)
-    per_person = room // len(with_refs) if with_refs else 0
-    face_refs = {p["model"]: person_refs(cast["models"][p["model"]], per_person) if per_person else [] for p in people}
-    print(f"Using {per_person} reference photo(s) per real person and up to {max_products} product photos per image.")
     manifest = {"video": video["id"], "endpoint": ENDPOINT, "mode": "pairs", "images": []}
     old = outdir / "manifest.json"
     if only and old.exists():
         manifest["images"] = [i for i in json.loads(old.read_text())["images"] if i.get("look") != only]
+    cache = {}
     made = 0
     for look in looks:
         if only and only != look["slug"]:
             continue
-        lines, refs = [], []
-        for side, p in zip(sides, people):
+        for p in people:
+            model = cast["models"][p["model"]]
             ps = pieces_for(look, p["tier"])
-            lines.append(f"{side}: {model_desc(cast, p['model'])}, wearing {describe(ps)}.")
-            refs += [x["ref"] for x in ps if x["ref"]]
-        persons = [u for p in people for u in face_refs[p["model"]]]
-        refs = list(dict.fromkeys(persons + refs))[:MAX_REFS]
-        prompt = (f"{cast['style']} Vertical 3:4. Two women standing side by side, both full length, head to toe visible, "
-                  f"same outfit idea in two versions. " + " ".join(lines) + f" {cast.get('scale_note', '')} "
-                  f"Setting: {cast['set']}. {cast['reference_note']}")
-        for u in call(prompt, refs, "3:4", 1):
-            dest = outdir / f"{look['slug']}.jpg"
-            save_jpeg(u, dest)
-            made += 1
-            manifest["images"].append({"file": dest.name, "kind": "look", "look": look["slug"],
-                                       "prompt": prompt, "person_refs": len(persons)})
+            prod = list(dict.fromkeys(x["ref"] for x in ps if x["ref"]))
+            room = max(MAX_REFS - len(prod), 0)
+            key = (p["model"], room)
+            if key not in cache:
+                cache[key] = person_refs(model, room) if model.get("refs") and room else []
+            persons = cache[key]
+            who = model_desc(cast, p["model"])
+            prompt = (f"{cast['style']} Vertical 3:4. One woman alone, full length, head to toe visible, centered, "
+                      f"standing naturally: {who}, wearing {describe(ps)}. Setting: {cast['set']}. {cast['reference_note']}")
+            for u in call(prompt, persons + prod, "3:4", 1):
+                dest = outdir / f"{look['slug']}-{p['model']}.jpg"
+                save_jpeg(u, dest)
+                made += 1
+                manifest["images"].append({"file": dest.name, "kind": "person", "look": look["slug"], "model": p["model"],
+                                           "tier": p["tier"], "prompt": prompt, "person_refs": len(persons)})
     outdir.mkdir(parents=True, exist_ok=True)
     manifest["estimated_cost_usd"] = round(made * PRICE_PER_IMAGE, 2)
     (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

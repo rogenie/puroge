@@ -8,7 +8,7 @@
     },
     "R": {
       "label": "4'6\"",
-      "description": "Rogenie, a grown adult Filipina woman in her thirties (an adult, never a child) with a very petite frame, mature adult face and adult body proportions, long dark wavy hair, warm brown eyes, full lips. Her face, hair and figure must match the attached photos of her exactly",
+      "description": "Rogenie, an adult Filipina woman in her thirties with a petite frame, long dark wavy hair, warm brown eyes, full lips; her face, skin tone, hair and figure must match the attached photos of her exactly",
       "refs": [
         "people/rogenie/face-03-closeup.jpg",
         "people/rogenie/face-01-outdoor.jpg",
@@ -41,5 +41,5 @@
   },
   "style": "Photorealistic full-length fashion photograph. Natural standing pose, hands relaxed, face toward camera. True-to-life fabric texture and color. No text, letters or numbers anywhere in the image, including on mannequins, sewing machines and fabric. No logos, no bags, no jewelry beyond small earrings.",
   "reference_note": "The attached photos are the exact products. Reproduce each garment's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos. The first photos show the real petite woman; match her face, skin tone, hair and figure to them, as a faithful likeness of that adult.",
-  "scale_note": "Both are grown adult women. The petite woman stands noticeably shorter: the top of her head reaches about the tall woman's shoulder. Keep the petite woman's adult face and adult proportions; do not make her look young."
+  "scale_note": "Not used in prompts: people are generated separately and placed side by side by render.py."
 }

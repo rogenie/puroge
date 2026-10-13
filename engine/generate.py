@@ -89,6 +89,50 @@ def model_desc(cast, key):
     return m["description"] if isinstance(m, dict) else m
 
 
+def local_ref(path):
+    """Upload one local file (in this repo or PEOPLE_DIR) to fal storage; URLs pass through."""
+    import fal_client
+    if path.startswith("http"):
+        return path
+    for base in (ROOT, Path(os.environ.get("PEOPLE_DIR", ROOT))):
+        if (base / path).exists():
+            return fal_client.upload_file(str(base / path))
+    print(f"::warning title=generate.py::reference not found: {path}")
+    return None
+
+
+def main_assets(video, outdir, only):
+    """Reusable assets (character sheets, empty set plates): "jobs": [{file, prompt, refs, aspect, n}]."""
+    manifest = {"video": video["id"], "endpoint": ENDPOINT, "mode": "assets", "images": []}
+    made = 0
+    for job in video["jobs"]:
+        if only and only != job["file"]:
+            continue
+        refs = [u for u in (local_ref(r) for r in job.get("refs", [])) if u]
+        n = job.get("n", 1)
+        for i, u in enumerate(call(job["prompt"], refs, job.get("aspect", "3:4"), n), 1):
+            dest = outdir / (f"{job['file']}-{i}.jpg" if n > 1 else f"{job['file']}.jpg")
+            save_jpeg(u, dest, max_w=job.get("max_w", 1600))
+            made += 1
+            manifest["images"].append({"file": dest.name, "prompt": job["prompt"], "refs": job.get("refs", [])})
+    outdir.mkdir(parents=True, exist_ok=True)
+    manifest["estimated_cost_usd"] = round(made * PRICE_PER_IMAGE, 2)
+    (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    print(f"{made} images in {outdir}, about ${manifest['estimated_cost_usd']}")
+
+
+def person_prompt(cast, model, outfit):
+    """Playbook order (engine/playbook.md): who, anchors and outfit first; then references, pose, frame, relight, realism."""
+    return (f"One woman alone: {model['description']}. Fixed details ({model.get('anchors', '')}). "
+            f"FULLY CLOTHED, wearing {outfit}.\n"
+            "Image 1 is her character sheet: keep this exact woman's face, identity, hair and fixed details unchanged; "
+            "use it for identity only, never for lighting or clothing. Image 2 is the room: place her in exactly this room, same "
+            "furniture, same view, same camera height. The remaining images are the garments: reproduce each one's color, fabric, "
+            "cut and details exactly, including the shoes; ignore any person, mannequin or background in them.\n"
+            f"{cast['pose']} Expression: {model.get('expression', 'calm')}. {cast['frame']}\n"
+            f"{cast['relight']}\n{cast['realism']} {cast['modest']} {cast['no_ip']}")
+
+
 def main_pairs(video, cast, outdir, only):
     """One full-length image per person per look ("<look>-<model>.jpg"); render.py places them side by side.
     People are never generated together: a tall and a petite woman in one frame gets drawn as parent and child."""
@@ -100,6 +144,7 @@ def main_pairs(video, cast, outdir, only):
         manifest["images"] = [i for i in json.loads(old.read_text())["images"] if i.get("look") != only]
     cache = {}
     made = 0
+    plate = local_ref(cast["set_plate"]) if cast.get("set_plate") and (ROOT / cast["set_plate"]).exists() else None
     for look in looks:
         if only and only != look["slug"]:
             continue
@@ -107,20 +152,26 @@ def main_pairs(video, cast, outdir, only):
             model = cast["models"][p["model"]]
             ps = pieces_for(look, p["tier"])
             prod = list(dict.fromkeys(x["ref"] for x in ps if x["ref"]))
-            room = max(MAX_REFS - len(prod), 0)
-            key = (p["model"], room)
-            if key not in cache:
-                cache[key] = person_refs(model, room) if model.get("refs") and room else []
-            persons = cache[key]
-            who = model_desc(cast, p["model"])
-            prompt = (f"{cast['style']} Vertical 3:4. One woman alone, full length, head to toe visible, centered, "
-                      f"standing naturally: {who}, wearing {describe(ps)}. Setting: {cast['set']}. {cast['reference_note']}")
-            for u in call(prompt, persons + prod, "3:4", 1):
+            sheet = model.get("sheet")
+            if sheet and (ROOT / sheet).exists() and plate:
+                if sheet not in cache:
+                    cache[sheet] = local_ref(sheet)
+                refs = [cache[sheet], plate] + prod[:MAX_REFS - 2]
+                prompt = person_prompt(cast, model, describe(ps))
+            else:  # older path: reference photos, set described in words
+                room = max(MAX_REFS - len(prod), 0)
+                key = (p["model"], room)
+                if key not in cache:
+                    cache[key] = person_refs(model, room) if model.get("refs") and room else []
+                refs = cache[key] + prod
+                prompt = (f"{cast['style']} Vertical 3:4. One woman alone, full length, head to toe visible, centered, "
+                          f"standing naturally: {model['description']}, wearing {describe(ps)}. Setting: {cast['set']}. {cast['reference_note']}")
+            for u in call(prompt, refs, "3:4", 1):
                 dest = outdir / f"{look['slug']}-{p['model']}.jpg"
                 save_jpeg(u, dest)
                 made += 1
                 manifest["images"].append({"file": dest.name, "kind": "person", "look": look["slug"], "model": p["model"],
-                                           "tier": p["tier"], "prompt": prompt, "person_refs": len(persons)})
+                                           "tier": p["tier"], "prompt": prompt, "refs": len(refs)})
     outdir.mkdir(parents=True, exist_ok=True)
     manifest["estimated_cost_usd"] = round(made * PRICE_PER_IMAGE, 2)
     (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
@@ -144,6 +195,8 @@ def main():
     order = cast["positions"].get(str(len(looks)), [])
     outdir = Path(os.environ.get("CANDIDATES_DIR", ROOT / "images" / "candidates")) / video["id"]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+    if video.get("mode") == "assets":
+        return main_assets(video, outdir, only)
     if video.get("mode") == "pairs":
         return main_pairs(video, cast, outdir, only)
     old = outdir / "manifest.json"

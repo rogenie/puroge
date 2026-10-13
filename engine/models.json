@@ -3,11 +3,14 @@
   "models": {
     "T": {
       "label": "5'9\"",
-      "description": "a tall adult woman in her early thirties, slim build, light olive skin, shoulder-length brown hair, calm warm expression",
+      "description": "a tall slim adult woman, clearly in her early thirties, NOT a teenager; light olive skin; long straight chestnut-brown hair with a center part falling past her shoulders; hazel-green eyes; natural groomed brows; soft natural makeup with a rosy lip",
       "refs": [
         "engine/people-ai/T-face.jpg",
         "engine/people-ai/T-full.jpg"
-      ]
+      ],
+      "anchors": "signature anchor: a small beauty mark high on her right cheekbone; second anchor: faint freckles across the bridge of her nose; third anchor: exactly one pair of small gold ball stud earrings and no other jewellery",
+      "expression": "a relaxed warm open smile",
+      "sheet": "engine/people-ai/T-sheet.jpg"
     },
     "R": {
       "label": "4'6\"",
@@ -32,12 +35,15 @@
     },
     "P": {
       "label": "",
-      "description": "an adult woman in her late twenties with a petite build, warm tan skin, glossy black hair in a sleek low bun, soft natural makeup, calm confident expression",
+      "description": "a petite adult woman, clearly in her late twenties, NOT a teenager, NOT a child, with adult proportions; warm tan skin; glossy black hair with a center part pulled into a sleek low bun; dark brown almond-shaped eyes; full lips; groomed straight dark brows; minimal natural makeup",
       "refs": [
         "engine/people-ai/P-face.jpg",
         "engine/people-ai/P-full.jpg"
       ],
-      "note": "Stand-in Everyday model until Rogenie's Higgsfield Soul ID twin is ready. Deliberately not a likeness of Rogenie."
+      "note": "Stand-in Everyday model until Rogenie's Higgsfield Soul ID twin is ready. Deliberately not a likeness of Rogenie.",
+      "anchors": "signature anchor: exactly one pair of small gold huggie hoop earrings and no other jewellery; second anchor: a tiny mole just above the left corner of her upper lip; third anchor: the sleek center-parted low bun",
+      "expression": "a calm confident closed-lip smile",
+      "sheet": "engine/people-ai/P-sheet.jpg"
     }
   },
   "positions": {
@@ -53,5 +59,12 @@
   },
   "style": "Photorealistic full-length fashion photograph. Natural standing pose, hands relaxed, face toward camera. True-to-life fabric texture and color. No text, letters or numbers anywhere in the image, including on mannequins, sewing machines and fabric. No logos, no bags, no jewelry beyond small earrings.",
   "reference_note": "The product photos show the exact garments: reproduce each one's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos. The first photos show the woman herself: she must be the same person, with the same face, hair and skin tone, but wearing only the outfit described.",
-  "scale_note": "Not used in prompts: people are generated separately and placed side by side by render.py."
+  "scale_note": "Not used in prompts: people are generated separately and placed side by side by render.py.",
+  "set_plate": "engine/sets/del-mar-living.jpg",
+  "relight": "RELIGHT: discard the character sheet's flat studio lighting completely and light her from scratch to the room: late-afternoon sun through the ocean glass as the key light from camera left, a warm fill bouncing up off the cream marble floor, a faint green bounce from the olive tree on her shadow side, a real soft contact shadow from her feet across the jute rug. She is physically standing in the room, never a cut-out pasted on a background, never brighter than the room.",
+  "realism": "Photorealistic lifestyle-lookbook photograph taken on a modern phone, casual slightly imperfect framing, true-to-life colors, matte unretouched skin with visible pores and fine peach fuzz, no airbrushing, no skin smoothing, no plastic skin, no CGI look.",
+  "pose": "Lookbook pose, not a passport photo: weight on one leg, one hand resting lightly in a pocket or at a cuff, shoulders relaxed, a calm alive gaze toward the camera.",
+  "modest": "Modest fully-clothed styling, opaque fabric, torso fully covered.",
+  "no_ip": "No logos, no brand marks, no readable text, letters or numbers anywhere in the image. No celebrity or real-person likeness.",
+  "frame": "Vertical 3:4, full length from the top of her head to her shoes with space above her head; the upper third of the frame is calm wall, glass and sky (captions go there)."
 }

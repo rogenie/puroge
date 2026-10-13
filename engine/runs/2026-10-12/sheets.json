@@ -1,0 +1,42 @@
+{
+  "id": "2026-10-12-sheets",
+  "mode": "assets",
+  "endpoint": "fal-ai/nano-banana-pro/edit",
+  "notes": [
+    "Character sheets (playbook section 1) and the empty Del Mar plate (section 2). Pick one of each, copy to engine/people-ai/<X>-sheet.jpg and engine/sets/del-mar-living.jpg, never regenerate."
+  ],
+  "jobs": [
+    {
+      "file": "T-sheet",
+      "prompt": "Three-panel character reference sheet, 16:9 aspect ratio. Neutral mid-grey seamless studio backdrop with a soft mottled painterly texture and a gentle natural vignette, the floor fading into the same grey; she stands well in front of the backdrop with a soft natural shadow behind her. The SAME identical woman with the same exact face in all three panels, same person photographed three times: a tall slim adult woman, clearly in her early thirties, NOT a teenager; light olive skin; long straight chestnut-brown hair with a center part falling past her shoulders; hazel-green eyes; natural groomed brows; soft natural makeup with a rosy lip. Fixed details, identical in every panel (signature anchor: a small beauty mark high on her right cheekbone; second anchor: faint freckles across the bridge of her nose; third anchor: exactly one pair of small gold ball stud earrings and no other jewellery). She wears ONE SINGLE OUTFIT across the entire sheet, FULLY CLOTHED: a plain ivory fine-knit crewneck sweater, straight high-waisted ecru cotton trousers, tan leather loafers. Images 1 and 2 show her face and figure: keep this exact woman's face, bone structure, skin tone and hair unchanged; ignore their background and lighting.\nPanel 1 (left third) - Full body shot from the top of her head to her loafers on the floor, generous space around the figure, lookbook pose: weight on one leg, one hand resting in a trouser pocket, shoulders relaxed, a relaxed warm open smile.\nPanel 2 (center third) - True 90-degree side profile MEDIUM bust portrait, from upper chest to the top of the head, wearing the SAME sweater, the earring and hair clearly visible, serene expression.\nPanel 3 (right third) - Frontal MEDIUM bust portrait facing the camera, from upper chest to the top of the head, wearing the SAME sweater, calm alive gaze into the lens, a relaxed warm open smile.\nFraming rule for panels 2 and 3: face in the upper-middle third, shoulders and upper chest showing, no tight face crops.\nEditorial fashion photography, 85mm, photorealistic with completely matte unretouched natural skin showing visible pores, fine peach fuzz and natural imperfections, no plastic skin, no airbrushing, no skin smoothing, no CGI rendering. Soft directional studio daylight from one side like a large window, gentle natural falloff, soft real shadows behind her. Face identical across all three panels, same fixed details. Modest fully-clothed styling, opaque fabric, torso fully covered. No logos, no brand marks, no readable text, letters or numbers. No celebrity or real-person likeness: an original face. Realistic anatomy, five fingers per hand.",
+      "refs": [
+        "engine/people-ai/T-face.jpg",
+        "engine/people-ai/T-full.jpg"
+      ],
+      "aspect": "16:9",
+      "n": 2,
+      "max_w": 2048
+    },
+    {
+      "file": "P-sheet",
+      "prompt": "Three-panel character reference sheet, 16:9 aspect ratio. Neutral mid-grey seamless studio backdrop with a soft mottled painterly texture and a gentle natural vignette, the floor fading into the same grey; she stands well in front of the backdrop with a soft natural shadow behind her. The SAME identical woman with the same exact face in all three panels, same person photographed three times: a petite adult woman, clearly in her late twenties, NOT a teenager, NOT a child, with adult proportions; warm tan skin; glossy black hair with a center part pulled into a sleek low bun; dark brown almond-shaped eyes; full lips; groomed straight dark brows; minimal natural makeup. Fixed details, identical in every panel (signature anchor: exactly one pair of small gold huggie hoop earrings and no other jewellery; second anchor: a tiny mole just above the left corner of her upper lip; third anchor: the sleek center-parted low bun). She wears ONE SINGLE OUTFIT across the entire sheet, FULLY CLOTHED: a plain ivory fine-knit crewneck sweater, straight high-waisted ecru cotton trousers, tan leather loafers. She is petite with adult proportions, a grown woman, not a girl. Images 1 and 2 show her face and figure: keep this exact woman's face, bone structure, skin tone and hair unchanged; ignore their background and lighting.\nPanel 1 (left third) - Full body shot from the top of her head to her loafers on the floor, generous space around the figure, lookbook pose: weight on one leg, one hand resting in a trouser pocket, shoulders relaxed, a calm confident closed-lip smile.\nPanel 2 (center third) - True 90-degree side profile MEDIUM bust portrait, from upper chest to the top of the head, wearing the SAME sweater, the earring and hair clearly visible, serene expression.\nPanel 3 (right third) - Frontal MEDIUM bust portrait facing the camera, from upper chest to the top of the head, wearing the SAME sweater, calm alive gaze into the lens, a calm confident closed-lip smile.\nFraming rule for panels 2 and 3: face in the upper-middle third, shoulders and upper chest showing, no tight face crops.\nEditorial fashion photography, 85mm, photorealistic with completely matte unretouched natural skin showing visible pores, fine peach fuzz and natural imperfections, no plastic skin, no airbrushing, no skin smoothing, no CGI rendering. Soft directional studio daylight from one side like a large window, gentle natural falloff, soft real shadows behind her. Face identical across all three panels, same fixed details. Modest fully-clothed styling, opaque fabric, torso fully covered. No logos, no brand marks, no readable text, letters or numbers. No celebrity or real-person likeness: an original face. Realistic anatomy, five fingers per hand.",
+      "refs": [
+        "engine/people-ai/P-face.jpg",
+        "engine/people-ai/P-full.jpg"
+      ],
+      "aspect": "16:9",
+      "n": 2,
+      "max_w": 2048
+    },
+    {
+      "file": "del-mar-living",
+      "prompt": "Edit this photo: remove the woman completely so the room is empty, with no people anywhere. Keep the exact same room, camera position, framing, lens and light: the floor-to-ceiling ocean glass with palm trees, slatted light oak columns, the cream sectional sofa with linen pillows, the square marble block coffee table with white hydrangeas and white coral, the olive tree in a stone planter, the jute rug, the cream marble floor. Fill the space where she stood with the floor, rug and sofa that were behind her, seamlessly. Late-afternoon sun from the left, the lighting state unchanged. Photorealistic, true-to-life colors, no text, no logos.",
+      "refs": [
+        "images/candidates/2026-10-12-del-mar-batch/navy-and-brown-T.jpg"
+      ],
+      "aspect": "3:4",
+      "n": 1,
+      "max_w": 1080
+    }
+  ]
+}

@@ -30,7 +30,7 @@
     "#3b322c",
     "#5a2a27"
   ],
-  "image": "",
+  "image": "/images/looks/camel-and-burgundy-heirloom.jpg",
   "pieces": [
     {
       "n": 1,
@@ -134,5 +134,9 @@
         "ref_image": "https://m.media-amazon.com/images/I/51haD8KR4mL._AC_SL1500_.jpg"
       }
     }
-  ]
+  ],
+  "images": {
+    "heirloom": "/images/looks/camel-and-burgundy-heirloom.jpg",
+    "everyday": "/images/looks/camel-and-burgundy-everyday.jpg"
+  }
 }

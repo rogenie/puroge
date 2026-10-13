@@ -29,7 +29,7 @@
     "#efe6d6",
     "#4a3426"
   ],
-  "image": "",
+  "image": "/images/looks/navy-and-brown-heirloom.jpg",
   "pieces": [
     {
       "n": 1,
@@ -134,5 +134,9 @@
         "ref_image": "https://m.media-amazon.com/images/I/71JORMn9cTL._AC_SL1500_.jpg"
       }
     }
-  ]
+  ],
+  "images": {
+    "heirloom": "/images/looks/navy-and-brown-heirloom.jpg",
+    "everyday": "/images/looks/navy-and-brown-everyday.jpg"
+  }
 }

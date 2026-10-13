@@ -28,7 +28,7 @@
     "#efe6d6",
     "#5a2a27"
   ],
-  "image": "",
+  "image": "/images/looks/dinner-in-forest-green-heirloom.jpg",
   "pieces": [
     {
       "n": 1,
@@ -107,5 +107,9 @@
         "ref_image": "https://m.media-amazon.com/images/I/51haD8KR4mL._AC_SL1500_.jpg"
       }
     }
-  ]
+  ],
+  "images": {
+    "heirloom": "/images/looks/dinner-in-forest-green-heirloom.jpg",
+    "everyday": "/images/looks/dinner-in-forest-green-everyday.jpg"
+  }
 }

@@ -24,5 +24,13 @@
   "notes": [
     "Third pass, built on engine/playbook.md: character sheet as image 1, empty Del Mar plate as image 2, relight line, anchors, lookbook poses.",
     "Model P is a stand-in until Rogenie's twin is ready."
-  ]
+  ],
+  "status": "approved: all twelve",
+  "qa": {
+    "all": "pass. Faces match the sheets in all six looks; relaxed lookbook poses; room consistent; warmer, more natural light than pass 2.",
+    "navy-and-brown-T": "pass, note: model added a thin brown belt that isn't one of the pieces.",
+    "burgundy-and-red-T": "pass, note: Clay Red silk skirt drawn a little shorter than the maxi length.",
+    "burgundy-and-navy-P": "pass, note: camera sits slightly further right than the others.",
+    "cost_usd": 1.8
+  }
 }

@@ -27,7 +27,7 @@
     "#1f2a44",
     "#4a3426"
   ],
-  "image": "/images/looks/burgundy-and-navy.jpg",
+  "image": "/images/looks/burgundy-and-navy-heirloom.jpg",
   "pieces": [
     {
       "n": 1,
@@ -105,5 +105,9 @@
         "ref_image": "https://m.media-amazon.com/images/I/71JORMn9cTL._AC_SL1500_.jpg"
       }
     }
-  ]
+  ],
+  "images": {
+    "heirloom": "/images/looks/burgundy-and-navy-heirloom.jpg",
+    "everyday": "/images/looks/burgundy-and-navy-everyday.jpg"
+  }
 }

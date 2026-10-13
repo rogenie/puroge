@@ -26,7 +26,7 @@
     "#b5361f",
     "#4a1e1c"
   ],
-  "image": "/images/looks/burgundy-and-red.jpg",
+  "image": "/images/looks/burgundy-and-red-heirloom.jpg",
   "pieces": [
     {
       "n": 1,
@@ -103,5 +103,9 @@
         "ref_image": "https://m.media-amazon.com/images/I/61blh4bBX7L._AC_SL1500_.jpg"
       }
     }
-  ]
+  ],
+  "images": {
+    "heirloom": "/images/looks/burgundy-and-red-heirloom.jpg",
+    "everyday": "/images/looks/burgundy-and-red-everyday.jpg"
+  }
 }

@@ -10,22 +10,22 @@
       "label": "4'6\"",
       "description": "Rogenie: petite Filipina woman, 4 feet 6 inches tall, long dark wavy hair, warm brown eyes, full lips; her face and body must match the reference photos exactly",
       "refs": [
-        "people/rogenie/body-01-front-jeans.jpg",
-        "people/rogenie/body-02-back-jeans.jpg",
-        "people/rogenie/body-03-wide-trousers.jpg",
-        "people/rogenie/body-04-mirror-shorts.jpg",
-        "people/rogenie/body-05-romper.jpg",
-        "people/rogenie/body-06-romper-mirror.jpg",
-        "people/rogenie/body-07-heels.jpg",
-        "people/rogenie/body-08-side-navy-trousers.jpg",
-        "people/rogenie/body-09-delmar-walking.jpg",
-        "people/rogenie/body-10-delmar-side.jpg",
-        "people/rogenie/face-01-outdoor.jpg",
-        "people/rogenie/face-02-indoor.jpg",
         "people/rogenie/face-03-closeup.jpg",
-        "people/rogenie/face-04-delmar.jpg"
+        "people/rogenie/face-01-outdoor.jpg",
+        "people/rogenie/body-03-wide-trousers.jpg",
+        "people/rogenie/body-09-delmar-walking.jpg",
+        "people/rogenie/body-01-front-jeans.jpg",
+        "people/rogenie/body-05-romper.jpg",
+        "people/rogenie/face-02-indoor.jpg",
+        "people/rogenie/body-07-heels.jpg",
+        "people/rogenie/body-10-delmar-side.jpg",
+        "people/rogenie/face-04-delmar.jpg",
+        "people/rogenie/body-08-side-navy-trousers.jpg",
+        "people/rogenie/body-02-back-jeans.jpg",
+        "people/rogenie/body-06-romper-mirror.jpg",
+        "people/rogenie/body-04-mirror-shorts.jpg"
       ],
-      "refs_note": "Paths inside the private repository rogenie/puroge-private (PEOPLE_DIR). Never commit these photos to this public repository."
+      "refs_note": "Best first: the engine sends as many as fit under the image model's 10-image limit after the product photos. Paths inside the private repository rogenie/puroge-private (PEOPLE_DIR). Never commit these photos to this public repository."
     }
   },
   "positions": {

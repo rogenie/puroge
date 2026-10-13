@@ -38,5 +38,14 @@
       "n": 1,
       "max_w": 1080
     }
-  ]
+  ],
+  "status": "approved: T-sheet-2, P-sheet-1, del-mar-living",
+  "qa": {
+    "T-sheet-1": "fail: reads late thirties, drifted from T's face",
+    "T-sheet-2": "pass: matches T, freckles and beauty mark visible. Chosen.",
+    "P-sheet-1": "pass: closest to P, mole faint. Chosen.",
+    "P-sheet-2": "pass but drifts toward a different face",
+    "del-mar-living": "pass: same room, empty, no artifacts",
+    "cost_usd": 0.75
+  }
 }

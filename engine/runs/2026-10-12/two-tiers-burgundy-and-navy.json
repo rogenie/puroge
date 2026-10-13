@@ -1,0 +1,80 @@
+{
+  "id": "2026-10-12-two-tiers-burgundy-and-navy",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "images_from": "2026-10-12-del-mar-v3",
+  "short_link": "puroge.com/burgundy-and-navy",
+  "looks": [
+    "burgundy-and-navy"
+  ],
+  "cast": [
+    {
+      "model": "P",
+      "tier": "everyday"
+    },
+    {
+      "model": "T",
+      "tier": "heirloom"
+    }
+  ],
+  "labels": [
+    "Everyday · $95",
+    "Heirloom · $240"
+  ],
+  "reveal_at": 12,
+  "hook": "Burgundy and navy: $240 or $95?",
+  "script": [
+    {
+      "t": "0-3s",
+      "shot": "pair",
+      "vo": "Ninety five dollars. Or two forty. Burgundy and navy, and it's the quietest color pair there is."
+    },
+    {
+      "t": "3-7s",
+      "shot": "P",
+      "vo": "Cotton knit, stretch twill chinos, brown penny loafers. Both colors are deep, so nothing shouts."
+    },
+    {
+      "t": "7-11s",
+      "shot": "T",
+      "vo": "This one's cashmere and linen. Softer, sure. From here though?"
+    },
+    {
+      "t": "11-16s",
+      "shot": "pair",
+      "vo": "Left is Everyday, right is Heirloom. Both linked, link in bio."
+    }
+  ],
+  "on_screen": [
+    {
+      "t": "0-3s",
+      "text": "Burgundy and navy: $240 or $95?"
+    },
+    {
+      "t": "3-7s",
+      "text": "Both deep, so nothing shouts"
+    },
+    {
+      "t": "7-11s",
+      "text": "Can you tell which costs more?"
+    },
+    {
+      "t": "11-16s",
+      "text": "Same look. Two budgets.\nEvery piece is linked:\npuroge.com/burgundy-and-navy"
+    }
+  ],
+  "caption": "Burgundy and Navy, two budgets. Everyday on the left, Heirloom on the right. Did you guess right?\n\nEvery piece is real and linked, both versions: puroge.com/burgundy-and-navy (link in bio)\n\nModels are AI. Every piece is real and linked.",
+  "hashtags": [
+    "#burgundyoutfit",
+    "#navyoutfit",
+    "#quietluxury",
+    "#outfitideas",
+    "#lookforless",
+    "#capsulewardrobe"
+  ],
+  "notes": [
+    "Hook rule (playbook 7): the price gap is the hook, the tier reveal at 12s is the hold.",
+    "Voiceover: paste the vo lines into TikTok/CapCut text-to-speech; keep one voice for every video.",
+    "Model P is a stand-in until Rogenie's twin is ready."
+  ]
+}

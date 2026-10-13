@@ -1,0 +1,80 @@
+{
+  "id": "2026-10-12-two-tiers-dinner-in-forest-green",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "images_from": "2026-10-12-del-mar-v3",
+  "short_link": "puroge.com/dinner-in-forest-green",
+  "looks": [
+    "dinner-in-forest-green"
+  ],
+  "cast": [
+    {
+      "model": "T",
+      "tier": "heirloom"
+    },
+    {
+      "model": "P",
+      "tier": "everyday"
+    }
+  ],
+  "labels": [
+    "Heirloom · $353",
+    "Everyday · $165"
+  ],
+  "reveal_at": 12,
+  "hook": "Dinner in forest green: $353 or $165?",
+  "script": [
+    {
+      "t": "0-3s",
+      "shot": "pair",
+      "vo": "Dinner tonight. Forest green, three hundred fifty three dollars or one sixty five."
+    },
+    {
+      "t": "3-7s",
+      "shot": "T",
+      "vo": "Silk slip dress, cashmere cardigan, a burgundy flat. Two deep colors and one soft layer between them."
+    },
+    {
+      "t": "7-11s",
+      "shot": "P",
+      "vo": "The other one is a cotton midi and an organic merino cardigan. And yes, the same burgundy shoe idea."
+    },
+    {
+      "t": "11-16s",
+      "shot": "pair",
+      "vo": "Left is Heirloom, right is Everyday. Pick your budget, every piece is linked. Link in bio."
+    }
+  ],
+  "on_screen": [
+    {
+      "t": "0-3s",
+      "text": "Dinner in forest green: $353 or $165?"
+    },
+    {
+      "t": "3-7s",
+      "text": "Two deep colors, one soft layer between"
+    },
+    {
+      "t": "7-11s",
+      "text": "Can you tell which costs more?"
+    },
+    {
+      "t": "11-16s",
+      "text": "Same look. Two budgets.\nEvery piece is linked:\npuroge.com/dinner-in-forest-green"
+    }
+  ],
+  "caption": "Dinner in Forest Green, two budgets. Heirloom on the left, Everyday on the right. Did you guess right?\n\nEvery piece is real and linked, both versions: puroge.com/dinner-in-forest-green (link in bio)\n\nModels are AI. Every piece is real and linked.",
+  "hashtags": [
+    "#dinneroutfit",
+    "#forestgreen",
+    "#datenightoutfit",
+    "#elegantstyle",
+    "#outfitideas",
+    "#lookforless"
+  ],
+  "notes": [
+    "Hook rule (playbook 7): the price gap is the hook, the tier reveal at 12s is the hold.",
+    "Voiceover: paste the vo lines into TikTok/CapCut text-to-speech; keep one voice for every video.",
+    "Model P is a stand-in until Rogenie's twin is ready."
+  ]
+}

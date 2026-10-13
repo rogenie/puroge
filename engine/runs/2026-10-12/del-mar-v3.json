@@ -1,0 +1,28 @@
+{
+  "id": "2026-10-12-del-mar-v3",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "endpoint": "fal-ai/nano-banana-pro/edit",
+  "looks": [
+    "camel-and-burgundy",
+    "navy-and-brown",
+    "dinner-in-forest-green",
+    "burgundy-and-ivory",
+    "burgundy-and-red",
+    "burgundy-and-navy"
+  ],
+  "cast": [
+    {
+      "model": "T",
+      "tier": "heirloom"
+    },
+    {
+      "model": "P",
+      "tier": "everyday"
+    }
+  ],
+  "notes": [
+    "Third pass, built on engine/playbook.md: character sheet as image 1, empty Del Mar plate as image 2, relight line, anchors, lookbook poses.",
+    "Model P is a stand-in until Rogenie's twin is ready."
+  ]
+}

@@ -59,7 +59,7 @@ def lerp(a, b, t):
     return tuple(x + (y - x) * t for x, y in zip(a, b))
 
 
-def text_layer(text):
+def text_layer(text, top=0.12):
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     if not text:
         return layer
@@ -77,7 +77,7 @@ def text_layer(text):
                 cur = trial
         lines.append(cur)
     line_h = 70
-    y = int(H * 0.12)
+    y = int(H * top)
     for line in lines:
         tw = d.textlength(line, font=font)
         x = (W - tw) / 2
@@ -114,7 +114,7 @@ def render_pairs(video, out):
     srcs = {c["model"]: pair_source(video, c["model"]) for c in cast}
     centers = video.get("centers", {})
     shots = [(seconds(s_["t"]), s_["shot"].split()[0]) for s_ in video["script"]]
-    texts = [(seconds(t["t"]), text_layer(t["text"])) for t in video["on_screen"]]
+    texts = [(seconds(t["t"]), text_layer(t["text"], 0.035)) for t in video["on_screen"]]
     total = max(b_ for (_, b_), _ in shots)
     labels = video.get("labels") or [c["tier"].title() for c in cast]
     half = (W - 6) // 2
@@ -123,26 +123,34 @@ def render_pairs(video, out):
     lf = ImageFont.truetype(FONT, 40)
     for text, cxp in zip(labels, (half / 2, W - half / 2)):
         tw = dl.textlength(text, font=lf)
-        y = int(H * 0.30)
+        y = int(H * 0.90)
         dl.rounded_rectangle((cxp - tw / 2 - 18, y - 6, cxp + tw / 2 + 18, y + 52), radius=26, fill=(246, 241, 232, 225))
         dl.text((cxp - tw / 2, y), text, font=lf, fill=(42, 36, 32, 255))
     solo_labels = {c["model"]: lab for c, lab in zip(cast, labels)}
 
+    from PIL import ImageFilter
+    TOP = 300                                  # text band above the people
+    any_src = next(iter(srcs.values()))
+    wall = any_src.crop((0, 0, any_src.width, round(any_src.height * 0.08)))
+    band = wall.resize((W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(40))
+
     def render(idx, t):
         (a_, b_), kind = shots[idx]
         p = ease(min(max((t - a_) / max(b_ - a_, 0.01), 0), 1))
+        frame = band.copy()
         if kind == "pair":
-            frame = Image.new("RGB", (W, H), (246, 241, 232))
             z = 1 - 0.05 * p
             for i, c in enumerate(cast):
                 src = srcs[c["model"]]
-                box = window(src, half / H, z, centers.get(c["model"], 0.5))
-                frame.paste(src.crop(box).resize((half, H), Image.LANCZOS), (0 if i == 0 else W - half, 0))
+                box = window(src, half / (H - TOP), z, centers.get(c["model"], 0.5))
+                frame.paste(src.crop(box).resize((half, H - TOP), Image.LANCZOS), (0 if i == 0 else W - half, TOP))
             return frame.convert("RGBA"), True
-        src = srcs[kind]
-        z = 1 - 0.08 * p
-        box = window(src, W / H, z, centers.get(kind, 0.5), 0.6)
-        return src.crop(box).resize((W, H), Image.LANCZOS).convert("RGBA"), kind
+        src = srcs[kind]                           # one person: the whole 3:4 image, bottom-anchored, slow push-in
+        z = 1 + 0.06 * p
+        fw = round(W * z)
+        fh = round(src.height * fw / src.width)
+        frame.paste(src.resize((fw, fh), Image.LANCZOS), ((W - fw) // 2, H - fh))
+        return frame.convert("RGBA"), kind
 
     proc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
                              "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p",
@@ -150,8 +158,12 @@ def render_pairs(video, out):
                             stdin=subprocess.PIPE)
     FADE = 0.35
 
+    reveal = video.get("reveal_at", 0)
+
     def labelled(idx, t):
         frame, kind = render(idx, t)
+        if t < reveal:
+            return frame
         if kind is True:
             frame.alpha_composite(lab_layer)
         elif kind in solo_labels:
@@ -159,7 +171,7 @@ def render_pairs(video, out):
             d1 = ImageDraw.Draw(one)
             text = solo_labels[kind]
             tw = d1.textlength(text, font=lf)
-            y = int(H * 0.30)
+            y = int(H * 0.90)
             d1.rounded_rectangle((W / 2 - tw / 2 - 18, y - 6, W / 2 + tw / 2 + 18, y + 52), radius=26, fill=(246, 241, 232, 225))
             d1.text((W / 2 - tw / 2, y), text, font=lf, fill=(42, 36, 32, 255))
             frame.alpha_composite(one)

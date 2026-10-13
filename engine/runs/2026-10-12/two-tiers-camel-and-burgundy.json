@@ -1,0 +1,81 @@
+{
+  "id": "2026-10-12-two-tiers-camel-and-burgundy",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "images_from": "2026-10-12-del-mar-v3",
+  "short_link": "puroge.com/camel-and-burgundy",
+  "looks": [
+    "camel-and-burgundy"
+  ],
+  "cast": [
+    {
+      "model": "T",
+      "tier": "heirloom"
+    },
+    {
+      "model": "P",
+      "tier": "everyday"
+    }
+  ],
+  "labels": [
+    "Heirloom · $741",
+    "Everyday · from $228"
+  ],
+  "reveal_at": 12,
+  "hook": "$741 or $228. Which is which?",
+  "script": [
+    {
+      "t": "0-3s",
+      "shot": "pair",
+      "vo": "Seven hundred forty one dollars, or two twenty eight. Same look. Guess which is which."
+    },
+    {
+      "t": "3-7s",
+      "shot": "T",
+      "vo": "Camel coat, ivory knit, dark trousers. And the shoe is burgundy. That's the one swap that stops it going beige."
+    },
+    {
+      "t": "7-11s",
+      "shot": "P",
+      "vo": "Over here, a wool blend coat and corduroy. Honestly, from across a room? You can't tell."
+    },
+    {
+      "t": "11-16s",
+      "shot": "pair",
+      "vo": "Left is Heirloom. Camel hair, cashmere, built to outlive the trend. Right is Everyday. Every piece is linked, link in bio."
+    }
+  ],
+  "on_screen": [
+    {
+      "t": "0-3s",
+      "text": "$741 or $228. Which is which?"
+    },
+    {
+      "t": "3-7s",
+      "text": "The burgundy shoe stops it going beige"
+    },
+    {
+      "t": "7-11s",
+      "text": "Can you tell which costs more?"
+    },
+    {
+      "t": "11-16s",
+      "text": "Same look. Two budgets.\nEvery piece is linked:\npuroge.com/camel-and-burgundy"
+    }
+  ],
+  "caption": "Camel and Burgundy, two budgets. Heirloom on the left, Everyday on the right. Did you guess right?\n\nEvery piece is real and linked, both versions: puroge.com/camel-and-burgundy (link in bio)\n\nModels are AI. Every piece is real and linked.",
+  "hashtags": [
+    "#camelcoat",
+    "#oldmoneystyle",
+    "#outfitideas",
+    "#fallfashion",
+    "#lookforless",
+    "#elegantstyle",
+    "#capsulewardrobe"
+  ],
+  "notes": [
+    "Hook rule (playbook 7): the price gap is the hook, the tier reveal at 12s is the hold.",
+    "Voiceover: paste the vo lines into TikTok/CapCut text-to-speech; keep one voice for every video.",
+    "Model P is a stand-in until Rogenie's twin is ready."
+  ]
+}

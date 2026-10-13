@@ -1,0 +1,80 @@
+{
+  "id": "2026-10-12-two-tiers-burgundy-and-red",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "images_from": "2026-10-12-del-mar-v3",
+  "short_link": "puroge.com/burgundy-and-red",
+  "looks": [
+    "burgundy-and-red"
+  ],
+  "cast": [
+    {
+      "model": "T",
+      "tier": "heirloom"
+    },
+    {
+      "model": "P",
+      "tier": "everyday"
+    }
+  ],
+  "labels": [
+    "Heirloom · $387",
+    "Everyday · $117"
+  ],
+  "reveal_at": 12,
+  "hook": "Burgundy with red: $387 or $117?",
+  "script": [
+    {
+      "t": "0-3s",
+      "shot": "pair",
+      "vo": "Burgundy with red. Yes, together. Three eighty seven, or one seventeen."
+    },
+    {
+      "t": "3-7s",
+      "shot": "T",
+      "vo": "Cashmere, a clay red silk maxi, mahogany leather boots. Two reds of different depth. The eye loves that tension."
+    },
+    {
+      "t": "7-11s",
+      "shot": "P",
+      "vo": "Here it's cotton, a satin midi and faux leather boots. Same idea for a third of the price."
+    },
+    {
+      "t": "11-16s",
+      "shot": "pair",
+      "vo": "Left is Heirloom, right is Everyday. Every piece linked, link in bio."
+    }
+  ],
+  "on_screen": [
+    {
+      "t": "0-3s",
+      "text": "Burgundy with red: $387 or $117?"
+    },
+    {
+      "t": "3-7s",
+      "text": "Two reds, different depths"
+    },
+    {
+      "t": "7-11s",
+      "text": "Can you tell which costs more?"
+    },
+    {
+      "t": "11-16s",
+      "text": "Same look. Two budgets.\nEvery piece is linked:\npuroge.com/burgundy-and-red"
+    }
+  ],
+  "caption": "Burgundy and Red, two budgets. Heirloom on the left, Everyday on the right. Did you guess right?\n\nEvery piece is real and linked, both versions: puroge.com/burgundy-and-red (link in bio)\n\nModels are AI. Every piece is real and linked.",
+  "hashtags": [
+    "#burgundyoutfit",
+    "#redoutfit",
+    "#colorcombos",
+    "#outfitideas",
+    "#lookforless",
+    "#fallfashion"
+  ],
+  "notes": [
+    "Hook rule (playbook 7): the price gap is the hook, the tier reveal at 12s is the hold.",
+    "Voiceover: paste the vo lines into TikTok/CapCut text-to-speech; keep one voice for every video.",
+    "Model P is a stand-in until Rogenie's twin is ready."
+  ]
+}

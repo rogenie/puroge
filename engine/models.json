@@ -4,7 +4,10 @@
     "T": {
       "label": "5'9\"",
       "description": "a tall adult woman in her early thirties, slim build, light olive skin, shoulder-length brown hair, calm warm expression",
-      "refs": []
+      "refs": [
+        "engine/people-ai/T-face.jpg",
+        "engine/people-ai/T-full.jpg"
+      ]
     },
     "R": {
       "label": "4'6\"",
@@ -30,7 +33,10 @@
     "P": {
       "label": "",
       "description": "an adult woman in her late twenties with a petite build, warm tan skin, glossy black hair in a sleek low bun, soft natural makeup, calm confident expression",
-      "refs": [],
+      "refs": [
+        "engine/people-ai/P-face.jpg",
+        "engine/people-ai/P-full.jpg"
+      ],
       "note": "Stand-in Everyday model until Rogenie's Higgsfield Soul ID twin is ready. Deliberately not a likeness of Rogenie."
     }
   },
@@ -46,6 +52,6 @@
     ]
   },
   "style": "Photorealistic full-length fashion photograph. Natural standing pose, hands relaxed, face toward camera. True-to-life fabric texture and color. No text, letters or numbers anywhere in the image, including on mannequins, sewing machines and fabric. No logos, no bags, no jewelry beyond small earrings.",
-  "reference_note": "The attached photos are the exact products. Reproduce each garment's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos. The first photos show the real petite woman; match her face, skin tone, hair and figure to them, as a faithful likeness of that adult.",
+  "reference_note": "The product photos show the exact garments: reproduce each one's color, fabric, cut and details faithfully, and match every color exactly, including the shoes. Ignore any person, mannequin or background in the product photos. The first photos show the woman herself: she must be the same person, with the same face, hair and skin tone, but wearing only the outfit described.",
   "scale_note": "Not used in prompts: people are generated separately and placed side by side by render.py."
 }

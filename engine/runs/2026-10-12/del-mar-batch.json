@@ -23,6 +23,7 @@
   ],
   "notes": [
     "Del Mar set, Pro model. One image per person per look, used for the look pages and six Heirloom-vs-Everyday videos.",
-    "Model P is a stand-in until Rogenie's Soul ID twin is ready."
+    "Model P is a stand-in until Rogenie's Soul ID twin is ready.",
+    "Second pass: regenerated with one reference face per model (engine/people-ai) so both women stay the same person across all six looks."
   ]
 }

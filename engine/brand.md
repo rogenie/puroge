@@ -25,7 +25,7 @@ Two people in every image, side by side, each wearing one tier of the same look:
 | Left | A recurring AI model (T) | 5'9" | Heirloom |
 | Right | Rogenie (R), from her reference photos | 4'6" | Everyday |
 
-Heights are shown on screen. True relative height matters: it shows each look working on a tall and a petite frame.
+Heights are shown on screen as labels only, never written into image prompts: the image model turns "4'6\"" into a child. Prompts describe both as grown adult women and give relative height in words. Any image where Rogenie reads as a child fails quality check.
 Rogenie's reference photos stay private (never in the public repository). The tall model gets a reference sheet so her face stays the same every week.
 
 ## Image prompt template

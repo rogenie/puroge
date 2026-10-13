@@ -23,7 +23,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ENDPOINT = "fal-ai/nano-banana/edit"
-PRICE_PER_IMAGE = 0.0398
+PRICES = {"fal-ai/nano-banana/edit": 0.0398, "fal-ai/nano-banana-pro/edit": 0.15, "fal-ai/nano-banana-2/edit": 0.08}
+PRICE_PER_IMAGE = PRICES[ENDPOINT]
 
 
 def load_json(p):
@@ -133,6 +134,10 @@ def main():
     if not os.environ.get("FAL_KEY"):
         sys.exit("FAL_KEY is not set. Add it as a repository secret named FAL_KEY.")
     video = load_json(sys.argv[1])
+    global ENDPOINT, PRICE_PER_IMAGE
+    if video.get("endpoint"):
+        ENDPOINT = video["endpoint"]
+        PRICE_PER_IMAGE = PRICES.get(ENDPOINT, 0.15)
     cast = load_json(ROOT / "engine" / "models.json")
     tier = video.get("tier_shown", "everyday")
     looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]

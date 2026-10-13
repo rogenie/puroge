@@ -26,6 +26,12 @@
         "people/rogenie/body-04-mirror-shorts.jpg"
       ],
       "refs_note": "Best first: the engine sends as many as fit under the image model's 10-image limit after the product photos. Paths inside the private repository rogenie/puroge-private (PEOPLE_DIR). Never commit these photos to this public repository."
+    },
+    "P": {
+      "label": "",
+      "description": "an adult woman in her late twenties with a petite build, warm tan skin, glossy black hair in a sleek low bun, soft natural makeup, calm confident expression",
+      "refs": [],
+      "note": "Stand-in Everyday model until Rogenie's Higgsfield Soul ID twin is ready. Deliberately not a likeness of Rogenie."
     }
   },
   "positions": {

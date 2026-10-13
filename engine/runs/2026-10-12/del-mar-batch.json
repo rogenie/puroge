@@ -1,0 +1,28 @@
+{
+  "id": "2026-10-12-del-mar-batch",
+  "format": "two-tiers",
+  "mode": "pairs",
+  "endpoint": "fal-ai/nano-banana-pro/edit",
+  "looks": [
+    "camel-and-burgundy",
+    "navy-and-brown",
+    "dinner-in-forest-green",
+    "burgundy-and-ivory",
+    "burgundy-and-red",
+    "burgundy-and-navy"
+  ],
+  "cast": [
+    {
+      "model": "T",
+      "tier": "heirloom"
+    },
+    {
+      "model": "P",
+      "tier": "everyday"
+    }
+  ],
+  "notes": [
+    "Del Mar set, Pro model. One image per person per look, used for the look pages and six Heirloom-vs-Everyday videos.",
+    "Model P is a stand-in until Rogenie's Soul ID twin is ready."
+  ]
+}

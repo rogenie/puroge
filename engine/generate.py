@@ -129,7 +129,7 @@ def main():
     cast = load_json(ROOT / "engine" / "models.json")
     tier = video.get("tier_shown", "everyday")
     looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]
-    order = cast["positions"][str(len(looks))]
+    order = cast["positions"].get(str(len(looks)), [])
     outdir = Path(os.environ.get("CANDIDATES_DIR", ROOT / "images" / "candidates")) / video["id"]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
     if video.get("mode") == "pairs":

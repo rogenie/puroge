@@ -87,10 +87,108 @@ def text_layer(text):
     return layer
 
 
+def pair_source(video, model):
+    """A person's image in a two-person video: approved look image by tier, else the generation candidate."""
+    slug = video["looks"][0]
+    tier = next(c["tier"] for c in video["cast"] if c["model"] == model)
+    cand_dirs = [ROOT / "images" / "candidates" / video.get("images_from", video["id"])]
+    for p in [ROOT / "images" / "looks" / f"{slug}-{tier}.jpg"] + [d / f"{slug}-{model}.jpg" for d in cand_dirs]:
+        if p.exists():
+            return Image.open(p).convert("RGB")
+    sys.exit(f"No image for {slug} / {model}")
+
+
+def window(src, aspect, z, cx=0.5, cy=0.7):
+    """Crop window of the given width/height aspect at zoom z (1 = full height), centered at cx, vertical anchor cy."""
+    h = src.height * z
+    w = min(h * aspect, src.width)
+    x = min(max(src.width * cx - w / 2, 0), src.width - w)
+    y = (src.height - h) * cy
+    return (round(x), round(y), round(x + w), round(y + h))
+
+
+def render_pairs(video, out):
+    """Two-person videos (mode "pairs"): shots are "pair" (split screen, left then right as cast) or a model key alone.
+    Each person image is full length 3:4; the split screen shows a tall strip of each, labeled with the tier."""
+    cast = video["cast"]
+    srcs = {c["model"]: pair_source(video, c["model"]) for c in cast}
+    centers = video.get("centers", {})
+    shots = [(seconds(s_["t"]), s_["shot"].split()[0]) for s_ in video["script"]]
+    texts = [(seconds(t["t"]), text_layer(t["text"])) for t in video["on_screen"]]
+    total = max(b_ for (_, b_), _ in shots)
+    labels = video.get("labels") or [c["tier"].title() for c in cast]
+    half = (W - 6) // 2
+    lab_layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    dl = ImageDraw.Draw(lab_layer)
+    lf = ImageFont.truetype(FONT, 40)
+    for text, cxp in zip(labels, (half / 2, W - half / 2)):
+        tw = dl.textlength(text, font=lf)
+        y = int(H * 0.30)
+        dl.rounded_rectangle((cxp - tw / 2 - 18, y - 6, cxp + tw / 2 + 18, y + 52), radius=26, fill=(246, 241, 232, 225))
+        dl.text((cxp - tw / 2, y), text, font=lf, fill=(42, 36, 32, 255))
+    solo_labels = {c["model"]: lab for c, lab in zip(cast, labels)}
+
+    def render(idx, t):
+        (a_, b_), kind = shots[idx]
+        p = ease(min(max((t - a_) / max(b_ - a_, 0.01), 0), 1))
+        if kind == "pair":
+            frame = Image.new("RGB", (W, H), (246, 241, 232))
+            z = 1 - 0.05 * p
+            for i, c in enumerate(cast):
+                src = srcs[c["model"]]
+                box = window(src, half / H, z, centers.get(c["model"], 0.5))
+                frame.paste(src.crop(box).resize((half, H), Image.LANCZOS), (0 if i == 0 else W - half, 0))
+            return frame.convert("RGBA"), True
+        src = srcs[kind]
+        z = 1 - 0.08 * p
+        box = window(src, W / H, z, centers.get(kind, 0.5), 0.6)
+        return src.crop(box).resize((W, H), Image.LANCZOS).convert("RGBA"), kind
+
+    proc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+                             "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                             "-preset", "medium", "-crf", "20", "-movflags", "+faststart", str(out)],
+                            stdin=subprocess.PIPE)
+    FADE = 0.35
+
+    def labelled(idx, t):
+        frame, kind = render(idx, t)
+        if kind is True:
+            frame.alpha_composite(lab_layer)
+        elif kind in solo_labels:
+            one = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            d1 = ImageDraw.Draw(one)
+            text = solo_labels[kind]
+            tw = d1.textlength(text, font=lf)
+            y = int(H * 0.30)
+            d1.rounded_rectangle((W / 2 - tw / 2 - 18, y - 6, W / 2 + tw / 2 + 18, y + 52), radius=26, fill=(246, 241, 232, 225))
+            d1.text((W / 2 - tw / 2, y), text, font=lf, fill=(42, 36, 32, 255))
+            frame.alpha_composite(one)
+        return frame
+
+    for f in range(int(total * FPS)):
+        t = f / FPS
+        idx = next((i for i, ((a_, b_), _) in enumerate(shots) if a_ <= t < b_), len(shots) - 1)
+        frame = labelled(idx, t)
+        a_ = shots[idx][0][0]
+        if idx and t - a_ < FADE:
+            frame = Image.blend(labelled(idx - 1, t), frame, ease((t - a_) / FADE))
+        layer = next((lay for (ta, tb), lay in texts if ta <= t < tb), None)
+        if layer is not None:
+            frame.alpha_composite(layer)
+        proc.stdin.write(frame.convert("RGB").tobytes())
+    proc.stdin.close()
+    proc.wait()
+    print(f"Rendered {out} ({total:.0f}s)")
+
+
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
     video = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    if video.get("mode") == "pairs":
+        out = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "videos" / f"{video['id']}.mp4"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        return render_pairs(video, out)
     img_path = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "images" / "videos" / f"{video['id']}.jpg"
     out = Path(sys.argv[3]) if len(sys.argv) > 3 else ROOT / "videos" / f"{video['id']}.mp4"
     out.parent.mkdir(parents=True, exist_ok=True)

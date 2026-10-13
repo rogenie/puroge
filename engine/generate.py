@@ -190,13 +190,14 @@ def main():
         ENDPOINT = video["endpoint"]
         PRICE_PER_IMAGE = PRICES.get(ENDPOINT, 0.15)
     cast = load_json(ROOT / "engine" / "models.json")
+    only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+    if video.get("mode") == "assets":
+        return main_assets(video, Path(os.environ.get("CANDIDATES_DIR", ROOT / "images" / "candidates")) / video["id"], only)
     tier = video.get("tier_shown", "everyday")
     looks = [load_json(ROOT / "data" / "looks" / f"{s}.json") for s in video["looks"]]
     order = cast["positions"].get(str(len(looks)), [])
     outdir = Path(os.environ.get("CANDIDATES_DIR", ROOT / "images" / "candidates")) / video["id"]
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
-    if video.get("mode") == "assets":
-        return main_assets(video, outdir, only)
     if video.get("mode") == "pairs":
         return main_pairs(video, cast, outdir, only)
     old = outdir / "manifest.json"

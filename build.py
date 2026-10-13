@@ -140,6 +140,16 @@ def page(title, body, site, desc="", path="/", image=""):
 </div></body></html>"""
 
 
+def tier_hero(look):
+    """Look page hero: one image per tier when the look has them; the tabs swap it."""
+    imgs = look.get("images") or {}
+    if not imgs.get("heirloom"):
+        return hero(look)
+    data = " ".join(f'data-{k}="{e(v)}"' for k, v in imgs.items())
+    return (f'<div class="hero"><img id="tier-img" src="{e(imgs["heirloom"])}" {data} '
+            f'alt="{e(look["title"])}, Heirloom version"></div>')
+
+
 def hero(look):
     if look.get("image"):
         return f'<div class="hero"><img src="{e(look["image"])}" alt="{e(look["title"])}" loading="lazy"></div>'
@@ -227,7 +237,7 @@ def look_page(look, site):
     mood = " · ".join(label(site, "mood", m) for m in t.get("mood", []))
     body = f"""<p class="meta" style="margin-top:24px">{e(label(site, "kind", look["kind"]))}{" · " + e(mood) if mood else ""}</p>
 <h1 style="margin-top:8px">{e(look['title'])}</h1>
-{hero(look)}<p class="ai">Image is AI-generated. Every piece listed below is real and was in stock when checked.</p>
+{tier_hero(look)}<p class="ai">Image is AI-generated. Every piece listed below is real and was in stock when checked.</p>
 <div class="swatches">{sw}</div>
 <p class="lesson">{e(look.get('lesson'))}</p>
 <div class="tabs" role="tablist">{"".join(tabs)}</div>{"".join(panels)}
@@ -238,6 +248,8 @@ def look_page(look, site):
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{{
  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
  document.querySelectorAll('.panel').forEach(p=>p.hidden=p.dataset.p!==b.dataset.t);
+ const im=document.getElementById('tier-img');
+ if(im&&im.dataset[b.dataset.t]){{im.src=im.dataset[b.dataset.t];im.alt=im.alt.replace(/[A-Z][a-z]+ version$/,b.querySelector('b').textContent+' version');}}
 }});
 </script>"""
     return page(f"{look['title']} | Purogé", body, site, look.get("lesson"),

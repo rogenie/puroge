@@ -1,0 +1,122 @@
+{
+  "id": "2026-10-13-two-of-me-batch1",
+  "format": "two-of-me",
+  "tool": "Higgsfield (Nano Banana Pro start frame + Seedance 2.5 omni-reference, lip-synced to Rogenie's recorded voice)",
+  "host_element": "856c5972-1405-4ece-b724-046fcc2ce242",
+  "set_plate_media": "cb8d078a-98a6-4093-8af2-7504cdcbd25a",
+  "status": "drafts approved by QA; awaiting finalize to 1080p",
+  "videos": [
+    {
+      "look": "dinner-in-forest-green",
+      "draft_job": "2869f5db-8ec2-4617-9db5-8158c58015be",
+      "start_frame_job": "417d7655-7930-4903-be4f-4ecc492888c8",
+      "on_screen": [
+        "Heirloom $353",
+        "Everyday $165"
+      ],
+      "caption": "Date night in forest green, two budgets. Silk and cashmere on the left, cotton and organic merino on the right.\n\nHeirloom $353 \u00b7 Everyday $165. Every piece is real and linked: puroge.com/dinner-in-forest-green (link in bio)\n\nModels are AI. Every piece is real and linked.",
+      "hashtags": [
+        "#datenightoutfit",
+        "#forestgreen",
+        "#dinneroutfit",
+        "#elegantstyle",
+        "#lookforless",
+        "#outfitideas"
+      ]
+    },
+    {
+      "look": "burgundy-and-red",
+      "draft_job": "737da234-92fc-4d62-98c8-b9196636ac53",
+      "start_frame_job": "54ce8986-6bf9-4db7-9e8e-cb9fe4b4f778",
+      "on_screen": [
+        "Heirloom $387",
+        "Everyday $117"
+      ],
+      "caption": "Burgundy with red, yes together. Two reds of different depth, two budgets.\n\nHeirloom $387 \u00b7 Everyday $117. Every piece is real and linked: puroge.com/burgundy-and-red (link in bio)\n\nModels are AI. Every piece is real and linked.",
+      "hashtags": [
+        "#burgundyoutfit",
+        "#redoutfit",
+        "#holidayoutfit",
+        "#colorcombos",
+        "#lookforless",
+        "#outfitideas"
+      ]
+    },
+    {
+      "look": "burgundy-and-ivory",
+      "draft_job": "01699489-f3d0-4330-be0e-35d87170052f",
+      "start_frame_job": "54a6687b-3551-47c3-848b-e1fe576d4b51",
+      "on_screen": [
+        "Heirloom $240",
+        "Everyday $112"
+      ],
+      "caption": "Burgundy and ivory for every brunch. Cashmere and linen, or cotton and real leather.\n\nHeirloom $240 \u00b7 Everyday $112. Every piece is real and linked: puroge.com/burgundy-and-ivory (link in bio)\n\nModels are AI. Every piece is real and linked.",
+      "hashtags": [
+        "#burgundyoutfit",
+        "#brunchoutfit",
+        "#colorcombos",
+        "#oldmoneystyle",
+        "#lookforless",
+        "#outfitideas"
+      ]
+    },
+    {
+      "look": "navy-and-brown",
+      "draft_job": "1e33f612-2526-449f-a773-c53b7b1f5b9b",
+      "start_frame_job": "e10f5949-08ec-4925-b124-fd4e95d31528",
+      "on_screen": [
+        "Heirloom $320",
+        "Everyday $121"
+      ],
+      "caption": "Navy with brown? Trust me. $320 or $121, same look.\n\nHeirloom $320 \u00b7 Everyday $121. Every piece is real and linked: puroge.com/navy-and-brown (link in bio)\n\nModels are AI. Every piece is real and linked.",
+      "hashtags": [
+        "#navyandbrown",
+        "#colorcombos",
+        "#oldmoneystyle",
+        "#workoutfit",
+        "#lookforless",
+        "#outfitideas"
+      ]
+    },
+    {
+      "look": "camel-and-burgundy",
+      "draft_job": "bc083588-bdf2-4590-ae54-b21cb0824623",
+      "start_frame_job": "388388e7-6c6d-4120-940f-49dcb4ffaed2",
+      "on_screen": [
+        "Heirloom $741",
+        "Everyday $228"
+      ],
+      "caption": "The camel coat, two ways. Camel hair that lasts forever, or wool blend in the same shape.\n\nHeirloom $741 \u00b7 Everyday $228 from. Every piece is real and linked: puroge.com/camel-and-burgundy (link in bio)\n\nModels are AI. Every piece is real and linked.",
+      "hashtags": [
+        "#camelcoat",
+        "#oldmoneystyle",
+        "#fallfashion",
+        "#coatseason",
+        "#lookforless",
+        "#outfitideas"
+      ]
+    },
+    {
+      "look": "burgundy-and-navy",
+      "draft_job": "a4772615-d3c9-49e3-b6d8-25e6c9d6e1fa",
+      "start_frame_job": "ce73de71-766a-4afa-a03d-3566751fdd53",
+      "on_screen": [
+        "Heirloom $240",
+        "Everyday $95"
+      ],
+      "caption": "Burgundy and navy, the quietest combo there is. $240 or $95.\n\nHeirloom $240 \u00b7 Everyday $95. Every piece is real and linked: puroge.com/burgundy-and-navy (link in bio)\n\nModels are AI. Every piece is real and linked.",
+      "hashtags": [
+        "#burgundyoutfit",
+        "#quietluxury",
+        "#navyoutfit",
+        "#capsulewardrobe",
+        "#lookforless",
+        "#outfitideas"
+      ]
+    }
+  ],
+  "notes": [
+    "Camel & Burgundy and Burgundy & Navy were regenerated once: first takes clipped the opening words / garbled audio and showed a phone. Fix: 0.7s silence before the audio, 'no phone visible' in TOP PRIORITY.",
+    "Costs: start frame 2 credits each, draft ~3 credits/second, finalize to 1080p ~60 credits."
+  ]
+}

@@ -785,12 +785,12 @@ def story_page(site):
 <p class="lead">Before there was a brand, there was a road, a needle, and twenty-four children to feed.</p>
 
 <h2>The road</h2>
-<p>My Lola Purisima sewed and sold used clothes for a living. She walked miles upon miles with a pile of
+<p>My Lola Purisima, now 91, sewed and sold used clothes for a living. She walked miles upon miles with a pile of
 second-hand clothes balanced on her head, selling each piece to someone who would wear it again.</p>
 <p>That is how she raised twelve children.</p>
 
 <h2>The needle</h2>
-<p>My Lola Roberta sewed sixteen hours a day to help support her family. Sixteen hours is a day that begins
+<p>My Lola Roberta, now 89, sewed sixteen hours a day to help support her family. Sixteen hours is a day that begins
 before the light and ends long after it.</p>
 <p>She raised twelve children, too.</p>
 
@@ -803,8 +803,8 @@ is drawn as a single stitch, for them.</p>
 
 <h2>What they knew</h2>
 <p>Lola Purisima was selling second-hand clothing long before anyone called it sustainable. To her, a garment
-was never finished after one owner. It was carried, sold, and worn again.</p>
-<p>Lola Roberta knew what a seam costs. When you have given sixteen hours to make something, you do not make it
+is never finished after one owner. It was carried, sold, and worn again.</p>
+<p>Lola Roberta knows what a seam costs. When you have given sixteen hours to make something, you do not make it
 to be thrown away.</p>
 <p>That is the whole idea behind Purogé. Choose natural fiber. Choose pieces made well. Wear them for years,
 then hand them on.</p>
@@ -815,6 +815,7 @@ head. I carry the search for you: I find every piece in an outfit, check what it
 page, in two versions so it works for more than one budget.</p>
 <p>And now we make our own. The Purogé label is linen, made here in San Diego, to be worn for years and
 handed on.</p>
+<p>Both of my Lolas are still with us. This is for them.</p>
 <p>Three women are hidden in our name. Now you know where to find them.</p>
 <p class="note">Lola is Tagalog for grandmother.</p>
 <p style="margin-top:28px"><a class="btn" href="/looks/">See the looks</a>

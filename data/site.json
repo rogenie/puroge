@@ -149,7 +149,7 @@
   },
   "label": {
     "live": false,
-    "endpoint": "",
+    "endpoint": "https://script.google.com/macros/s/AKfycbwWNV_elBVj98-tikblshOZAx4BKisv5G2DhUkY0VeGo0O40JZbX6Vj-9DhAXBeUcO8SQ/exec",
     "sheet": "https://docs.google.com/spreadsheets/d/1CULzsZKInUiwYl-f-bmj-s0Y_3ut8JAVQeu-3OUFhq0/edit",
     "pieces": [
       {

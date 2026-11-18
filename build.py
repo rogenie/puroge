@@ -155,7 +155,7 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
     repeating-linear-gradient(90deg,rgba(255,240,210,.03) 0 1px,transparent 1px 4px),
     linear-gradient(160deg,#2c2621,#221d19)}
   .stage .light{background:radial-gradient(closest-side,rgba(255,226,180,.18),rgba(255,226,180,0) 70%)}}
-@media (max-width:640px){.intro{grid-template-columns:1fr;gap:24px}.stage{height:360px;order:-1}header{flex-direction:column;align-items:flex-start;gap:12px}header nav{justify-content:flex-start}header nav a{margin:0 18px 0 0}}
+@media (max-width:640px){.intro{grid-template-columns:1fr;gap:24px}.stage{height:360px;order:-1}}
 @media (prefers-reduced-motion:reduce){.stage *{animation:none!important}.f-poly{opacity:0}.f-linen{opacity:1}}
 .door .chips{margin:10px 0 0}
 .door .chips i{font-style:normal;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--ink)}
@@ -198,6 +198,142 @@ footer a{margin-right:14px}
 @media (max-width:640px){.lp-grid{grid-template-columns:1fr 1fr;gap:10px}.sw{height:84px}.lp-name{font-size:20px}.lf-fields{grid-template-columns:1fr}}
 footer a.ded{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
 footer a.ded:hover{border-color:var(--accent)}
+/* ===== Redesign: site frame ===== */
+body{font-size:16px}
+.site-head{display:block;padding:0;position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.3) blur(10px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.head-in{max-width:1240px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.site-head .brand svg{height:22px}
+.site-head .tagline{font-size:13px;margin-top:5px}
+.site-head nav{display:flex;gap:28px}
+.site-head nav a{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;position:relative}
+.site-head nav a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.site-head nav a:hover::after{transform:scaleX(1)}
+main .wrap{padding-top:8px}
+.site-foot{--accent:#d39a8e;margin-top:96px;background:#221d19;color:#d9cfc1;text-align:center;padding:72px 24px 56px}
+.foot-in{max-width:760px;margin:0 auto}
+.foot-brand{color:#f6f1e8}.foot-brand svg{height:30px;width:auto}
+.site-foot .tagline{color:#d39a8e;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:19px;margin:10px 0 26px}
+.site-foot a{color:#efe6d8}
+.site-foot a.ded{color:#f6f1e8;font-size:22px;border-bottom-color:#5a4e44}
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin:28px 0;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.foot-nav a{text-decoration:none;margin:0}
+.site-foot .fine{font-size:12px;color:#9c8f80;margin:8px 0}
+.btn{transition:background .25s,color .25s,transform .25s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.btn.light{background:#f6f1e8;color:#221d19}
+.kicker{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== Home ===== */
+.home h1,.home h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400}
+.h-hero{display:grid;grid-template-columns:1.05fr 1fr;min-height:calc(100vh - 74px);max-height:920px}
+.h-copy{display:flex;flex-direction:column;justify-content:center;padding:64px 6vw 64px max(28px,calc((100vw - 1240px)/2 + 28px))}
+.h-copy h1{font-size:clamp(54px,7.6vw,112px);line-height:.92;letter-spacing:-.02em;margin:0 0 28px}
+.h-copy h1 em{font-style:italic;color:var(--accent)}
+.h-copy .lead{font-size:19px;line-height:1.65;max-width:30em;margin:0 0 34px;color:var(--ink)}
+.h-copy .row{display:flex;gap:12px;flex-wrap:wrap}
+.h-copy .btn{padding:15px 28px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.h-note{margin:40px 0 0;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.h-room{position:relative;overflow:hidden;background:#e9dfcf}
+.room-img{position:absolute;inset:0;background:url(/images/set/del-mar-living.jpg) center 60%/cover;animation:kb 28s ease-in-out infinite alternate}
+.room-light{position:absolute;inset:-30%;background:radial-gradient(closest-side,rgba(255,246,226,.55),rgba(255,246,226,0) 70%);mix-blend-mode:soft-light;animation:light 16s ease-in-out infinite alternate}
+.h-room .swing{left:58%;width:210px;margin-left:-105px}
+.h-room .string{height:24vh;background:linear-gradient(#cbb89a,#9d8768)}
+.h-room .tag{filter:drop-shadow(0 22px 26px rgba(40,25,10,.28))}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.12) translate(-1.5%,-1%)}}
+
+.ribbon{overflow:hidden;background:#221d19;color:#f1e8da;padding:18px 0;border-top:1px solid #3a322b}
+.ribbon-track{display:flex;gap:34px;width:max-content;animation:ribbon 48s linear infinite;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:24px;white-space:nowrap}
+.ribbon i{color:#d39a8e;font-style:normal}
+@keyframes ribbon{to{transform:translateX(-50%)}}
+
+.edit,.journal-tease,.pillars,.wide-wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.edit{padding-top:110px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(36px,4.6vw,60px);line-height:1.02;margin:0;max-width:16ch}
+.more{font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;white-space:nowrap;border-bottom:1px solid var(--line);padding-bottom:4px}
+.more:hover{border-color:var(--accent);color:var(--accent)}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,24%);gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;scrollbar-width:thin}
+.slide{scroll-snap-align:start;text-decoration:none;color:var(--ink)}
+.slide .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--line)}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1),opacity .7s ease}
+.slide .ev{opacity:0}
+.slide:hover img{transform:scale(1.04)}
+.slide:hover .ev,.slide:focus .ev{opacity:1}
+.tier-chip{position:absolute;left:12px;bottom:12px;display:flex;gap:2px;background:rgba(251,247,240,.92);border-radius:99px;padding:3px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.tier-chip b,.tier-chip i{font-style:normal;font-weight:500;padding:5px 10px;border-radius:99px;color:#2a2420;transition:background .5s,color .5s}
+.tier-chip b{background:#2a2420;color:#f6f1e8}
+.slide:hover .tier-chip b{background:transparent;color:#2a2420}
+.slide:hover .tier-chip i{background:#2a2420;color:#f6f1e8}
+.cap{display:flex;flex-direction:column;gap:4px;padding:16px 2px 0}
+.cap-k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.cap-t{font-family:'Cormorant Garamond',Georgia,serif;font-size:27px;line-height:1.1}
+.cap-l{font-size:14px;line-height:1.55;color:var(--muted)}
+.rail-hint{font-size:12px;color:var(--muted);margin:8px 0 0}
+
+.tiers{max-width:1240px;margin:120px auto 0;padding:0 28px;display:grid;grid-template-columns:1fr 1.05fr 1fr;gap:28px;align-items:center}
+.tier{position:relative;aspect-ratio:3/4;overflow:hidden}
+.tier img{width:100%;height:100%;object-fit:cover}
+.tier-t{position:absolute;left:0;right:0;bottom:0;padding:60px 20px 20px;color:#fbf6ee;background:linear-gradient(transparent,rgba(25,18,12,.72))}
+.tier-t span{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#f0c9bf}
+.tier-t b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:28px;line-height:1.1;margin:6px 0 4px}
+.tier-t i{font-style:normal;font-size:13px;opacity:.85}
+.tier-mid{text-align:center;padding:0 8px}
+.tier-mid h2{font-size:clamp(40px,4.4vw,58px);line-height:1;margin:0 0 18px}
+.tier-mid p{color:var(--muted);margin:0 0 26px}
+
+.wide-wrap .label-sec{margin-top:120px;border-top:0;padding-top:0}
+.wide-wrap .label-sec h2{font-size:clamp(40px,5vw,64px)}
+.wide-wrap .lp-grid{grid-template-columns:repeat(4,1fr);gap:18px}
+.wide-wrap .sw{height:220px;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.wide-wrap .lp:hover .sw{transform:scale(1.04)}
+.wide-wrap .lp{border-radius:0}
+.wide-wrap .lf-fields{grid-template-columns:1fr 1fr 1fr auto;max-width:none}
+.wide-wrap .lf-fields input[name=notes]{grid-column:auto}
+.wide-wrap .lf-fields .btn{grid-column:auto;padding:12px 26px}
+
+.story-tease{margin:130px 0 0;background:#221d19;color:#efe6d8;text-align:center;padding:110px 28px}
+.story-tease .kicker{color:#d39a8e}
+.story-tease p.big-names{max-width:none;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,6vw,84px);line-height:1;margin:10px 0 34px;color:#7d7064}
+.big-names b{font-weight:500;color:#7d7064;transition:color 1.2s ease}
+.big-names .dot{color:#5a4e44}
+.story-tease.in .big-names b{color:#f6f1e8}
+.story-tease.in .nm:nth-child(3) b{transition-delay:.5s}.story-tease.in .nm:nth-child(5) b{transition-delay:1s}
+.story-tease h2{font-size:clamp(30px,3.6vw,46px);margin:0 0 16px;color:#f6f1e8}
+.story-tease p{max-width:34em;margin:0 auto 30px;color:#c9bdae;font-size:17px}
+
+.journal-tease{padding-top:110px}
+.jt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.jt{display:flex;flex-direction:column;gap:10px;min-height:230px;padding:30px 28px;background:var(--card);border:1px solid var(--line);text-decoration:none;transition:border-color .3s,transform .4s}
+.jt:hover{border-color:var(--ink);transform:translateY(-3px)}
+.jt-k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.jt-t{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;line-height:1.12}
+.jt-d{font-size:14px;color:var(--muted);line-height:1.55;margin-top:auto}
+
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;padding-top:110px}
+.pillars span{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:var(--accent)}
+.pillars b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:24px;margin:6px 0 6px}
+.pillars p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6}
+
+@media (max-width:900px){
+ .h-hero{grid-template-columns:1fr;min-height:0;max-height:none}
+ .h-room{height:62vh;order:-1}
+ .h-copy{padding:44px 22px 20px}
+ .rail{grid-auto-columns:72%}
+ .tiers{grid-template-columns:1fr 1fr}.tier-mid{grid-column:1/-1;order:-1;padding:0}
+ .wide-wrap .lp-grid{grid-template-columns:1fr 1fr}
+ .wide-wrap .sw{height:130px}
+ .wide-wrap .lf-fields{grid-template-columns:1fr}
+ .jt-grid,.pillars{grid-template-columns:1fr}
+ .sec-head{flex-direction:column;align-items:flex-start}
+ .site-head nav{gap:16px}.head-in{padding:12px 20px}
+ .site-head .tagline{display:none}
+}
+@media (max-width:640px){.site-head nav a:nth-child(2){display:none}header{flex-direction:row}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ribbon-track,.room-img,.room-light{animation:none}}
 """
 
 FAVICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" rx="220" fill="#6b2a26"/><g fill="#f6f1e8" transform="translate(258 780) scale(0.892 -0.892)"><path d="M200 85Q200 55 207.5 39.5Q215 24 239.0 18.0Q263 12 311 12Q314 12 314.0 6.0Q314 0 311 0Q279 0 241.5 1.0Q204 2 160 2Q127 2 95.5 1.0Q64 0 39 0Q37 0 37.0 6.0Q37 12 39 12Q74 12 91.5 17.0Q109 22 114.5 37.0Q120 52 120 81V544Q120 573 114.5 587.5Q109 602 91.5 607.5Q74 613 39 613Q37 613 37.0 619.0Q37 625 39 625Q64 625 95.0 623.5Q126 622 159 622Q185 622 222.5 625.0Q260 628 298 628Q356 628 402.5 611.0Q449 594 477.0 558.0Q505 522 506 464Q506 412 487.0 374.0Q468 336 435.5 311.0Q403 286 363.5 274.0Q324 262 286 262Q274 262 261.5 263.0Q249 264 238 267Q234 268 236 275Q237 280 239 280Q239 280 240 280Q249 278 258.5 277.0Q268 276 275 276Q313 276 345.0 294.0Q377 312 397.0 349.5Q417 387 417 443Q417 497 398.5 534.0Q380 571 347.0 591.0Q314 611 271 611Q243 611 227.5 607.0Q212 603 206.0 588.0Q200 573 200 542Z"/></g></svg>'
@@ -206,14 +342,16 @@ LOGO = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 4974 865" aria-
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&'
-         'family=Inter:wght@400;600&display=swap" rel="stylesheet">')
+         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&'
+         'family=Inter:wght@400;500;600&display=swap" rel="stylesheet">')
 
 
-def page(title, body, site, desc="", path="/", image=""):
+def page(title, body, site, desc="", path="/", image="", wide=False):
     url = f"https://{site['domain']}{path}"
     img = f'<meta property="og:image" content="https://{site["domain"]}{e(image)}">' if image else ""
     socials = "".join(f'<a href="{e(s["url"])}" rel="me">{e(s["name"])}</a>' for s in site.get("socials", []))
+    main = body if wide else f'<div class="wrap">{body}</div>'
+    lab = '<a href="/#label">The Label</a>' if (site.get("label", {}).get("live") or SHOW_DRAFTS) else ""
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}">
@@ -222,11 +360,26 @@ def page(title, body, site, desc="", path="/", image=""):
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}">{img}<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f6f1e8">
-{FONTS}<link rel="stylesheet" href="/style.css"></head><body><div class="wrap">
-<header><a class="brand" href="/" aria-label="Purogé home">{LOGO}<span class="tagline">{e(site["tagline"])}</span></a><nav><a href="/looks/">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a><a href="/journal/">Journal</a></nav></header>
-{body}
-<footer>{socials and f"<p>{socials}</p>"}<p><a class="ded" href="/story/">{e(site['dedication'])}</a></p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
-</div></body></html>"""
+{FONTS}<link rel="stylesheet" href="/style.css"></head><body class="{'home' if wide else 'page'}">
+<header class="site-head"><div class="head-in">
+<a class="brand" href="/" aria-label="Purogé home">{LOGO}<span class="tagline">{e(site["tagline"])}</span></a>
+<nav><a href="/looks/">Looks</a>{lab}<a href="/story/">Story</a><a href="/journal/">Journal</a></nav>
+</div></header>
+<main>{main}</main>
+<footer class="site-foot"><div class="foot-in">
+<div class="foot-brand">{LOGO}<p class="tagline">{e(site["tagline"])}</p></div>
+<p><a class="ded" href="/story/">{e(site['dedication'])}</a></p>
+<p class="foot-nav"><a href="/looks/">Looks</a>{lab}<a href="/story/">Story</a><a href="/values/">Values</a><a href="/journal/">Journal</a></p>
+{socials and f"<p>{socials}</p>"}
+<p class="fine">{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p>
+<p class="fine">Made with care in San Diego, California.</p>
+</div></footer>
+<script>
+(function(){{var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){{els.forEach(function(x){{x.classList.add('in')}});return}}
+var io=new IntersectionObserver(function(es){{es.forEach(function(en){{if(en.isIntersecting){{en.target.classList.add('in');io.unobserve(en.target)}}}})}},{{rootMargin:'0px 0px -10% 0px'}});
+els.forEach(function(x){{io.observe(x)}});}})();
+</script>
+</body></html>"""
 
 
 def tier_hero(look):
@@ -364,10 +517,10 @@ def label_section(site):
                   f'<span class="lp-pick">Reserve this</span></label>')
     endpoint = lab.get("endpoint", "")
     return f"""<section class="label-sec" id="label">
-<p class="kicker">The Purogé Label · Pre-order</p>
+<p class="kicker">The Purogé Label · Made in San Diego · Pre-order</p>
 <h2>Our own label, in linen.</h2>
-<p class="lead">Our first collection: four pieces, made to be worn for years and handed on. Reserve yours now.
-Reserving is free; nothing is charged until your pieces are ready.</p>
+<p class="lead">Our first collection: four linen pieces, made in San Diego, California, to be worn for years and
+handed on. Reserve yours now. Reserving is free; nothing is charged until your pieces are ready.</p>
 <form class="label-form" data-endpoint="{e(endpoint)}">
 <div class="lp-grid">{cards}</div>
 <div class="lf-fields">
@@ -396,54 +549,105 @@ f.classList.add('done');m.textContent='Reserved. Thank you, we will be in touch 
 
 
 def home_page(looks, site):
-    cards = "".join(card(l, site) for l in looks[:6])
-    looks_html = (f'<div class="grid">{cards}</div><a class="btn off" href="/looks/">See all {len(looks)} looks</a>'
-                  if looks else
-                  '<div class="empty"><b>The first looks are being scouted.</b>'
-                  'Every piece checked for fabric and fit before it goes up.</div>')
-    doors = (f'<div class="doors">{door(site, looks, "occasion")}{door(site, looks, "style")}{door(site, looks, "pairing")}</div>'
-             if looks else "")
-    body = f"""<section class="intro">
-<div>
-<p class="kicker">Check the label</p>
-<h1>Wear plants,<br>not plastic.</h1>
-<p class="lead">Most of what’s in a modern closet is spun from oil. We find the linen and natural-fiber pieces
-worth keeping, for the office, the airport and every year after.</p>
-<div class="row"><a class="btn" href="/occasion/work/">Shop the edit</a>
-<a class="btn off" href="/journal/why-humans-should-wear-sustainable-clothing/">Read why it matters</a></div>
-</div>
-<div class="stage" aria-hidden="true"><div class="light"></div><div class="shade"></div>
-<div class="swing"><div class="string"></div><div class="tag"><span class="eyelet"></span>
+    tag = """<div class="swing"><div class="string"></div><div class="tag"><span class="eyelet"></span>
 <span class="tag-brand">PUROGÉ</span><span class="tag-rule"></span>
 <div class="fiber"><div class="f f-poly"><b>100% Polyester<span class="strike"></span></b><i>Spun from oil</i></div>
 <div class="f f-linen"><b>100% Linen</b><i>Grown from flax. Made to last.</i></div></div>
-<span class="tag-foot">Wear plants against your skin</span></div></div></div>
+<span class="tag-foot">Wear plants against your skin</span></div></div>"""
+
+    slides = ""
+    for l in looks[:8]:
+        imgs = l.get("images") or {}
+        h = imgs.get("heirloom") or l.get("image")
+        ev = imgs.get("everyday")
+        if not h:
+            continue
+        swap = f'<img class="ev" src="{e(ev)}" alt="" loading="lazy">' if ev else ""
+        occ = ", ".join(label(site, "occasion", o) for o in l["tags"].get("occasion", [])[:2])
+        slides += (f'<a class="slide" href="/look/{l["slug"]}/"><div class="ph">'
+                   f'<img class="hl" src="{e(h)}" alt="{e(l["title"])} outfit" loading="lazy">{swap}'
+                   f'<span class="tier-chip"><b>Heirloom</b>{"<i>Everyday</i>" if ev else ""}</span></div>'
+                   f'<div class="cap"><span class="cap-k">{e(occ)}</span><span class="cap-t">{e(l["title"])}</span>'
+                   f'<span class="cap-l">{e((l.get("lesson") or "")[:110])}{"…" if len(l.get("lesson") or "")>110 else ""}</span></div></a>')
+
+    tiers = ""
+    for l in looks:
+        imgs = l.get("images") or {}
+        if imgs.get("heirloom") and imgs.get("everyday"):
+            tiers = f"""<section class="tiers reveal">
+<div class="tier"><img src="{e(imgs['heirloom'])}" alt="{e(l['title'])}, Heirloom version" loading="lazy">
+<div class="tier-t"><span>Heirloom</span><b>Made to last a lifetime.</b><i>The investment version, in the best fabric we could find.</i></div></div>
+<div class="tier-mid"><p class="kicker">Every look, two ways</p><h2>Same look.<br>Your budget.</h2>
+<p>Every outfit we curate comes in two versions, with each piece numbered and linked. Heirloom for the pieces you
+will keep for decades. Everyday for the same look at a gentler price.</p>
+<a class="btn" href="/look/{l['slug']}/">See {e(l['title'])}</a></div>
+<div class="tier"><img src="{e(imgs['everyday'])}" alt="{e(l['title'])}, Everyday version" loading="lazy">
+<div class="tier-t"><span>Everyday</span><b>Same look, gentler price.</b><i>Chosen with the same eye for fabric and fit.</i></div></div>
+</section>"""
+            break
+
+    label_html = label_section(site) if (site.get("label", {}).get("live") or SHOW_DRAFTS) else ""
+    body = f"""<section class="h-hero">
+<div class="h-copy">
+<p class="kicker">Check the label</p>
+<h1>Wear plants,<br><em>not plastic.</em></h1>
+<p class="lead">Most of what’s in a modern closet is spun from oil. We find the linen and natural-fiber pieces worth
+keeping, for the office, the airport and every year after.</p>
+<div class="row"><a class="btn" href="/looks/">Shop the edit</a>
+<a class="btn ghost" href="/journal/why-humans-should-wear-sustainable-clothing/">Why it matters</a></div>
+<p class="h-note">Curated in San Diego, California</p>
+</div>
+<div class="h-room" aria-hidden="true"><div class="room-img"></div><div class="room-light"></div>{tag}</div>
 </section>
-{label_section(site) if (site.get("label", {}).get("live") or SHOW_DRAFTS) else ""}
-<h2>Elegant, never boring.<br>Every piece found for you.</h2>
-<p class="lead">You see an outfit you love, and then the hunting starts. We do the hunting.
-Every look is a complete outfit, numbered piece by piece, in two price versions.</p>
-<a class="btn" href="/latest/">Find the look from our latest video</a>
-<h2>Start here</h2>
-{doors}
-<h2 id="looks">Latest looks</h2>
-{looks_html}
-<h2>How it works</h2>
-<ol class="how">
-<li><div><b>Find a look you love</b> in our videos. Every piece in it is numbered.</div></li>
-<li><div><b>Open the look here.</b> The name in the video is the address: the look "Navy and Brown" lives at puroge.com/navy-and-brown.</div></li>
-<li><div><b>Pick your version.</b> Heirloom is made to last a lifetime. Everyday is the same look at a gentler price.</div></li>
-</ol>
-<h2>What we stand for</h2>
-<ul class="vals">
-<li><b>Fabric first.</b> Every piece names what it is made of. We favor natural fibers because they wear better, last longer and age well.</li>
-<li><b>Elegant, never boring.</b> Classic foundations with one deliberate detail that makes the outfit yours.</li>
-<li><b>Real, and honest about it.</b> Our images are AI-generated and labeled. The clothes in them are real, checked and linked.</li>
-<li><b>Made to be kept.</b> Fewer, better pieces, worn for years and handed down.</li>
-</ul>
-<a class="btn off" href="/values/">Our values and where we're going</a>"""
-    return page("Purogé | Elegant, never boring", body, site,
-                "Complete elegant outfits, every piece found and linked for you, in two price versions.")
+
+<div class="ribbon" aria-hidden="true"><div class="ribbon-track">
+<span>100% linen</span><i>·</i><span>Made in San Diego</span><i>·</i><span>Worn for years</span><i>·</i><span>Handed on</span><i>·</i><span>Natural fiber, found for you</span><i>·</i>
+<span>100% linen</span><i>·</i><span>Made in San Diego</span><i>·</i><span>Worn for years</span><i>·</i><span>Handed on</span><i>·</i><span>Natural fiber, found for you</span><i>·</i>
+</div></div>
+
+<section class="edit reveal">
+<div class="sec-head"><div><p class="kicker">The edit</p><h2>Complete looks, every piece found for you.</h2></div>
+<a class="more" href="/looks/">All {len(looks)} looks →</a></div>
+<div class="rail">{slides}</div>
+<p class="rail-hint">Hover or tap a look to see its Everyday version.</p>
+</section>
+
+{tiers}
+
+<div class="wide-wrap">{label_html}</div>
+
+<section class="story-tease reveal">
+<p class="kicker">Our story</p>
+<p class="big-names"><span class="nm"><b>Pu</b>risima</span><span class="dot">·</span><span class="nm"><b>Ro</b>berta</span><span class="dot">·</span><span class="nm">Ro<b>ge</b>nie</span></p>
+<h2>Three women are hidden in our name.</h2>
+<p>One walked miles with second-hand clothes on her head. One sewed sixteen hours a day. The third is building Purogé
+in San Diego.</p>
+<a class="btn light" href="/story/">Read their story</a>
+</section>
+
+<section class="journal-tease reveal">
+<div class="sec-head"><div><p class="kicker">The journal</p><h2>The case for natural fiber.</h2></div>
+<a class="more" href="/journal/">All articles →</a></div>
+<div class="jt-grid" id="jt"><a class="jt" href="/journal/why-humans-should-wear-sustainable-clothing/"><span class="jt-k">The case for natural fiber</span><span class="jt-t">Why Humans Should Wear Sustainable Clothing</span></a></div>
+<script>
+fetch('/journal/feed.xml').then(function(r){{return r.text()}}).then(function(x){{
+var d=new DOMParser().parseFromString(x,'text/xml'),it=[].slice.call(d.querySelectorAll('item')).slice(0,3);if(!it.length)return;
+var g=document.getElementById('jt');g.innerHTML='';it.forEach(function(i){{var a=document.createElement('a');a.className='jt';
+a.href=i.querySelector('link').textContent.replace('https://puroge.com','');
+a.innerHTML='<span class="jt-k">Read · Journal</span><span class="jt-t"></span><span class="jt-d"></span>';
+a.querySelector('.jt-t').textContent=i.querySelector('title').textContent;a.querySelector('.jt-d').textContent=i.querySelector('description').textContent;g.appendChild(a);}});}}).catch(function(){{}});
+</script>
+</section>
+
+<section class="pillars reveal">
+<div><span>01</span><b>Fabric first</b><p>Every piece names what it is made of. We favor natural fibers because they wear better and age well.</p></div>
+<div><span>02</span><b>Elegant, never boring</b><p>Classic foundations with one deliberate detail that makes the outfit yours.</p></div>
+<div><span>03</span><b>Honest about it</b><p>Our images are AI-generated and labeled. The clothes in them are real, checked and linked.</p></div>
+<div><span>04</span><b>Made to be kept</b><p>Fewer, better pieces, worn for years and handed down.</p></div>
+</section>"""
+    return page("Purogé | Natural fiber, found for you", body, site,
+                "Linen and natural-fiber outfits for work and travel, curated in San Diego. Every piece found, checked and linked, in two price versions.",
+                wide=True, image="/images/set/del-mar-living.jpg")
 
 
 def series_card(series, by_slug, site):
@@ -601,6 +805,8 @@ then hand them on.</p>
 <p>I’m Rogenie, their granddaughter, and I build Purogé from San Diego, California. I don’t carry clothes on my
 head. I carry the search for you: I find every piece in an outfit, check what it is made of, and put it all on one
 page, in two versions so it works for more than one budget.</p>
+<p>And now we make our own. The Purogé label is linen, made here in San Diego, to be worn for years and
+handed on.</p>
 <p>Three women are hidden in our name. Now you know where to find them.</p>
 <p class="note">Lola is Tagalog for grandmother.</p>
 <p style="margin-top:28px"><a class="btn" href="/looks/">See the looks</a>
@@ -697,6 +903,8 @@ def main():
     write(OUT / "style.css", CSS)
     if (ROOT / "images" / "looks").exists():
         shutil.copytree(ROOT / "images" / "looks", OUT / "images" / "looks")
+    if (ROOT / "images" / "set").exists():
+        shutil.copytree(ROOT / "images" / "set", OUT / "images" / "set")
     write(OUT / "favicon.svg", FAVICON)
     if (ROOT / "brand").exists():
         shutil.copytree(ROOT / "brand", OUT / "brand")

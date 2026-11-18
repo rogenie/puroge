@@ -188,7 +188,7 @@ footer a{margin-right:14px}
 .lp-pick{align-self:flex-start;margin:10px 16px 0!important;padding:10px 18px!important;border:1.5px solid var(--accent);border-radius:99px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:transparent;transition:background .25s,color .25s,transform .25s}
 .lp:hover .lp-pick{background:var(--accent);color:#fbf6ee;transform:translateY(-1px)}
 .lp:has(input:checked) .lp-pick{background:var(--accent);color:#fbf6ee}
-.lp:has(input:checked) .lp-pick::before{content:"✓ Reserved · "}
+.pk-on{display:none}.lp:has(input:checked) .pk-on{display:inline}.lp:has(input:checked) .pk-off{display:none}
 .lf-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .lf-fields input{font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink)}
 .lf-fields input[name=notes]{grid-column:1/-1}
@@ -542,7 +542,7 @@ def label_section(site):
               if pc.get("image") else f'<span class="sw sw-{e(pc.get("swatch","oat"))}"></span>')
         cards += (f'<label class="lp"><input type="checkbox" name="pieces" value="{e(pc["name"])}">{ph}'
                   f'<span class="lp-name">{e(pc["name"])}</span><span class="lp-line">{e(pc["line"])}</span>{price}'
-                  f'<span class="lp-pick">Reserve this</span></label>')
+                  f'<span class="lp-pick"><span class="pk-off">Reserve this</span><span class="pk-on">✓ Selected</span></span></label>')
     endpoint = lab.get("endpoint", "")
     return f"""<section class="label-sec" id="label">
 <p class="kicker">The Purogé Label · Made in San Diego · Pre-order</p>

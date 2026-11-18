@@ -212,8 +212,8 @@ footer a{margin-right:14px}
 .h-emb svg{width:78px;height:78px;display:block;filter:drop-shadow(0 6px 14px rgba(107,42,38,.28))}
 .h-wm svg{height:40px;width:auto;display:block}
 .h-wm{color:var(--ink)}
-@media (max-width:900px){.site-head .brand .emb svg{width:40px;height:40px}.site-head nav{gap:12px}.site-head nav a{font-size:11px;letter-spacing:.1em}.site-head .brand{gap:10px}}
-@media (max-width:430px){.site-head nav a[href='/story/']{display:none}.site-head .brand .wm svg{height:22px}.h-brand{display:none}}
+@media (max-width:900px){.site-head .brand .emb svg{width:40px;height:40px}.site-head nav{gap:10px}.site-head nav a{font-size:10.5px;letter-spacing:.07em}.site-head .brand{gap:10px}}
+@media (max-width:430px){.site-head nav a[href='/story/'],.site-head .nav-the{display:none}.site-head .brand .wm svg{height:17px}.h-brand{display:none}}
 .fbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px}
 .fbar-l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-right:4px}
 .dd{position:relative}
@@ -236,7 +236,7 @@ body{font-size:16px}
 .site-head .brand svg{height:22px}
 .site-head .tagline{font-size:13px;margin-top:5px}
 .site-head nav{display:flex;gap:28px}
-.site-head nav a{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;position:relative}
+.site-head nav a{white-space:nowrap;margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;position:relative}
 .site-head nav a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
 .site-head nav a:hover::after{transform:scaleX(1)}
 main .wrap{padding-top:8px}
@@ -367,7 +367,7 @@ main .wrap{padding-top:8px}
  .site-head nav{gap:16px}.head-in{padding:12px 20px}
  .site-head .tagline{display:none}
 }
-@media (max-width:640px){.site-head nav a:nth-child(2){display:none}.site-head nav{flex-wrap:nowrap}header{flex-direction:row}}
+@media (max-width:640px){.site-head nav{flex-wrap:nowrap}header{flex-direction:row}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ribbon-track,.room-img,.room-light{animation:none}}
 """
 
@@ -391,7 +391,7 @@ def page(title, body, site, desc="", path="/", image="", wide=False):
     img = f'<meta property="og:image" content="https://{site["domain"]}{e(image)}">' if image else ""
     socials = "".join(f'<a href="{e(s["url"])}" rel="me">{e(s["name"])}</a>' for s in site.get("socials", []))
     main = body if wide else f'<div class="wrap">{body}</div>'
-    lab = '<a href="/#label">The Label</a>' if (site.get("label", {}).get("live") or SHOW_DRAFTS) else ""
+    lab = '<a href="/#label"><span class="nav-the">The </span>Label</a>' if (site.get("label", {}).get("live") or SHOW_DRAFTS) else ""
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}">

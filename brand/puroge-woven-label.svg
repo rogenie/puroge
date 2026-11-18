@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="300" height="300" fill="#d9cdbb"/>
+<g transform="translate(150 150)">
+<rect x="-78" y="-104" width="156" height="208" rx="3" fill="#6b2a26"/>
+<rect x="-78" y="-104" width="156" height="14" fill="#5a221f"/><rect x="-78" y="90" width="156" height="14" fill="#5a221f"/>
+<line x1="-70" y1="-97" x2="70" y2="-97" stroke="#f6f1e8" stroke-width="1.2" stroke-dasharray="4 3" opacity=".7"/>
+<line x1="-70" y1="97" x2="70" y2="97" stroke="#f6f1e8" stroke-width="1.2" stroke-dasharray="4 3" opacity=".7"/>
+<path transform="translate(-9.01 24.00) scale(0.03087 -0.03087)" d="M116 0V1490H726Q894 1490 1016.0 1429.5Q1138 1369 1203.5 1258.0Q1269 1147 1269 995Q1269 842 1202.0 733.5Q1135 625 1011 569Q1011 569 1010 569L1321 0H934L661 513H469V0ZM469 792H652Q735 792 790.5 814.0Q846 836 874.5 881.0Q903 926 903 995Q903 1065 874.5 1111.0Q846 1157 790.0 1180.5Q734 1204 651 1204H469Z" fill="#f6f1e8"/><path transform="translate(9.01 24.00) scale(-0.03087 -0.03087)" d="M116 0V1490H726Q894 1490 1016.0 1429.5Q1138 1369 1203.5 1258.0Q1269 1147 1269 995Q1269 842 1202.0 733.5Q1135 625 1011 569Q1011 569 1010 569L1321 0H934L661 513H469V0ZM469 792H652Q735 792 790.5 814.0Q846 836 874.5 881.0Q903 926 903 995Q903 1065 874.5 1111.0Q846 1157 790.0 1180.5Q734 1204 651 1204H469Z" fill="#f6f1e8"/><path transform="translate(-9.01 -22.00) scale(0.03087 -0.03087)" d="M116 0V1490H726Q894 1490 1016.0 1425.0Q1138 1360 1203.5 1244.0Q1269 1128 1269 975Q1269 821 1202.0 707.0Q1135 593 1011.0 529.0Q887 465 716 465H469V0ZM469 744H652Q735 744 791.0 773.0Q847 802 875.0 854.0Q903 906 903 975Q903 1045 875.0 1096.5Q847 1148 790.5 1176.0Q734 1204 651 1204H469Z" fill="#f6f1e8"/>
+<text x="0" y="48" text-anchor="middle" font-family="Georgia,serif" font-size="15" letter-spacing="5" fill="#f6f1e8">PUROGÉ</text>
+<text x="0" y="68" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="6" letter-spacing="1.2" fill="#f6f1e8" opacity=".85">100% LINEN · MADE IN SAN DIEGO</text>
+</g></svg>

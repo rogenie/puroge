@@ -163,6 +163,10 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .hub a span{color:var(--muted);font-size:14px}
 footer{border-top:1px solid var(--line);margin-top:56px;padding:20px 0 40px;color:var(--muted);font-size:13px}
 footer a{margin-right:14px}
+.story p{font-size:17px;line-height:1.75}
+.story h2{margin-top:44px}
+.story p.names{font-size:32px;line-height:1.3;margin:20px 0 24px}
+.story-quote{margin:40px 0;padding:0 0 0 20px;border-left:2px solid var(--accent);font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:28px;line-height:1.3;color:var(--accent)}
 footer a.ded{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
 footer a.ded:hover{border-color:var(--accent)}
 """
@@ -491,18 +495,48 @@ Everything we learn from curating, which pieces you love and which ones are impo
 
 
 def story_page(site):
-    body = """<p class="meta" style="margin-top:24px">Our story</p>
+    body = """<article class="story">
+<p class="meta" style="margin-top:24px">Our story</p>
 <h1 style="margin-top:8px">Three women are hidden in our name.</h1>
-<p class="lead">My grandmothers, Lola Purisima and Lola Roberta, sewed and sold clothes for a living.</p>
+<p class="lead">Before there was a brand, there was a road, a needle, and twenty-four children to feed.</p>
+
+<h2>The road</h2>
+<p>My Lola Purisima sewed and sold used clothes for a living. She walked miles upon miles with a pile of
+second-hand clothes balanced on her head, selling each piece to someone who would wear it again.</p>
+<p>That is how she raised twelve children.</p>
+
+<h2>The needle</h2>
+<p>My Lola Roberta sewed sixteen hours a day to help support her family. Sixteen hours is a day that begins
+before the light and ends long after it.</p>
+<p>She raised twelve children, too.</p>
+
+<blockquote class="story-quote">Twenty-four children. Two women. One needle each, and more miles than anyone counted.</blockquote>
+
+<h2>The name</h2>
 <p class="names"><span>Pu</span>risima · <span>Ro</span>berta · Ro<span>ge</span>nie</p>
-<p>Purogé carries all three of us: the first sound of each Lola's name, and mine.</p>
-<p>The brand works the way a good shopkeeper does. Instead of leaving you to hunt down an outfit you saw
-online, we find every piece for you, check what it is made of, and put it all on one page.
-Two versions of each look, so it works for more than one budget.</p>
-<p>Lola is Tagalog for grandmother.</p>
-<p style="margin-top:28px"><a class="btn" href="/looks/">See the looks</a></p>"""
+<p>Purogé carries all three of us: the first sound of each Lola’s name, and mine. The accent in our logo
+is drawn as a single stitch, for them.</p>
+
+<h2>What they knew</h2>
+<p>Lola Purisima was selling second-hand clothing long before anyone called it sustainable. To her, a garment
+was never finished after one owner. It was carried, sold, and worn again.</p>
+<p>Lola Roberta knew what a seam costs. When you have given sixteen hours to make something, you do not make it
+to be thrown away.</p>
+<p>That is the whole idea behind Purogé. Choose natural fiber. Choose pieces made well. Wear them for years,
+then hand them on.</p>
+
+<h2>From San Diego</h2>
+<p>I’m Rogenie, their granddaughter, and I build Purogé from San Diego, California. I don’t carry clothes on my
+head. I carry the search for you: I find every piece in an outfit, check what it is made of, and put it all on one
+page, in two versions so it works for more than one budget.</p>
+<p>Three women are hidden in our name. Now you know where to find them.</p>
+<p class="note">Lola is Tagalog for grandmother.</p>
+<p style="margin-top:28px"><a class="btn" href="/looks/">See the looks</a>
+<a class="btn off" href="/journal/why-humans-should-wear-sustainable-clothing/">Why natural fiber matters</a></p>
+</article>"""
     return page("Our story | Purogé", body, site,
-                "Purogé is named for Lola Purisima and Lola Roberta, who sewed and sold clothes for a living.",
+                "Purogé is named for Lola Purisima, who walked miles selling second-hand clothes, and Lola Roberta, "
+                "who sewed sixteen hours a day. Their granddaughter Rogenie builds it from San Diego.",
                 "/story/")
 
 

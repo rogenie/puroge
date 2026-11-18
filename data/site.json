@@ -146,5 +146,40 @@
     "/colors/charcoal/": "/colors/",
     "/colors/green/": "/colors/",
     "/colors/cream/": "/colors/"
+  },
+  "label": {
+    "live": false,
+    "endpoint": "",
+    "sheet": "https://docs.google.com/spreadsheets/d/1CULzsZKInUiwYl-f-bmj-s0Y_3ut8JAVQeu-3OUFhq0/edit",
+    "pieces": [
+      {
+        "slug": "pajama-set",
+        "name": "The Linen Pajama Set",
+        "line": "Long sleeves, a relaxed pant, and nothing synthetic between you and a good night.",
+        "price": "",
+        "swatch": "oat"
+      },
+      {
+        "slug": "bedding",
+        "name": "Linen Bedding",
+        "line": "Duvet cover, sheets and pillowcases that breathe the way you do and soften with every wash.",
+        "price": "",
+        "swatch": "ivory"
+      },
+      {
+        "slug": "pants",
+        "name": "The Linen Pant",
+        "line": "Cut for the office, soft enough for the flight.",
+        "price": "",
+        "swatch": "clay"
+      },
+      {
+        "slug": "shirt",
+        "name": "The Linen Shirt",
+        "line": "Tailored enough for a meeting, easy enough for the weekend.",
+        "price": "",
+        "swatch": "sage"
+      }
+    ]
   }
 }

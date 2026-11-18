@@ -32,6 +32,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "site"
+SHOW_DRAFTS = False
 TIERS = [("heirloom", "h", "Heirloom", "Made to last a lifetime"),
          ("everyday", "e", "Everyday", "Same look, gentler price")]
 
@@ -167,6 +168,34 @@ footer a{margin-right:14px}
 .story h2{margin-top:44px}
 .story p.names{font-size:32px;line-height:1.3;margin:20px 0 24px}
 .story-quote{margin:40px 0;padding:0 0 0 20px;border-left:2px solid var(--accent);font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:28px;line-height:1.3;color:var(--accent)}
+/* The Purogé Label pre-order */
+.label-sec{margin:56px 0 8px;padding:40px 0 8px;border-top:1px solid var(--line)}
+.label-sec .kicker{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.label-sec h2{font-size:clamp(34px,6vw,46px);margin:0 0 12px;line-height:1.05}
+.lp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:26px 0 20px}
+.lp{position:relative;display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:0 0 16px;cursor:pointer;overflow:hidden;transition:border-color .2s}
+.lp input{position:absolute;opacity:0;pointer-events:none}
+.lp:hover{border-color:var(--muted)}
+.lp:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.sw{display:block;height:120px;margin-bottom:10px;background:
+  repeating-linear-gradient(0deg,rgba(255,255,255,.18) 0 1px,transparent 1px 3px),
+  repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 4px),var(--c)}
+.sw-oat{--c:#d9cbb3}.sw-ivory{--c:#eee5d4}.sw-clay{--c:#c7a48b}.sw-sage{--c:#b5baa0}
+.lp-name,.lp-line,.lp-price,.lp-pick{padding:0 16px}
+.lp-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;line-height:1.15}
+.lp-line{font-size:14px;color:var(--muted);line-height:1.5}
+.lp-price{font-size:14px;font-weight:600;margin-top:4px}.lp-price.soon{font-weight:400;font-style:italic;color:var(--muted)}
+.lp-pick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.lp:has(input:checked) .lp-pick{color:var(--accent)}
+.lp:has(input:checked) .lp-pick::before{content:"✓ "}
+.lf-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lf-fields input{font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink)}
+.lf-fields input[name=notes]{grid-column:1/-1}
+.lf-fields .btn{grid-column:1/-1;border:0;cursor:pointer;font:inherit;font-size:15px;padding:13px 18px}
+.hp{position:absolute;left:-9999px}
+.lf-msg{min-height:1.4em;margin:12px 0 0;color:var(--accent);font-weight:600}
+.label-form.done .lf-fields,.label-form.done .lp-grid{opacity:.5;pointer-events:none}
+@media (max-width:640px){.lp-grid{grid-template-columns:1fr 1fr;gap:10px}.sw{height:84px}.lp-name{font-size:20px}.lf-fields{grid-template-columns:1fr}}
 footer a.ded{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
 footer a.ded:hover{border-color:var(--accent)}
 """
@@ -324,6 +353,48 @@ def door(site, looks, group):
             f'<div class="chips">{chips}</div></a>')
 
 
+def label_section(site):
+    lab = site.get("label") or {}
+    cards = ""
+    for pc in lab.get("pieces", []):
+        price = f'<span class="lp-price">{e(pc["price"])}</span>' if pc.get("price") else '<span class="lp-price soon">Price at launch</span>'
+        cards += (f'<label class="lp"><input type="checkbox" name="pieces" value="{e(pc["name"])}">'
+                  f'<span class="sw sw-{e(pc.get("swatch","oat"))}"></span>'
+                  f'<span class="lp-name">{e(pc["name"])}</span><span class="lp-line">{e(pc["line"])}</span>{price}'
+                  f'<span class="lp-pick">Reserve this</span></label>')
+    endpoint = lab.get("endpoint", "")
+    return f"""<section class="label-sec" id="label">
+<p class="kicker">The Purogé Label · Pre-order</p>
+<h2>Our own label, in linen.</h2>
+<p class="lead">Our first collection: four pieces, made to be worn for years and handed on. Reserve yours now.
+Reserving is free; nothing is charged until your pieces are ready.</p>
+<form class="label-form" data-endpoint="{e(endpoint)}">
+<div class="lp-grid">{cards}</div>
+<div class="lf-fields">
+<input name="name" placeholder="Your name" autocomplete="name" aria-label="Your name">
+<input name="email" type="email" required placeholder="Email" autocomplete="email" aria-label="Email">
+<input name="notes" placeholder="Sizes or bed size (optional)" aria-label="Sizes or bed size">
+<input name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+<button class="btn" type="submit">Reserve my pieces</button>
+</div>
+<p class="lf-msg" role="status"></p>
+<p class="note">We will email you before anything ships with final prices, sizes and a date. You can change your mind at any time.</p>
+</form>
+<script>
+(function(){{var f=document.querySelector('.label-form');if(!f)return;var m=f.querySelector('.lf-msg');
+f.addEventListener('submit',function(ev){{ev.preventDefault();
+var picks=[].slice.call(f.querySelectorAll('input[name=pieces]:checked')).map(function(i){{return i.value}});
+if(!picks.length){{m.textContent='Choose at least one piece to reserve.';return}}
+var d=new URLSearchParams();d.append('name',f.name.value);d.append('email',f.email.value);d.append('notes',f.notes.value);
+d.append('website',f.website.value);d.append('pieces',picks.join(', '));d.append('page',location.pathname);
+var b=f.querySelector('button');b.disabled=true;m.textContent='Reserving…';
+fetch(f.dataset.endpoint,{{method:'POST',mode:'no-cors',body:d}}).then(function(){{
+f.classList.add('done');m.textContent='Reserved. Thank you, we will be in touch before anything ships.';}})
+.catch(function(){{b.disabled=false;m.textContent='Something went wrong. Please try again.';}});}});}})();
+</script>
+</section>"""
+
+
 def home_page(looks, site):
     cards = "".join(card(l, site) for l in looks[:6])
     looks_html = (f'<div class="grid">{cards}</div><a class="btn off" href="/looks/">See all {len(looks)} looks</a>'
@@ -348,6 +419,7 @@ worth keeping, for the office, the airport and every year after.</p>
 <div class="f f-linen"><b>100% Linen</b><i>Grown from flax. Made to last.</i></div></div>
 <span class="tag-foot">Wear plants against your skin</span></div></div></div>
 </section>
+{label_section(site) if (site.get("label", {}).get("live") or SHOW_DRAFTS) else ""}
 <h2>Elegant, never boring.<br>Every piece found for you.</h2>
 <p class="lead">You see an outfit you love, and then the hunting starts. We do the hunting.
 Every look is a complete outfit, numbered piece by piece, in two price versions.</p>
@@ -616,7 +688,8 @@ def load(show_drafts):
 
 
 def main():
-    show_drafts = "--drafts" in sys.argv
+    global SHOW_DRAFTS
+    show_drafts = SHOW_DRAFTS = "--drafts" in sys.argv
     site, looks, series_list = load(show_drafts)
     if OUT.exists():
         shutil.rmtree(OUT)

@@ -19,6 +19,7 @@ Generates:
   /series/<slug>/             a video that shows several looks (e.g. one color, three partners)
   /<series-slug>/             short link to a series
   /go/<slug>-<n>-h|e/         redirect to piece n, Heirloom or Everyday
+  /journal/                   the SEO journal, built from the puroge-site repo by the publish workflow
 Tags must come from the taxonomy in data/site.json, so hundreds of looks stay consistent.
 """
 import html
@@ -44,8 +45,11 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
 a{color:inherit}
 .wrap{max-width:760px;margin:0 auto;padding:0 16px}
-header{padding:28px 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.brand{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;letter-spacing:.06em;text-decoration:none}
+header{padding:28px 0 8px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{text-decoration:none;display:block;color:var(--ink)}
+.brand svg{display:block;height:24px;width:auto}
+.tagline{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:15px;color:var(--accent);margin-top:6px;letter-spacing:.01em}
+header nav{display:flex;flex-wrap:wrap;justify-content:flex-end}
 nav a{color:var(--muted);font-size:14px;text-decoration:none;margin-left:16px}
 nav a:hover{color:var(--ink)}
 h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,8vw,52px);line-height:1.08;margin:32px 0 12px}
@@ -101,6 +105,57 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .door{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px}
 .door b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:26px;line-height:1.15}
 .door span{color:var(--muted);font-size:14px}
+
+/* Home intro: the swing tag */
+.intro{display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:center;margin:28px 0 8px}
+.intro h1{font-size:clamp(46px,8.4vw,68px);line-height:.98;margin:0 0 18px;letter-spacing:-.01em}
+.intro .kicker{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.intro .lead{margin:0 0 26px;max-width:30em}
+.intro .row{display:flex;gap:10px;flex-wrap:wrap}
+.stage{position:relative;height:400px;border-radius:6px;overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg,rgba(120,98,70,.05) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(90deg,rgba(120,98,70,.045) 0 1px,transparent 1px 4px),
+    linear-gradient(160deg,#efe6d6,#e6dac6);
+  box-shadow:inset 0 0 0 1px rgba(120,98,70,.12)}
+.stage .light{position:absolute;inset:-40%;background:radial-gradient(closest-side,rgba(255,250,236,.85),rgba(255,250,236,0) 70%);
+  animation:light 14s ease-in-out infinite alternate}
+.stage .shade{position:absolute;inset:0;background:repeating-linear-gradient(105deg,transparent 0 46px,rgba(90,70,50,.05) 46px 58px);
+  animation:shade 14s ease-in-out infinite alternate}
+.swing{position:absolute;left:50%;top:0;width:200px;margin-left:-100px;transform-origin:50% 0;animation:sway 7s ease-in-out infinite alternate}
+.string{width:1px;height:78px;margin:0 auto;background:linear-gradient(#b5a184,#9d8768)}
+.tag{position:relative;width:200px;height:268px;margin-top:-6px;padding:44px 22px 20px;color:#2a2420;text-align:center;
+  background:linear-gradient(175deg,#fdfaf3,#f4ecdd);
+  clip-path:polygon(18% 0,82% 0,100% 12%,100% 100%,0 100%,0 12%);
+  filter:drop-shadow(0 14px 18px rgba(60,40,20,.16));animation:flutter 7s ease-in-out infinite alternate}
+.eyelet{position:absolute;top:13px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;
+  border:2px solid #b08d57;background:#e6dac6;box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}
+.tag-brand{display:block;font:600 10px/1 Inter,sans-serif;letter-spacing:.42em;margin-left:.42em}
+.tag-rule{display:block;width:28px;height:1px;background:#b08d57;margin:14px auto 0}
+.fiber{position:relative;height:120px;margin-top:18px}
+.f{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.f b{font:500 28px/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:-.005em;white-space:nowrap}
+.f i{font:400 12px/1.4 Inter,sans-serif;font-style:normal;color:#7a6e63;margin-top:10px;letter-spacing:.02em}
+.f-poly{animation:poly 12s ease-in-out infinite}
+.f-linen{opacity:0;animation:linen 12s ease-in-out infinite}
+.f b{position:relative}
+.strike{position:absolute;left:-6px;right:-6px;top:54%;height:1.5px;background:#6b2a26;transform:scaleX(0);transform-origin:left;
+  animation:strike 12s cubic-bezier(.6,0,.2,1) infinite}
+.tag-foot{position:absolute;left:0;right:0;bottom:20px;font:italic 400 15px/1.3 'Cormorant Garamond',Georgia,serif;color:#6b2a26}
+@keyframes sway{from{transform:rotate(-2.6deg)}to{transform:rotate(2.6deg)}}
+@keyframes flutter{from{transform:perspective(600px) rotateY(-7deg)}to{transform:perspective(600px) rotateY(7deg)}}
+@keyframes light{from{transform:translate(-18%,-14%)}to{transform:translate(16%,12%)}}
+@keyframes shade{from{transform:translateX(-30px)}to{transform:translateX(30px)}}
+@keyframes poly{0%,30%{opacity:1;filter:blur(0)}42%,92%{opacity:0;filter:blur(3px)}100%{opacity:1;filter:blur(0)}}
+@keyframes strike{0%,14%{transform:scaleX(0)}26%,92%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
+@keyframes linen{0%,36%{opacity:0;transform:translateY(6px)}48%,88%{opacity:1;transform:none}96%,100%{opacity:0}}
+@media (prefers-color-scheme:dark){.stage{background:
+    repeating-linear-gradient(0deg,rgba(255,240,210,.035) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(90deg,rgba(255,240,210,.03) 0 1px,transparent 1px 4px),
+    linear-gradient(160deg,#2c2621,#221d19)}
+  .stage .light{background:radial-gradient(closest-side,rgba(255,226,180,.18),rgba(255,226,180,0) 70%)}}
+@media (max-width:640px){.intro{grid-template-columns:1fr;gap:24px}.stage{height:360px;order:-1}header{flex-direction:column;align-items:flex-start;gap:12px}header nav{justify-content:flex-start}header nav a{margin:0 18px 0 0}}
+@media (prefers-reduced-motion:reduce){.stage *{animation:none!important}.f-poly{opacity:0}.f-linen{opacity:1}}
 .door .chips{margin:10px 0 0}
 .door .chips i{font-style:normal;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--ink)}
 .hub{list-style:none;padding:0;margin:20px 0;display:grid;gap:8px}
@@ -110,10 +165,9 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:20px 0 40px;colo
 footer a{margin-right:14px}
 """
 
-FAVICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
-           '<rect width="64" height="64" rx="14" fill="#6b2a26"/>'
-           '<text x="32" y="45" text-anchor="middle" font-family="Georgia,serif" '
-           'font-size="40" fill="#f6f1e8">P</text></svg>')
+FAVICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" rx="220" fill="#6b2a26"/><g fill="#f6f1e8" transform="translate(258 780) scale(0.892 -0.892)"><path d="M200 85Q200 55 207.5 39.5Q215 24 239.0 18.0Q263 12 311 12Q314 12 314.0 6.0Q314 0 311 0Q279 0 241.5 1.0Q204 2 160 2Q127 2 95.5 1.0Q64 0 39 0Q37 0 37.0 6.0Q37 12 39 12Q74 12 91.5 17.0Q109 22 114.5 37.0Q120 52 120 81V544Q120 573 114.5 587.5Q109 602 91.5 607.5Q74 613 39 613Q37 613 37.0 619.0Q37 625 39 625Q64 625 95.0 623.5Q126 622 159 622Q185 622 222.5 625.0Q260 628 298 628Q356 628 402.5 611.0Q449 594 477.0 558.0Q505 522 506 464Q506 412 487.0 374.0Q468 336 435.5 311.0Q403 286 363.5 274.0Q324 262 286 262Q274 262 261.5 263.0Q249 264 238 267Q234 268 236 275Q237 280 239 280Q239 280 240 280Q249 278 258.5 277.0Q268 276 275 276Q313 276 345.0 294.0Q377 312 397.0 349.5Q417 387 417 443Q417 497 398.5 534.0Q380 571 347.0 591.0Q314 611 271 611Q243 611 227.5 607.0Q212 603 206.0 588.0Q200 573 200 542Z"/></g></svg>'
+
+LOGO = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 4974 865" aria-hidden="true" focusable="false"><g fill="currentColor" transform="translate(0 815) scale(1 -1)"><path transform="translate(0 0)" d="M200 85Q200 55 207.5 39.5Q215 24 239.0 18.0Q263 12 311 12Q314 12 314.0 6.0Q314 0 311 0Q279 0 241.5 1.0Q204 2 160 2Q127 2 95.5 1.0Q64 0 39 0Q37 0 37.0 6.0Q37 12 39 12Q74 12 91.5 17.0Q109 22 114.5 37.0Q120 52 120 81V544Q120 573 114.5 587.5Q109 602 91.5 607.5Q74 613 39 613Q37 613 37.0 619.0Q37 625 39 625Q64 625 95.0 623.5Q126 622 159 622Q185 622 222.5 625.0Q260 628 298 628Q356 628 402.5 611.0Q449 594 477.0 558.0Q505 522 506 464Q506 412 487.0 374.0Q468 336 435.5 311.0Q403 286 363.5 274.0Q324 262 286 262Q274 262 261.5 263.0Q249 264 238 267Q234 268 236 275Q237 280 239 280Q239 280 240 280Q249 278 258.5 277.0Q268 276 275 276Q313 276 345.0 294.0Q377 312 397.0 349.5Q417 387 417 443Q417 497 398.5 534.0Q380 571 347.0 591.0Q314 611 271 611Q243 611 227.5 607.0Q212 603 206.0 588.0Q200 573 200 542Z"/><path transform="translate(746 0)" d="M572 510Q572 560 549.5 586.5Q527 613 483 613Q480 613 480.0 619.0Q480 625 483 625Q506 625 531.0 623.5Q556 622 585 622Q610 622 634.5 623.5Q659 625 680 625Q682 625 682.0 619.0Q682 613 680 613Q640 613 619.5 586.5Q599 560 599 510V227Q599 152 569.0 98.0Q539 44 485.0 15.5Q431 -13 359 -13Q285 -13 229.0 15.5Q173 44 142.0 97.0Q111 150 111 223V544Q111 573 105.0 587.5Q99 602 81.5 607.5Q64 613 30 613Q27 613 27.0 619.0Q27 625 30 625Q55 625 85.0 623.5Q115 622 150 622Q186 622 216.5 623.5Q247 625 270 625Q273 625 273.0 619.0Q273 613 270 613Q236 613 218.5 607.0Q201 601 195.5 586.0Q190 571 190 542V258Q190 138 242.0 78.5Q294 19 386 19Q474 19 523.0 73.5Q572 128 572 226Z"/><path transform="translate(1646 0)" d="M546 0Q530 0 493.5 38.5Q457 77 406 149Q358 216 298 308Q276 304 253 304Q241 304 228.0 304.5Q215 305 204 306V81Q204 52 209.5 37.0Q215 22 232.5 17.0Q250 12 285 12Q288 12 288.0 6.0Q288 0 285 0Q260 0 230.0 1.0Q200 2 164 2Q130 2 99.0 1.0Q68 0 43 0Q40 0 40.0 6.0Q40 12 43 12Q77 12 94.5 17.0Q112 22 118.5 37.0Q125 52 125 81V544Q125 573 119.0 587.5Q113 602 96.0 607.5Q79 613 44 613Q42 613 42.0 619.0Q42 625 44 625Q69 625 99.5 623.5Q130 622 164 622Q196 622 236.0 625.0Q276 628 306 628Q390 628 434.5 592.5Q479 557 479 498Q479 442 447 398Q416 355 365 330Q444 216 501 147Q559 75 604.0 43.5Q649 12 690 12Q693 12 693.0 6.0Q693 0 690 0ZM397 466Q397 522 382.0 553.5Q367 585 339.5 598.0Q312 611 275 611Q237 611 220.5 597.5Q204 584 204 542V331Q218 330 234.5 329.0Q251 328 263 328Q337 328 367.0 362.0Q397 396 397 466Z"/><path transform="translate(2527 0)" d="M366 -12Q294 -12 235.5 13.5Q177 39 135.5 84.0Q94 129 71.5 187.5Q49 246 49 312Q49 393 80.5 454.0Q112 515 164.0 555.5Q216 596 278.0 616.0Q340 636 401 636Q475 636 533.5 609.5Q592 583 633.0 538.0Q674 493 695.5 436.0Q717 379 717 319Q717 249 689.0 189.0Q661 129 612.5 84.0Q564 39 500.5 13.5Q437 -12 366 -12ZM401 10Q464 10 515.5 42.5Q567 75 596.5 137.5Q626 200 626 291Q626 384 593.5 456.5Q561 529 501.5 570.5Q442 612 360 612Q255 612 197.5 541.0Q140 470 140 347Q140 276 158.5 214.5Q177 153 212.0 107.0Q247 61 295.0 35.5Q343 10 401 10Z"/><path transform="translate(3493 0)" d="M412 -12Q326 -12 258.5 13.5Q191 39 144.5 84.0Q98 129 73.5 188.0Q49 247 49 313Q49 388 77.5 447.0Q106 506 158.0 548.5Q210 591 279.0 613.5Q348 636 429 636Q481 636 527.5 627.0Q574 618 605 601Q614 597 615.0 594.0Q616 591 617 578L630 454Q630 451 625.0 450.0Q620 449 618 453Q608 484 591.0 513.5Q574 543 548.0 566.5Q522 590 486.5 604.0Q451 618 404 618Q330 618 270.0 583.5Q210 549 175.0 484.5Q140 420 140 330Q140 266 159.5 207.0Q179 148 217.0 102.0Q255 56 310.5 29.5Q366 3 438 3Q483 3 509.5 14.5Q536 26 548.0 52.5Q560 79 560 125Q560 173 554.0 195.5Q548 218 525.0 225.0Q502 232 450 232Q444 232 444.0 240.0Q444 248 449 248Q515 244 568.5 243.5Q622 243 680 246Q685 246 685.0 239.0Q685 232 680 232Q659 233 649.0 225.5Q639 218 636.5 193.0Q634 168 634 115Q634 82 636.0 66.0Q638 50 639.5 42.5Q641 35 641 27Q641 21 639.0 19.0Q637 17 630 15Q578 4 520.5 -4.0Q463 -12 412 -12Z"/><path transform="translate(4412 0)" d="M469 0H43Q40 0 40.0 6.0Q40 12 43 12Q77 12 94.5 17.0Q112 22 118.0 37.0Q124 52 124 81V544Q124 573 118.0 587.5Q112 602 94.5 607.5Q77 613 43 613Q40 613 40.0 619.0Q40 625 43 625H451Q461 625 461 616L463 490Q463 487 457.5 486.5Q452 486 451 489Q444 544 412.0 572.5Q380 601 328 601H277Q247 601 231.0 596.0Q215 591 209.0 577.5Q203 564 203 540V337H313Q364 337 388.0 354.5Q412 372 412 409Q412 411 417.5 411.0Q423 411 423 409Q423 378 422.5 361.0Q422 344 422 325Q422 302 423.5 279.0Q425 256 425 230Q425 228 419.0 228.0Q413 228 413 230Q413 273 388.5 293.5Q364 314 310 314H203V85Q203 61 208.5 47.5Q214 34 229.0 28.5Q244 23 271 23H337Q394 23 431.0 56.5Q468 90 482 152Q482 153 482 153Q483 155 488 154Q494 153 494 150Q490 123 487.0 85.0Q484 47 484 15Q484 0 469 0Z"/></g><g transform="translate(0 815)"><path d="M4677 -687 L4739 -783" style="stroke:var(--accent)" stroke-width="38" stroke-linecap="round" fill="none"/></g></svg>'
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -134,7 +188,7 @@ def page(title, body, site, desc="", path="/", image=""):
 <meta property="og:url" content="{url}">{img}<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f6f1e8">
 {FONTS}<link rel="stylesheet" href="/style.css"></head><body><div class="wrap">
-<header><a class="brand" href="/">PUROGÉ</a><nav><a href="/looks/">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a></nav></header>
+<header><a class="brand" href="/" aria-label="Purogé home">{LOGO}<span class="tagline">{e(site["tagline"])}</span></a><nav><a href="/looks/">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a><a href="/journal/">Journal</a></nav></header>
 {body}
 <footer>{socials and f"<p>{socials}</p>"}<p>{e(site['dedication'])}</p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
 </div></body></html>"""
@@ -272,7 +326,23 @@ def home_page(looks, site):
                   'Every piece checked for fabric and fit before it goes up.</div>')
     doors = (f'<div class="doors">{door(site, looks, "occasion")}{door(site, looks, "style")}{door(site, looks, "pairing")}</div>'
              if looks else "")
-    body = f"""<h1>Elegant, never boring.<br>Every piece found for you.</h1>
+    body = f"""<section class="intro">
+<div>
+<p class="kicker">Check the label</p>
+<h1>Wear plants,<br>not plastic.</h1>
+<p class="lead">Most of what’s in a modern closet is spun from oil. We find the linen and natural-fiber pieces
+worth keeping, for the office, the airport and every year after.</p>
+<div class="row"><a class="btn" href="/occasion/work/">Shop the edit</a>
+<a class="btn off" href="/journal/why-humans-should-wear-sustainable-clothing/">Read why it matters</a></div>
+</div>
+<div class="stage" aria-hidden="true"><div class="light"></div><div class="shade"></div>
+<div class="swing"><div class="string"></div><div class="tag"><span class="eyelet"></span>
+<span class="tag-brand">PUROGÉ</span><span class="tag-rule"></span>
+<div class="fiber"><div class="f f-poly"><b>100% Polyester<span class="strike"></span></b><i>Spun from oil</i></div>
+<div class="f f-linen"><b>100% Linen</b><i>Grown from flax. Made to last.</i></div></div>
+<span class="tag-foot">Wear plants against your skin</span></div></div></div>
+</section>
+<h2>Elegant, never boring.<br>Every piece found for you.</h2>
 <p class="lead">You see an outfit you love, and then the hunting starts. We do the hunting.
 Every look is a complete outfit, numbered piece by piece, in two price versions.</p>
 <a class="btn" href="/latest/">Find the look from our latest video</a>
@@ -465,7 +535,7 @@ def write(path, text):
 
 
 RESERVED = {"series", "look", "looks", "latest", "go", "occasion", "style", "colors", "season", "story", "values",
-            "favicon.svg", "style.css", "404.html", "robots.txt", "sitemap.txt", "CNAME"}
+            "favicon.svg", "style.css", "404.html", "robots.txt", "sitemap.txt", "CNAME", "journal", "llms.txt", "brand"}
 
 
 def load(show_drafts):
@@ -519,8 +589,14 @@ def main():
     if (ROOT / "images" / "looks").exists():
         shutil.copytree(ROOT / "images" / "looks", OUT / "images" / "looks")
     write(OUT / "favicon.svg", FAVICON)
+    if (ROOT / "brand").exists():
+        shutil.copytree(ROOT / "brand", OUT / "brand")
     write(OUT / "CNAME", d)
-    write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\nSitemap: https://{d}/sitemap.txt\n")
+    write(OUT / "robots.txt", f"User-agent: *\nDisallow: /go/\n\n"
+          "# Search engines and AI answer engines are welcome to read and cite this site.\n"
+          + "".join(f"User-agent: {b}\nAllow: /\nDisallow: /go/\n\n" for b in
+                    ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "ClaudeBot", "Claude-SearchBot", "Google-Extended"])
+          + f"Sitemap: https://{d}/sitemap.txt\nSitemap: https://{d}/journal/sitemap.xml\n")
     urls = [f"https://{d}{p}" for p in ("/", "/latest/", "/looks/", "/occasion/", "/style/", "/colors/", "/values/", "/story/")]
     for look in looks:
         slug = look["slug"]

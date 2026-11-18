@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"   # hourly, so new journal articles go live within the hour
 
 permissions:
   contents: read
@@ -24,6 +26,16 @@ jobs:
           python-version: "3.12"
       - name: Build site from looks.json
         run: python3 build.py
+      - name: Get the journal (rogenie/puroge-site)
+        uses: actions/checkout@v4
+        with:
+          repository: rogenie/puroge-site
+          path: journal-src
+      - name: Build the journal into /journal
+        run: |
+          pip install markdown pyyaml
+          python3 journal-src/build.py --out site/journal
+          cp site/journal/llms.txt site/llms.txt
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

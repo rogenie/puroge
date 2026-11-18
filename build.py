@@ -214,6 +214,19 @@ footer a{margin-right:14px}
 .h-wm{color:var(--ink)}
 @media (max-width:900px){.site-head .brand .emb svg{width:40px;height:40px}.site-head nav{gap:12px}.site-head nav a{font-size:11px;letter-spacing:.1em}.site-head .brand{gap:10px}}
 @media (max-width:430px){.site-head nav a[href='/story/']{display:none}.site-head .brand .wm svg{height:22px}.h-brand{display:none}}
+.fbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px}
+.fbar-l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.dd{position:relative}
+.dd summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:8px 14px;font-size:14px;color:var(--ink);user-select:none}
+.dd summary::-webkit-details-marker{display:none}
+.dd-car{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:2px;transition:transform .2s}
+.dd[open] .dd-car{transform:rotate(-135deg) translate(-2px,0)}
+.dd.on summary,.dd[open] summary{border-color:var(--ink)}
+.dd.on summary{background:var(--ink);color:var(--bg)}
+.dd-panel{position:absolute;z-index:15;top:calc(100% + 8px);left:0;width:max-content;max-width:min(360px,86vw);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 14px 34px rgba(30,20,10,.16)}
+.dd-panel .chips{margin:0}
+.fclear{border:0;background:none;color:var(--accent);font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
+@media (max-width:640px){.fbar{gap:6px}.fbar-l{width:100%}.dd{position:static}.dd summary{padding:7px 10px;font-size:13px;gap:4px}.dd-panel{left:0;right:0;width:auto;max-width:none;top:calc(100% + 6px)}}
 footer a.ded{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
 footer a.ded:hover{border-color:var(--accent)}
 /* ===== Redesign: site frame ===== */
@@ -722,20 +735,30 @@ def latest_page(looks, site, series_list=()):
 def all_looks_page(looks, site):
     groups = []
     for g, title in (("occasion", "Occasion"), ("pairing", "Colors"), ("mood", "Mood"), ("season", "Season")):
-        chips = "".join(f'<button class="chip" aria-pressed="false" data-g="{g}" data-v="{k}">{e(label(site, g, k))}</button>'
-                        for k in used_keys(site, looks, g))
-        groups.append(f'<p class="lbl meta">{title}</p><div class="chips">{chips}</div>')
+        keys = used_keys(site, looks, g)
+        if not keys:
+            continue
+        chips = "".join(f'<button type="button" class="chip" aria-pressed="false" data-g="{g}" data-v="{k}">{e(label(site, g, k))}</button>'
+                        for k in keys)
+        groups.append(f'<details class="dd" data-g="{g}"><summary>{title}<span class="dd-n"></span><span class="dd-car" aria-hidden="true"></span></summary>'
+                      f'<div class="dd-panel"><div class="chips">{chips}</div></div></details>')
     cards = "".join(card(l, site) for l in looks)
     body = f"""<p class="meta" style="margin-top:24px">Every look</p>
 <h1 style="margin-top:8px">All looks</h1>
-<div class="filters">{"".join(groups)}</div>
+<div class="fbar"><span class="fbar-l">Filter</span>{"".join(groups)}<button type="button" class="fclear" hidden>Clear</button></div>
 <p class="count" id="count">{len(looks)} looks</p>
 <div class="grid" id="grid">{cards}</div>
 <script>
 const sel={{occasion:new Set(),pairing:new Set(),mood:new Set(),season:new Set()}};
-const cards=[...document.querySelectorAll('#grid .card')], count=document.getElementById('count');
-function apply(){{let n=0;cards.forEach(c=>{{const ok=Object.entries(sel).every(([g,s])=>!s.size||(c.dataset[g]||'').split(' ').some(v=>s.has(v)));c.hidden=!ok;if(ok)n++;}});count.textContent=n+(n===1?' look':' looks');}}
-document.querySelectorAll('.filters .chip').forEach(b=>b.onclick=()=>{{const s=sel[b.dataset.g],on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);on?s.add(b.dataset.v):s.delete(b.dataset.v);apply();}});
+const cards=[...document.querySelectorAll('#grid .card')], count=document.getElementById('count'), clr=document.querySelector('.fclear');
+const dds=[...document.querySelectorAll('.dd')];
+function apply(){{let n=0;cards.forEach(c=>{{const ok=Object.entries(sel).every(([g,s])=>!s.size||(c.dataset[g]||'').split(' ').some(v=>s.has(v)));c.hidden=!ok;if(ok)n++;}});
+count.textContent=n+(n===1?' look':' looks');let any=false;
+dds.forEach(d=>{{const k=sel[d.dataset.g].size;d.querySelector('.dd-n').textContent=k?' · '+k:'';d.classList.toggle('on',k>0);if(k)any=true;}});clr.hidden=!any;}}
+document.querySelectorAll('.fbar .chip').forEach(b=>b.onclick=()=>{{const s=sel[b.dataset.g],on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);on?s.add(b.dataset.v):s.delete(b.dataset.v);apply();}});
+dds.forEach(d=>d.addEventListener('toggle',()=>{{if(d.open)dds.forEach(o=>{{if(o!==d)o.open=false}})}}));
+document.addEventListener('click',ev=>{{if(!ev.target.closest('.dd'))dds.forEach(d=>d.open=false)}});
+clr.onclick=()=>{{Object.values(sel).forEach(s=>s.clear());document.querySelectorAll('.fbar .chip').forEach(b=>b.setAttribute('aria-pressed','false'));dds.forEach(d=>d.open=false);apply();}};
 </script>"""
     return page("All looks | Purogé", body, site, "Every Purogé look, filterable by occasion, colors, mood and season.", "/looks/")
 

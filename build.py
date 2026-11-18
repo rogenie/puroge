@@ -185,9 +185,10 @@ footer a{margin-right:14px}
 .lp-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;line-height:1.15}
 .lp-line{font-size:14px;color:var(--muted);line-height:1.5}
 .lp-price{font-size:14px;font-weight:600;margin-top:4px}.lp-price.soon{font-weight:400;font-style:italic;color:var(--muted)}
-.lp-pick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-.lp:has(input:checked) .lp-pick{color:var(--accent)}
-.lp:has(input:checked) .lp-pick::before{content:"✓ "}
+.lp-pick{align-self:flex-start;margin:10px 16px 0!important;padding:10px 18px!important;border:1.5px solid var(--accent);border-radius:99px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:transparent;transition:background .25s,color .25s,transform .25s}
+.lp:hover .lp-pick{background:var(--accent);color:#fbf6ee;transform:translateY(-1px)}
+.lp:has(input:checked) .lp-pick{background:var(--accent);color:#fbf6ee}
+.lp:has(input:checked) .lp-pick::before{content:"✓ Reserved · "}
 .lf-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .lf-fields input{font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink)}
 .lf-fields input[name=notes]{grid-column:1/-1}
@@ -196,6 +197,12 @@ footer a{margin-right:14px}
 .lf-msg{min-height:1.4em;margin:12px 0 0;color:var(--accent);font-weight:600}
 .label-form.done .lf-fields,.label-form.done .lp-grid{opacity:.5;pointer-events:none}
 @media (max-width:640px){.lp-grid{grid-template-columns:1fr 1fr;gap:10px}.sw{height:84px}.lp-name{font-size:20px}.lf-fields{grid-template-columns:1fr}}
+.lf-cue{display:flex;flex-direction:column;align-items:center;gap:6px;margin:30px 0 18px;text-align:center;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:24px;color:var(--ink)}
+.lf-arrow{font-family:Inter,sans-serif;font-style:normal;font-size:30px;line-height:1;color:var(--accent);animation:cue 1.6s ease-in-out infinite}
+.label-form.picked .lf-cue{color:var(--accent)}
+.label-form.picked .lf-fields{box-shadow:0 0 0 2px var(--accent);border-radius:34px;padding:8px;background:var(--card)}
+@keyframes cue{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.lf-arrow{animation:none}}
 footer a.ded{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
 footer a.ded:hover{border-color:var(--accent)}
 /* ===== Redesign: site frame ===== */
@@ -531,6 +538,7 @@ def label_section(site):
 handed on. Reserve yours now. Reserving is free; nothing is charged until your pieces are ready.</p>
 <form class="label-form" data-endpoint="{e(endpoint)}">
 <div class="lp-grid">{cards}</div>
+<p class="lf-cue" aria-live="polite"><span class="lf-cue-t">Choose your pieces, then reserve them here</span><span class="lf-arrow" aria-hidden="true">↓</span></p>
 <div class="lf-fields">
 <input name="name" placeholder="Your name" autocomplete="name" aria-label="Your name">
 <input name="email" type="email" required placeholder="Email" autocomplete="email" aria-label="Email">
@@ -543,6 +551,9 @@ handed on. Reserve yours now. Reserving is free; nothing is charged until your p
 </form>
 <script>
 (function(){{var f=document.querySelector('.label-form');if(!f)return;var m=f.querySelector('.lf-msg');
+var cue=f.querySelector('.lf-cue-t');f.addEventListener('change',function(ev){{if(ev.target.name!=='pieces')return;
+var n=f.querySelectorAll('input[name=pieces]:checked').length;f.classList.toggle('picked',n>0);
+cue.textContent=n?(n+(n>1?' pieces':' piece')+' selected. Add your name and email below to reserve.'):'Choose your pieces, then reserve them here';}});
 f.addEventListener('submit',function(ev){{ev.preventDefault();
 var picks=[].slice.call(f.querySelectorAll('input[name=pieces]:checked')).map(function(i){{return i.value}});
 if(!picks.length){{m.textContent='Choose at least one piece to reserve.';return}}

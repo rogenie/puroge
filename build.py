@@ -163,6 +163,8 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:30px
 .hub a span{color:var(--muted);font-size:14px}
 footer{border-top:1px solid var(--line);margin-top:56px;padding:20px 0 40px;color:var(--muted);font-size:13px}
 footer a{margin-right:14px}
+footer a.ded{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a.ded:hover{border-color:var(--accent)}
 """
 
 FAVICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" rx="220" fill="#6b2a26"/><g fill="#f6f1e8" transform="translate(258 780) scale(0.892 -0.892)"><path d="M200 85Q200 55 207.5 39.5Q215 24 239.0 18.0Q263 12 311 12Q314 12 314.0 6.0Q314 0 311 0Q279 0 241.5 1.0Q204 2 160 2Q127 2 95.5 1.0Q64 0 39 0Q37 0 37.0 6.0Q37 12 39 12Q74 12 91.5 17.0Q109 22 114.5 37.0Q120 52 120 81V544Q120 573 114.5 587.5Q109 602 91.5 607.5Q74 613 39 613Q37 613 37.0 619.0Q37 625 39 625Q64 625 95.0 623.5Q126 622 159 622Q185 622 222.5 625.0Q260 628 298 628Q356 628 402.5 611.0Q449 594 477.0 558.0Q505 522 506 464Q506 412 487.0 374.0Q468 336 435.5 311.0Q403 286 363.5 274.0Q324 262 286 262Q274 262 261.5 263.0Q249 264 238 267Q234 268 236 275Q237 280 239 280Q239 280 240 280Q249 278 258.5 277.0Q268 276 275 276Q313 276 345.0 294.0Q377 312 397.0 349.5Q417 387 417 443Q417 497 398.5 534.0Q380 571 347.0 591.0Q314 611 271 611Q243 611 227.5 607.0Q212 603 206.0 588.0Q200 573 200 542Z"/></g></svg>'
@@ -190,7 +192,7 @@ def page(title, body, site, desc="", path="/", image=""):
 {FONTS}<link rel="stylesheet" href="/style.css"></head><body><div class="wrap">
 <header><a class="brand" href="/" aria-label="Purogé home">{LOGO}<span class="tagline">{e(site["tagline"])}</span></a><nav><a href="/looks/">Looks</a><a href="/values/">Values</a><a href="/story/">Story</a><a href="/journal/">Journal</a></nav></header>
 {body}
-<footer>{socials and f"<p>{socials}</p>"}<p>{e(site['dedication'])}</p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
+<footer>{socials and f"<p>{socials}</p>"}<p><a class="ded" href="/story/">{e(site['dedication'])}</a></p><p>{e(site['disclosure'])} {e(site.get('amazon_disclosure'))}</p></footer>
 </div></body></html>"""
 
 
@@ -490,7 +492,7 @@ Everything we learn from curating, which pieces you love and which ones are impo
 
 def story_page(site):
     body = """<p class="meta" style="margin-top:24px">Our story</p>
-<h1 style="margin-top:8px">Named for two women who sewed.</h1>
+<h1 style="margin-top:8px">Three women are hidden in our name.</h1>
 <p class="lead">My grandmothers, Lola Purisima and Lola Roberta, sewed and sold clothes for a living.</p>
 <p class="names"><span>Pu</span>risima · <span>Ro</span>berta · Ro<span>ge</span>nie</p>
 <p>Purogé carries all three of us: the first sound of each Lola's name, and mine.</p>

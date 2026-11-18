@@ -291,6 +291,10 @@ main .wrap{padding-top:8px}
 .wide-wrap .sw{height:220px;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .wide-wrap .lp:hover .sw{transform:scale(1.04)}
 .wide-wrap .lp{border-radius:0}
+.sw.lp-ph{position:relative;overflow:hidden;background:#e9dfcf;height:auto!important;aspect-ratio:4/5}
+.lp-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.lp:hover .lp-ph img{transform:scale(1.05)}
+.wide-wrap .lp:hover .sw.lp-ph{transform:none}
 .wide-wrap .lf-fields{grid-template-columns:1fr 1fr 1fr auto;max-width:none}
 .wide-wrap .lf-fields input[name=notes]{grid-column:auto}
 .wide-wrap .lf-fields .btn{grid-column:auto;padding:12px 26px}
@@ -511,8 +515,9 @@ def label_section(site):
     cards = ""
     for pc in lab.get("pieces", []):
         price = f'<span class="lp-price">{e(pc["price"])}</span>' if pc.get("price") else '<span class="lp-price soon">Price at launch</span>'
-        cards += (f'<label class="lp"><input type="checkbox" name="pieces" value="{e(pc["name"])}">'
-                  f'<span class="sw sw-{e(pc.get("swatch","oat"))}"></span>'
+        ph = (f'<span class="sw lp-ph"><img src="{e(pc["image"])}" alt="{e(pc["name"])} in linen" loading="lazy"></span>'
+              if pc.get("image") else f'<span class="sw sw-{e(pc.get("swatch","oat"))}"></span>')
+        cards += (f'<label class="lp"><input type="checkbox" name="pieces" value="{e(pc["name"])}">{ph}'
                   f'<span class="lp-name">{e(pc["name"])}</span><span class="lp-line">{e(pc["line"])}</span>{price}'
                   f'<span class="lp-pick">Reserve this</span></label>')
     endpoint = lab.get("endpoint", "")
@@ -531,7 +536,7 @@ handed on. Reserve yours now. Reserving is free; nothing is charged until your p
 <button class="btn" type="submit">Reserve my pieces</button>
 </div>
 <p class="lf-msg" role="status"></p>
-<p class="note">We will email you before anything ships with final prices, sizes and a date. You can change your mind at any time.</p>
+<p class="note">We will email you before anything ships with final prices, sizes and a date. You can change your mind at any time. Product images are AI-generated previews of the finished pieces.</p>
 </form>
 <script>
 (function(){{var f=document.querySelector('.label-form');if(!f)return;var m=f.querySelector('.lf-msg');

@@ -157,28 +157,32 @@
         "name": "The Linen Pajama Set",
         "line": "Long sleeves, a relaxed pant, and nothing synthetic between you and a good night.",
         "price": "$245",
-        "swatch": "oat"
+        "swatch": "oat",
+        "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3KesbQoMk27kQicVEvtKEtbNKBz/c293a1d4-29a9-49d2-83ba-102ae258fba8.jpg"
       },
       {
         "slug": "bedding",
         "name": "Linen Bedding",
         "line": "Duvet cover and two shams (queen shown) that breathe the way you do and soften with every wash.",
         "price": "From $395",
-        "swatch": "ivory"
+        "swatch": "ivory",
+        "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3KesbQoMk27kQicVEvtKEtbNKBz/6b48042c-b3a2-4064-a37a-86f223527dde.jpg"
       },
       {
         "slug": "pants",
         "name": "The Linen Pant",
         "line": "Cut for the office, soft enough for the flight.",
         "price": "$195",
-        "swatch": "clay"
+        "swatch": "clay",
+        "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3KesbQoMk27kQicVEvtKEtbNKBz/662006f6-7c87-454b-9ff9-3f598b0cfb9d.jpg"
       },
       {
         "slug": "shirt",
         "name": "The Linen Shirt",
         "line": "Tailored enough for a meeting, easy enough for the weekend.",
         "price": "$185",
-        "swatch": "sage"
+        "swatch": "sage",
+        "image": "https://d2ol7oe51mr4n9.cloudfront.net/user_3KesbQoMk27kQicVEvtKEtbNKBz/cb5b9316-b47e-4732-96de-9952ea364d95.jpg"
       }
     ]
   }
